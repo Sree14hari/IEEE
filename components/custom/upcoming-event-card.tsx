@@ -21,9 +21,9 @@ export default function UpcomingEventCard({ event }: UpcomingEventCardProps) {
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ duration: 0.5 }}
 			whileHover={{ scale: 1.02 }}
-			className="w-full"
+			className="w-full max-w-[300px] flex-shrink-0"
 		>
-			<Card className="min-w-[300px] flex-shrink-0">
+			<Card className="w-full">
 				<CardHeader className="p-0">
 					<div className="relative h-40 w-full">
 						<Image

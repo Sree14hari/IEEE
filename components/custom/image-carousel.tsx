@@ -68,6 +68,8 @@ export function ImageCarousel() {
     useEffect(() => {
         if (width < 640) { // sm breakpoint
             setImagesPerPage(1);
+        } else if (width < 1024) { // md breakpoint
+            setImagesPerPage(2);
         } else {
             setImagesPerPage(3);
         }
@@ -103,7 +105,7 @@ export function ImageCarousel() {
 					}}
 					className={cn(
 						"absolute w-full h-full grid gap-4 px-4 sm:px-12",
-						"grid-cols-1 sm:grid-cols-3"
+						`grid-cols-${imagesPerPage}`
 					)}
 				>
 					{getImagesForPage(pageIndex).map((image) => (
