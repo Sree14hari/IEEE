@@ -1,5 +1,4 @@
 import EventList from "@/components/section/event-list";
-import UpcomingEvents from "@/components/section/upcoming-events";
 
 export default function Page() {
 	return (
@@ -12,7 +11,6 @@ export default function Page() {
 					Check out our upcoming events.
 				</p>
 			</div>
-			<UpcomingEvents />
 			<EventList />
 		</div>
 	);
