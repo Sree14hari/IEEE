@@ -193,7 +193,7 @@ export default function RootLayout({
 							</div>
 						</header>
 
-						<main className="flex flex-1 flex-col pb-2">
+						<main className="flex flex-1 flex-col pb-12">
 							<div className="grow p-6 lg:p-10 lg:pb-0">{children}</div>
 						</main>
 
