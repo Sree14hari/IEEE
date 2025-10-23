@@ -271,13 +271,13 @@ export default function RootLayout({
 											<SidebarBody>
 												<SidebarSection>
 													{navItems.map((item) => (
-														<SidebarItem key={item.url} href={item.url}>
+														<SidebarItem key={item.url} href={item.url} onClick={() => setIsSidebarOpen(false)}>
 															<SidebarLabel>{item.label}</SidebarLabel>
 														</SidebarItem>
 													))}
 												</SidebarSection>
 												<SidebarSection>
-													<SidebarItem href={PWA_LINK} target="_blank">
+													<SidebarItem href={PWA_LINK} target="_blank" onClick={() => setIsSidebarOpen(false)}>
 														<RainbowButton className="w-full">Join Us</RainbowButton>
 													</SidebarItem>
 												</SidebarSection>
