@@ -233,7 +233,6 @@ export default function RootLayout({
 						</main>
 
 						<footer className="py-16 mx-6">
-							<Logo className="mx-auto h-44 w-auto text-zinc-200 opacity-80" />
 							<div className="mt-10 text-sm">
 								<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 text-center">
 									{footerSections.map((section) => (
