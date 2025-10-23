@@ -7,6 +7,7 @@ import { useWindowSize } from 'react-use';
 
 import { Button } from '@/components/ui/button';
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
+import { cn } from '@/lib/utils';
 
 const images = [
 	{
@@ -100,7 +101,10 @@ export function ImageCarousel() {
 						x: { type: 'spring', stiffness: 300, damping: 30 },
 						opacity: { duration: 0.2 },
 					}}
-					className={`absolute w-full h-full grid grid-cols-${imagesPerPage} gap-4 px-4 sm:px-12`}
+					className={cn(
+						"absolute w-full h-full grid gap-4 px-4 sm:px-12",
+						imagesPerPage === 1 ? "grid-cols-1" : "md:grid-cols-3"
+					)}
 				>
 					{getImagesForPage(pageIndex).map((image) => (
 						<div key={image.src} className="relative h-full w-full">
