@@ -1,6 +1,5 @@
 'use client';
 
-import { AnimatePresence, motion } from 'motion/react';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 
@@ -40,24 +39,6 @@ const images = [
 	},
 ];
 
-const variants = {
-	enter: (direction: number) => ({
-		x: direction > 0 ? '100%' : '-100%',
-		opacity: 0,
-	}),
-	center: {
-		zIndex: 1,
-		x: 0,
-		opacity: 1,
-	},
-	exit: (direction: number) => ({
-		zIndex: 0,
-		x: direction < 0 ? '100%' : '-100%',
-		opacity: 0,
-	}),
-};
-
-
 export function ImageCarousel() {
 	const [[page, direction], setPage] = useState([0, 0]);
 	const [imagesPerPage, setImagesPerPage] = useState(3);
@@ -94,7 +75,7 @@ export function ImageCarousel() {
 	const pageIndex = (page % numPages + numPages) % numPages;
 
 	const paginate = (newDirection: number) => {
-		setPage([page + newDirection, newDirection]);
+		setPage([(page + newDirection) % numPages, newDirection]);
 	};
 
 	const getImagesForPage = (p: number) => {
@@ -106,33 +87,22 @@ export function ImageCarousel() {
 	return (
 		<div className="relative mt-10 w-full flex flex-col items-center justify-center">
 			<div className="relative w-full overflow-hidden h-64">
-				<AnimatePresence initial={false} custom={direction}>
-					<motion.div
-						key={page}
-						custom={direction}
-						variants={variants}
-						initial="enter"
-						animate="center"
-						exit="exit"
-						transition={{
-							x: { type: 'spring', stiffness: 300, damping: 30 },
-							opacity: { duration: 0.2 },
-						}}
-						className="absolute w-full h-full flex gap-4 px-4"
-					>
-						{getImagesForPage(pageIndex).map((image) => (
-							<div key={image.src} className="relative h-full w-full">
-								<Image
-									src={image.src}
-									alt={image.alt}
-									fill
-									className="rounded-xl object-cover"
-									data-ai-hint={image.hint}
-								/>
-							</div>
-						))}
-					</motion.div>
-				</AnimatePresence>
+				<div
+					key={page}
+					className="absolute w-full h-full flex gap-4 px-4"
+				>
+					{getImagesForPage(pageIndex).map((image) => (
+						<div key={image.src} className="relative h-full w-full">
+							<Image
+								src={image.src}
+								alt={image.alt}
+								fill
+								className="rounded-xl object-cover"
+								data-ai-hint={image.hint}
+							/>
+						</div>
+					))}
+				</div>
 			</div>
 			<div className="flex justify-center items-center gap-4 mt-4">
 				<Button

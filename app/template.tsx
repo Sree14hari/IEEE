@@ -1,17 +1,13 @@
 "use client";
 
-import { motion } from "framer-motion";
+import type { ReactNode } from 'react';
 
-export default function Template({ children }: { children: React.ReactNode }) {
+export default function Template({ children }: { children: ReactNode }) {
 	return (
-		<motion.div
+		<div
 			className="relative"
-			initial={{ opacity: 0, top: 20 }}
-			animate={{ opacity: 1, top: 0 }}
 		>
 			{children}
-		</motion.div>
+		</div>
 	);
 }
-
-    

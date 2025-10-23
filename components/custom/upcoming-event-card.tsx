@@ -2,7 +2,6 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { RainbowButton } from "@/components/ui/rainbow-button";
 import Image from "next/image";
-import { motion } from "motion/react";
 
 interface UpcomingEventCardProps {
 	event: {
@@ -16,11 +15,7 @@ interface UpcomingEventCardProps {
 
 export default function UpcomingEventCard({ event }: UpcomingEventCardProps) {
 	return (
-		<motion.div
-			initial={{ opacity: 0, y: 20 }}
-			animate={{ opacity: 1, y: 0 }}
-			transition={{ duration: 0.5 }}
-			whileHover={{ scale: 1.02 }}
+		<div
 			className="w-full max-w-[300px] flex-shrink-0"
 		>
 			<Card className="w-full">
@@ -41,6 +36,6 @@ export default function UpcomingEventCard({ event }: UpcomingEventCardProps) {
 					<RainbowButton className="w-full mt-4">View Event</RainbowButton>
 				</CardContent>
 			</Card>
-		</motion.div>
+		</div>
 	);
 }

@@ -3,7 +3,6 @@
 import { RoadmapAchievement } from "@/components/custom/roadmap-achievement";
 import { cn } from "@/lib/utils";
 import { IconArrowRight } from "@tabler/icons-react";
-import { type Variants, motion } from "motion/react";
 import Link from "next/link";
 
 // TODO: progreess visualisation calculation needs a fix
@@ -130,10 +129,6 @@ const ROADMAP_ITEMS = [
 ];
 
 export default function Roadmap() {
-	const item: Variants = {
-		hidden: { opacity: 0, marginLeft: 20 },
-		show: { opacity: 1, marginLeft: 0 },
-	};
 	return (
 		<div className="mx-auto max-w-full lg:flex lg:items-start lg:gap-x-10 px-4 sm:px-0">
 			<div className="lg:mx-0 lg:flex-auto">
@@ -144,11 +139,8 @@ export default function Roadmap() {
 				</div>
 				<div className="mt-12">
 					{ROADMAP_ITEMS.map((roadmap_item, index) => (
-						<motion.div
+						<div
 							key={index}
-							variants={item}
-							initial="hidden"
-							whileInView="show"
 							className="flex gap-x-3"
 						>
 							<div
@@ -187,7 +179,7 @@ export default function Roadmap() {
 									<p className="my-2">{roadmap_item.footer}</p>
 								)}
 							</div>
-						</motion.div>
+						</div>
 					))}
 				</div>
 			</div>

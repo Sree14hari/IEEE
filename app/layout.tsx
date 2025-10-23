@@ -34,7 +34,6 @@ import Image from "next/image";
 import { Fira_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import React, { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import { PWA_LINK } from "@/lib/constants";
 import "./globals.css";
 
@@ -254,79 +253,60 @@ export default function RootLayout({
 
 						<BreakpointDebug />
 
-						<AnimatePresence>
-							{isSidebarOpen && (
-								<>
-									<motion.div
-										initial={{ opacity: 0 }}
-										animate={{ opacity: 1 }}
-										exit={{ opacity: 0 }}
-										transition={{ type: 'spring', stiffness: 400, damping: 40 }}
-										className="fixed inset-0 z-50 bg-zinc-900/50 backdrop-blur-sm lg:hidden"
-										onClick={() => setIsSidebarOpen(false)}
-									/>
-									<motion.div
-										initial={{ x: "100%" }}
-										animate={{ x: "0%" }}
-										exit={{ x: "100%" }}
-										transition={{ type: 'spring', stiffness: 400, damping: 40 }}
-										className="fixed inset-y-0 right-0 z-50 w-full max-w-sm bg-white dark:bg-zinc-900 lg:hidden"
-									>
-										<Sidebar>
-											<SidebarHeader>
-												<Button
-													plain
-													onClick={() => setIsSidebarOpen(false)}
-													className="ml-auto"
-												>
-													<IconX />
-												</Button>
-											</SidebarHeader>
-											<SidebarBody>
-												<SidebarSection>
-													{navItems.map((item) => (
-														<SidebarItem key={item.url} href={item.url} onClick={() => setIsSidebarOpen(false)}>
-															<SidebarLabel>{item.label}</SidebarLabel>
+						{isSidebarOpen && (
+							<>
+								<div
+									className="fixed inset-0 z-40 bg-zinc-900/50 backdrop-blur-sm lg:hidden"
+									onClick={() => setIsSidebarOpen(false)}
+								/>
+								<div
+									className="fixed inset-y-0 right-0 z-50 w-full max-w-sm bg-white dark:bg-zinc-900 lg:hidden"
+								>
+									<Sidebar>
+										<SidebarHeader>
+											<Button
+												plain
+												onClick={() => setIsSidebarOpen(false)}
+												className="ml-auto"
+											>
+												<IconX />
+											</Button>
+										</SidebarHeader>
+										<SidebarBody>
+											<SidebarSection>
+												{navItems.map((item) => (
+													<SidebarItem key={item.url} href={item.url} onClick={() => setIsSidebarOpen(false)}>
+														<SidebarLabel>{item.label}</SidebarLabel>
+													</SidebarItem>
+												))}
+												<SidebarItem onClick={() => setIsExcomOpen(!isExcomOpen)}>
+													<SidebarLabel>Excom</SidebarLabel>
+													{isExcomOpen ? <IconChevronUp className="ml-auto" /> : <IconChevronDown className="ml-auto" />}
+												</SidebarItem>
+												{isExcomOpen && (
+													<div className="overflow-hidden flex flex-col">
+														<SidebarItem href="/excom/2025" onClick={() => setIsSidebarOpen(false)} className="pl-8">
+															<SidebarLabel>2025</SidebarLabel>
 														</SidebarItem>
-													))}
-													<SidebarItem onClick={() => setIsExcomOpen(!isExcomOpen)}>
-														<SidebarLabel>Excom</SidebarLabel>
-														{isExcomOpen ? <IconChevronUp className="ml-auto" /> : <IconChevronDown className="ml-auto" />}
-													</SidebarItem>
-													<AnimatePresence>
-														{isExcomOpen && (
-															<motion.div
-																initial={{ height: 0, opacity: 0 }}
-																animate={{ height: 'auto', opacity: 1 }}
-																exit={{ height: 0, opacity: 0 }}
-																className="overflow-hidden flex flex-col"
-															>
-																<SidebarItem href="/excom/2025" onClick={() => setIsSidebarOpen(false)} className="pl-8">
-																	<SidebarLabel>2025</SidebarLabel>
-																</SidebarItem>
-																<SidebarItem href="/excom/2024" onClick={() => setIsSidebarOpen(false)} className="pl-8">
-																	<SidebarLabel>2024</SidebarLabel>
-																</SidebarItem>
-															</motion.div>
-														)}
-													</AnimatePresence>
-												</SidebarSection>
-												<SidebarSection>
-													<SidebarItem href={PWA_LINK} target="_blank" onClick={() => setIsSidebarOpen(false)}>
-														<RainbowButton className="w-full">Join Us</RainbowButton>
-													</SidebarItem>
-												</SidebarSection>
-											</SidebarBody>
-										</Sidebar>
-									</motion.div>
-								</>
-							)}
-						</AnimatePresence>
+														<SidebarItem href="/excom/2024" onClick={() => setIsSidebarOpen(false)} className="pl-8">
+															<SidebarLabel>2024</SidebarLabel>
+														</SidebarItem>
+													</div>
+												)}
+											</SidebarSection>
+											<SidebarSection>
+												<SidebarItem href={PWA_LINK} target="_blank" onClick={() => setIsSidebarOpen(false)}>
+													<RainbowButton className="w-full">Join Us</RainbowButton>
+												</SidebarItem>
+											</SidebarSection>
+										</SidebarBody>
+									</Sidebar>
+								</div>
+							</>
+						)}
 					</div>
 				</TooltipProvider>
 			</body>
 		</html>
 	);
 }
-
-    
