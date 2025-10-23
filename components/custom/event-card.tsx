@@ -15,6 +15,7 @@ interface EventCardProps {
 		title: string;
 		date: string;
 		image: string;
+		hint: string;
 	};
 }
 
@@ -28,6 +29,7 @@ export default function EventCard({ event }: EventCardProps) {
 						alt={event.title}
 						fill
 						className="rounded-t-lg object-cover"
+						data-ai-hint={event.hint}
 					/>
 				</div>
 			</CardHeader>
