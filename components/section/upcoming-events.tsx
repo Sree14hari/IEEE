@@ -61,7 +61,7 @@ export default function UpcomingEvents() {
 			<div className="relative">
                 <div 
                     ref={scrollContainerRef}
-                    className="flex gap-6 overflow-x-auto pb-4 scroll-smooth snap-x snap-mandatory"
+                    className="flex gap-6 overflow-x-auto pb-4 scroll-smooth snap-x snap-mandatory px-4 md:px-0"
                     style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                 >
                     {upcomingEvents.map((event) => (
