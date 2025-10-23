@@ -1,6 +1,6 @@
 "use client";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { RainbowButton } from "@/components/ui/rainbow-button";
 import Image from "next/image";
 import { motion } from "motion/react";
 
@@ -38,7 +38,7 @@ export default function UpcomingEventCard({ event }: UpcomingEventCardProps) {
 				<CardContent className="p-4">
 					<h3 className="text-lg font-bold">{event.title}</h3>
 					<p className="text-sm text-muted-foreground">{event.date}</p>
-					<Button className="w-full mt-4">View Event</Button>
+					<RainbowButton className="w-full mt-4">View Event</RainbowButton>
 				</CardContent>
 			</Card>
 		</motion.div>

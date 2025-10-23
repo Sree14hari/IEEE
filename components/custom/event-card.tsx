@@ -6,7 +6,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { RainbowButton } from "@/components/ui/rainbow-button";
 import Image from "next/image";
 import { motion } from "motion/react";
 
@@ -45,7 +45,7 @@ export default function EventCard({ event }: EventCardProps) {
 					<p className="text-sm text-muted-foreground">{event.date}</p>
 				</CardContent>
 				<CardFooter>
-					<Button className="w-full">View Event</Button>
+					<RainbowButton className="w-full">View Event</RainbowButton>
 				</CardFooter>
 			</Card>
 		</motion.div>
