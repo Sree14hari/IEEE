@@ -199,7 +199,7 @@ export default function RootLayout({
 
 						<footer className="py-16 mx-6">
 							<div className="mt-10 text-sm">
-								<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 text-center sm:text-left">
+								<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 text-center sm:text-left">
 									{footerSections.map((section) => (
 										<div key={section.title}>
 											<h3 className="font-bold text-zinc-900 dark:text-white">{section.title}</h3>
