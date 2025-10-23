@@ -68,12 +68,10 @@ export default function UpcomingEvents() {
 						<UpcomingEventCard key={event.id} event={event} />
 					))}
 				</div>
-                <div className="absolute top-1/2 -translate-y-1/2 left-0">
+                <div className="flex justify-center items-center gap-4 mt-4">
                     <Button plain onClick={() => scroll('left')} className="rounded-full !p-2 bg-white/50 hover:bg-white/80">
                         <IconChevronLeft className="size-6" />
                     </Button>
-                </div>
-                <div className="absolute top-1/2 -translate-y-1/2 right-0">
                     <Button plain onClick={() => scroll('right')} className="rounded-full !p-2 bg-white/50 hover:bg-white/80">
                         <IconChevronRight className="size-6" />
                     </Button>
