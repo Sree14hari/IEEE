@@ -1,14 +1,16 @@
+
 import {
 	Card,
 	CardContent,
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
+import Link from "next/link";
 
 const committees = [
-	{ title: "SB Excom" },
-	{ title: "CS Excom" },
-	{ title: "IAS Excom" },
+	{ title: "SB Excom", slug: "sb" },
+	{ title: "CS Excom", slug: "cs" },
+	{ title: "IAS Excom", slug: "ias" },
 ];
 
 export default function Page() {
@@ -25,16 +27,22 @@ export default function Page() {
 				</div>
 				<div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
 					{committees.map((committee) => (
-						<Card key={committee.title}>
-							<CardHeader>
-								<CardTitle>{committee.title}</CardTitle>
-							</CardHeader>
-							<CardContent>
-								<p className="text-muted-foreground">
-									Member details coming soon.
-								</p>
-							</CardContent>
-						</Card>
+						<Link
+							key={committee.slug}
+							href={`/excom/2024/${committee.slug}`}
+							className="block hover:scale-105 transition-transform duration-300"
+						>
+							<Card>
+								<CardHeader>
+									<CardTitle>{committee.title}</CardTitle>
+								</CardHeader>
+								<CardContent>
+									<p className="text-muted-foreground">
+										Click to see member details.
+									</p>
+								</CardContent>
+							</Card>
+						</Link>
 					))}
 				</div>
 			</div>
