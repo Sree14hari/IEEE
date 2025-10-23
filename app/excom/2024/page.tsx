@@ -5,12 +5,13 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
+import Image from "next/image";
 import Link from "next/link";
 
 const committees = [
-	{ title: "SB Excom", slug: "sb" },
-	{ title: "CS Excom", slug: "cs" },
-	{ title: "IAS Excom", slug: "ias" },
+	{ title: "SB Excom", slug: "sb", image: "https://picsum.photos/seed/sb2024/600/400", hint: "team meeting" },
+	{ title: "CS Excom", slug: "cs", image: "https://picsum.photos/seed/cs2024/600/400", hint: "people coding" },
+	{ title: "IAS Excom", slug: "ias", image: "https://picsum.photos/seed/ias2024/600/400", hint: "industrial machinery" },
 ];
 
 export default function Page() {
@@ -32,7 +33,16 @@ export default function Page() {
 							href={`/excom/2024/${committee.slug}`}
 							className="block hover:scale-105 transition-transform duration-300"
 						>
-							<Card>
+							<Card className="overflow-hidden">
+								<div className="relative h-48 w-full">
+									<Image
+										src={committee.image}
+										alt={committee.title}
+										fill
+										className="object-cover"
+										data-ai-hint={committee.hint}
+									/>
+								</div>
 								<CardHeader>
 									<CardTitle>{committee.title}</CardTitle>
 								</CardHeader>
