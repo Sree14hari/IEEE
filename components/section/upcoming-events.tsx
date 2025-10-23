@@ -61,7 +61,7 @@ export default function UpcomingEvents() {
 			<div className="relative">
 				<div 
                     ref={scrollContainerRef}
-                    className="grid place-items-center md:flex md:flex-row md:justify-start gap-6 md:overflow-x-auto pb-4 md:scroll-smooth"
+                    className="grid justify-items-center gap-6 md:flex md:flex-row md:justify-start md:overflow-x-auto pb-4 md:scroll-smooth"
                     style={{ scrollbarWidth: 'none', '-ms-overflow-style': 'none' }}
                 >
 					{upcomingEvents.map((event) => (
