@@ -2,16 +2,14 @@
 import {
 	Card,
 	CardContent,
-	CardHeader,
-	CardTitle,
 } from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
 
 const committees = [
-	{ title: "SB Excom", slug: "sb", image: "https://picsum.photos/seed/sb2024/600/400", hint: "team meeting" },
-	{ title: "CS Excom", slug: "cs", image: "https://picsum.photos/seed/cs2024/600/400", hint: "people coding" },
-	{ title: "IAS Excom", slug: "ias", image: "https://picsum.photos/seed/ias2024/600/400", hint: "industrial machinery" },
+	{ title: "SB Excom", slug: "sb", image: "https://www.ieeesbsbce.in/assests/frond-page/ieee.svg", hint: "team meeting" },
+	{ title: "CS Excom", slug: "cs", image: "https://www.ieeesbsbce.in/assests/frond-page/cs.svg", hint: "people coding" },
+	{ title: "IAS Excom", slug: "ias", image: "https://www.ieeesbsbce.in/assests/frond-page/ias.svg", hint: "industrial machinery" },
 ];
 
 export default function Page() {
@@ -34,22 +32,19 @@ export default function Page() {
 							className="block hover:scale-105 transition-transform duration-300"
 						>
 							<Card className="overflow-hidden">
-								<div className="relative h-48 w-full">
-									<Image
-										src={committee.image}
-										alt={committee.title}
-										fill
-										className="object-cover"
-										data-ai-hint={committee.hint}
-									/>
+								<div className="bg-white p-6">
+									<div className="relative h-40 w-full">
+										<Image
+											src={committee.image}
+											alt={committee.title}
+											fill
+											className="object-contain"
+											data-ai-hint={committee.hint}
+										/>
+									</div>
 								</div>
-								<CardHeader>
-									<CardTitle>{committee.title}</CardTitle>
-								</CardHeader>
-								<CardContent>
-									<p className="text-muted-foreground">
-										Click to see member details.
-									</p>
+								<CardContent className="p-4 text-center">
+									<h3 className="text-lg font-bold">{committee.title}</h3>
 								</CardContent>
 							</Card>
 						</Link>
