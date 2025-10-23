@@ -7,13 +7,14 @@ import {
 import { Link } from "@/components/ui/link";
 import { Linkedin } from "lucide-react";
 
-const members = [
-	{
-		name: "Prof. Ananthu Vijayakumar",
-		role: "Branch Counsellor",
-		image: "https://picsum.photos/seed/sb1/400/400",
-		linkedin: null,
-	},
+const branchCounsellor = {
+	name: "Prof. Ananthu Vijayakumar",
+	role: "Branch Counsellor",
+	image: "https://picsum.photos/seed/sb1/400/400",
+	linkedin: null,
+};
+
+const otherMembers = [
 	{
 		name: "NEHA SIJU",
 		role: "Chairman",
@@ -94,8 +95,39 @@ export default function Page() {
 						Meet the team behind the IEEE Student Branch.
 					</p>
 				</div>
+                <div className="mt-12 flex justify-center">
+                    <div className="w-full max-w-sm">
+                        <Card key={branchCounsellor.name} className="group overflow-hidden text-center">
+                            <div className="relative h-64 w-full">
+                                <Image
+                                    src={branchCounsellor.image}
+                                    alt={`Photo of ${branchCounsellor.name}`}
+                                    fill
+                                    className="object-cover object-top"
+                                    data-ai-hint="person portrait"
+                                />
+                                {branchCounsellor.linkedin && (
+                                    <Link
+                                        href={branchCounsellor.linkedin}
+                                        target="_blank"
+                                        className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"
+                                    >
+                                        <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/70 backdrop-blur-sm">
+                                            <Linkedin className="h-5 w-5 text-blue-600" />
+                                        </span>
+                                    </Link>
+                                )}
+                            </div>
+                            <CardContent className="p-4">
+                                <h3 className="text-lg font-bold">{branchCounsellor.name}</h3>
+                                <p className="text-sm text-muted-foreground">{branchCounsellor.role}</p>
+                            </CardContent>
+                        </Card>
+                    </div>
+                </div>
+
 				<div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-					{members.map((member) => (
+					{otherMembers.map((member) => (
 						<Card key={member.name} className="group overflow-hidden text-center">
 							<div className="relative h-64 w-full">
 								<Image
