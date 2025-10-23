@@ -11,73 +11,73 @@ const members = [
 	{
 		name: "Prof. Ananthu Vijayakumar",
 		role: "Branch Counsellor",
-		image: "/Ananthu.png",
+		image: "https://picsum.photos/seed/sb1/400/400",
 		linkedin: null,
 	},
 	{
 		name: "NEHA SIJU",
 		role: "Chairman",
-		image: "/Neha.png",
+		image: "https://picsum.photos/seed/sb2/400/400",
 		linkedin: "https://www.linkedin.com/in/nehasiju/",
 	},
 	{
 		name: "SREYAS MOHAN",
 		role: "Vice Chair",
-		image: "/Sreyas.png",
+		image: "https://picsum.photos/seed/sb3/400/400",
 		linkedin: "https://www.linkedin.com/in/sreyas-mohan-8a227027b/",
 	},
 	{
 		name: "ANANTHAKRISHNAN S",
 		role: "Secretary",
-		image: "/anathakrishnan.jpeg",
+		image: "https://picsum.photos/seed/sb4/400/400",
 		linkedin: "https://www.linkedin.com/in/ananthakrishnan-s-55b0b9275/",
 	},
 	{
 		name: "SALWA SAINUDDIN",
 		role: "Treasurer",
-		image: "/Salwa.jpg",
+		image: "https://picsum.photos/seed/sb5/400/400",
 		linkedin: "https://www.linkedin.com/in/salwa-sainuddin/",
 	},
 	{
 		name: "AISHWARYA AMMAL S",
 		role: "Joint Treasurer",
-		image: "/Aishwarya_Ammal.jpg",
+		image: "https://picsum.photos/seed/sb6/400/400",
 		linkedin: "https://www.linkedin.com/in/aishwarya-ammal-s-879147271/",
 	},
 	{
 		name: "ANAGHA VENUGOPAL",
 		role: "Documentation Lead",
-		image: "/Anagha_Venugopal.jpg",
+		image: "https://picsum.photos/seed/sb7/400/400",
 		linkedin: "https://www.linkedin.com/in/anagha-venugopal-b76a322b5/",
 	},
 	{
 		name: "VISHNU V",
 		role: "Program Coordinator",
-		image: "/IMG_20250131_083411.jpg",
+		image: "https://picsum.photos/seed/sb8/400/400",
 		linkedin: null,
 	},
 	{
 		name: "AADIT AJAY",
 		role: "MDC",
-		image: "/Aadit_Ajay.jpg",
+		image: "https://picsum.photos/seed/sb9/400/400",
 		linkedin: "https://www.linkedin.com/in/aadit-ajay-072a99350/",
 	},
 	{
 		name: "CENJEL AJEIKA M",
 		role: "LINK REPRESENTATIVE",
-		image: "/Cenjel.jpg",
+		image: "https://picsum.photos/seed/sb10/400/400",
 		linkedin: "https://www.linkedin.com/in/cenjelajeikam/",
 	},
 	{
 		name: "ANJANA B",
 		role: "Newsletter Editor",
-		image: "/Anjana.JPG",
+		image: "https://picsum.photos/seed/sb11/400/400",
 		linkedin: "https://www.linkedin.com/in/anjana-b-b0b865204/",
 	},
 	{
 		name: "KARTHIK KAILAS",
 		role: "WEBMASTER",
-		image: "/Karthik.jpeg",
+		image: "https://picsum.photos/seed/sb12/400/400",
 		linkedin: "https://www.linkedin.com/in/karthik-s-kailas/",
 	},
 ];
@@ -103,6 +103,7 @@ export default function Page() {
 									alt={`Photo of ${member.name}`}
 									fill
 									className="object-cover object-top"
+									data-ai-hint="person portrait"
 								/>
 								{member.linkedin && (
 									<Link
