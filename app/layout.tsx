@@ -202,13 +202,13 @@ export default function RootLayout({
 								<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
 									{footerSections.map((section) => (
 										<div key={section.title}>
-											<h3 className="font-bold text-white">{section.title}</h3>
+											<h3 className="font-bold text-white text-base">{section.title}</h3>
 											<ul className="mt-4 space-y-2">
 												{section.links.map((link) => (
 													<li key={link.text}>
 														<Link
 															href={link.href}
-															className="text-zinc-300 hover:text-white flex items-center"
+															className="text-zinc-300 hover:text-white flex items-center text-sm"
 														>
 															<IconChevronRight className="size-4 mr-1" />
 															{link.text}
