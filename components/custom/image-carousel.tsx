@@ -2,7 +2,8 @@
 
 import { AnimatePresence, motion } from 'motion/react';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useWindowSize } from 'react-use';
 
 import { Button } from '@/components/ui/button';
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
@@ -57,12 +58,22 @@ const variants = {
 	}),
 };
 
-const IMAGES_PER_PAGE = 3;
 
 export function ImageCarousel() {
 	const [[page, direction], setPage] = useState([0, 0]);
+	const { width } = useWindowSize();
+    const [imagesPerPage, setImagesPerPage] = useState(3);
 
-	const numPages = Math.ceil(images.length / IMAGES_PER_PAGE);
+    useEffect(() => {
+        if (width < 768) {
+            setImagesPerPage(1);
+        } else {
+            setImagesPerPage(3);
+        }
+    }, [width]);
+
+
+	const numPages = Math.ceil(images.length / imagesPerPage);
 	const pageIndex = page % numPages;
 
 	const paginate = (newDirection: number) => {
@@ -70,8 +81,8 @@ export function ImageCarousel() {
 	};
 
 	const getImagesForPage = (p: number) => {
-		const start = p * IMAGES_PER_PAGE;
-		const end = start + IMAGES_PER_PAGE;
+		const start = p * imagesPerPage;
+		const end = start + imagesPerPage;
 		return images.slice(start, end);
 	};
 
@@ -89,7 +100,7 @@ export function ImageCarousel() {
 						x: { type: 'spring', stiffness: 300, damping: 30 },
 						opacity: { duration: 0.2 },
 					}}
-					className="absolute w-full h-full grid grid-cols-3 gap-4 px-12"
+					className={`absolute w-full h-full grid grid-cols-${imagesPerPage} gap-4 px-4 sm:px-12`}
 				>
 					{getImagesForPage(pageIndex).map((image) => (
 						<div key={image.src} className="relative h-full w-full">
@@ -104,7 +115,7 @@ export function ImageCarousel() {
 					))}
 				</motion.div>
 			</AnimatePresence>
-			<div className="absolute top-1/2 left-4 z-20 -translate-y-1/2">
+			<div className="absolute top-1/2 left-2 sm:left-4 z-20 -translate-y-1/2">
 				<Button
 					plain
 					onClick={() => paginate(-1)}
@@ -113,7 +124,7 @@ export function ImageCarousel() {
 					<IconChevronLeft className="size-6" />
 				</Button>
 			</div>
-			<div className="absolute top-1/2 right-4 z-20 -translate-y-1/2">
+			<div className="absolute top-1/2 right-2 sm:right-4 z-20 -translate-y-1/2">
 				<Button
 					plain
 					onClick={() => paginate(1)}

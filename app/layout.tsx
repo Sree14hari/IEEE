@@ -1,13 +1,8 @@
+
+'use client';
 import { BreakpointDebug } from "@/components/custom/breakpoint-debug";
 import Logo from "@/components/custom/logo";
 import { Button } from "@/components/ui/button";
-import {
-	DropdownDescription,
-	DropdownDivider,
-	DropdownItem,
-	DropdownLabel,
-	DropdownMenu,
-} from "@/components/ui/dropdown";
 import { Link } from "@/components/ui/link";
 import {
 	Navbar,
@@ -23,19 +18,21 @@ import {
 	SidebarHeader,
 	SidebarItem,
 	SidebarSection,
+	SidebarLabel,
 } from "@/components/ui/sidebar";
-import { Strong } from "@/components/ui/text";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import {
-	IconArrowUpRight,
-	IconBrandOpenSource,
-	IconShieldLock,
+	IconMenu2,
+	IconX,
 } from "@tabler/icons-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Fira_Mono } from "next/font/google";
 import localFont from "next/font/local";
-import React from "react";
+import React, { useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
+import { PWA_LINK } from "@/lib/constants";
+import "./globals.css";
 
 const font = localFont({
 	src: [
@@ -58,9 +55,6 @@ const font = localFont({
 	variable: "--font-display",
 });
 
-import { PWA_LINK } from "@/lib/constants";
-import "./globals.css";
-
 const fontMono = Fira_Mono({
 	weight: ["400", "500"],
 	subsets: ["latin"],
@@ -72,41 +66,6 @@ const navItems = [
 	{ label: "Excom", url: "/excom" },
 	{ label: "About", url: "/about" },
 ];
-
-export const metadata: Metadata = {
-	title: "IEEE SB SBCE",
-	description:
-		"Power What Next for Tech",
-	openGraph: {
-		title: "IEEE SB SBCE",
-		description:
-			"",
-		url: "https://ieeesbsbce.in",
-		siteName: "IEEE.SBCE",
-		locale: "en_US",
-		type: "website",
-		images: [
-			{
-				url: "/og.png",
-				width: 1200,
-				height: 630,
-				alt: "IEEE",
-			},
-		],
-	},
-	
-	robots: {
-		index: true,
-		follow: true,
-		googleBot: {
-			index: true,
-			follow: true,
-			"max-video-preview": -1,
-			"max-image-preview": "large",
-			"max-snippet": -1,
-		},
-	},
-};
 
 const footerSections = [
 	{
@@ -174,6 +133,7 @@ export default function RootLayout({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
+	const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 	return (
 		<html lang="en" className={`${font.variable} ${fontMono.variable}`}>
 			<head>
@@ -220,9 +180,13 @@ export default function RootLayout({
 											href={PWA_LINK}
 											target="_blank"
 											aria-label="Join Us"
+											className="max-lg:hidden"
 										>
 											<RainbowButton>Join Us</RainbowButton>
 										</Link>
+										<Button plain className="lg:hidden" onClick={() => setIsSidebarOpen(true)}>
+											<IconMenu2 />
+										</Button>
 									</NavbarSection>
 								</Navbar>
 							</div>
@@ -234,7 +198,7 @@ export default function RootLayout({
 
 						<footer className="py-16 mx-6">
 							<div className="mt-10 text-sm">
-								<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 text-center">
+								<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 text-center sm:text-left">
 									{footerSections.map((section) => (
 										<div key={section.title}>
 											<h3 className="font-bold text-zinc-900 dark:text-white">{section.title}</h3>
@@ -273,6 +237,56 @@ export default function RootLayout({
 						</p>
 
 						<BreakpointDebug />
+
+						<AnimatePresence>
+							{isSidebarOpen && (
+								<motion.div
+									initial={{ opacity: 0 }}
+									animate={{ opacity: 1 }}
+									exit={{ opacity: 0 }}
+									transition={{ duration: 0.3, ease: "easeInOut" }}
+									className="fixed inset-0 z-50 bg-zinc-900/50 backdrop-blur-sm lg:hidden"
+									onClick={() => setIsSidebarOpen(false)}
+								/>
+							)}
+						</AnimatePresence>
+						<AnimatePresence>
+						{isSidebarOpen && (
+							<motion.div
+								initial={{ x: "100%" }}
+								animate={{ x: "0%" }}
+								exit={{ x: "100%" }}
+								transition={{ duration: 0.3, ease: "easeInOut" }}
+								className="fixed inset-y-0 right-0 z-50 w-full max-w-sm bg-white dark:bg-zinc-900 lg:hidden"
+							>
+								<Sidebar>
+									<SidebarHeader>
+										<Button
+											plain
+											onClick={() => setIsSidebarOpen(false)}
+											className="ml-auto"
+										>
+											<IconX />
+										</Button>
+									</SidebarHeader>
+									<SidebarBody>
+										<SidebarSection>
+											{navItems.map((item) => (
+												<SidebarItem key={item.url} href={item.url}>
+													<SidebarLabel>{item.label}</SidebarLabel>
+												</SidebarItem>
+											))}
+										</SidebarSection>
+										<SidebarSection>
+											<SidebarItem href={PWA_LINK} target="_blank">
+												<RainbowButton className="w-full">Join Us</RainbowButton>
+											</SidebarItem>
+										</SidebarSection>
+									</SidebarBody>
+								</Sidebar>
+							</motion.div>
+						)}
+						</AnimatePresence>
 					</div>
 				</TooltipProvider>
 			</body>

@@ -39,7 +39,7 @@ function Stat({
 	}, [isInView, value, suffix]);
 
 	return (
-		<div className="flex flex-col items-center rounded-lg border bg-black p-8 shadow-sm">
+		<div className="flex flex-col items-center rounded-lg border bg-black p-4 sm:p-8 shadow-sm">
 			<p
 				ref={ref}
 				className="text-4xl font-bold tracking-tighter text-white sm:text-6xl"
@@ -53,9 +53,9 @@ function Stat({
 
 export function Stats() {
 	return (
-		<div className="bg-white py-24 sm:py-32">
-			<div className="mx-auto max-w-7xl px-6 lg:px-8">
-				<div className="grid grid-cols-1 gap-x-8 gap-y-16 text-center md:grid-cols-2 lg:grid-cols-4">
+		<div className="bg-white py-12 sm:py-24">
+			<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+				<div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4 sm:gap-8 text-center">
 					{stats.map((stat) => (
 						<Stat
 							key={stat.label}

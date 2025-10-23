@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export function Supporters() {
 	return (
-		<div className="mt-10 flex justify-center items-center gap-x-20">
+		<div className="mt-10 flex flex-col sm:flex-row justify-center items-center gap-y-10 sm:gap-x-20">
 			<Image
 				src="https://www.ieeesbsbce.in/assests/frond-page/ieee.svg"
 				alt="IEEE Society Logo"
