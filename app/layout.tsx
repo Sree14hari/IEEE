@@ -242,52 +242,50 @@ export default function RootLayout({
 
 						<AnimatePresence>
 							{isSidebarOpen && (
-								<motion.div
-									initial={{ opacity: 0 }}
-									animate={{ opacity: 1 }}
-									exit={{ opacity: 0 }}
-									transition={{ duration: 0.3, ease: "easeInOut" }}
-									className="fixed inset-0 z-50 bg-zinc-900/50 backdrop-blur-sm lg:hidden"
-									onClick={() => setIsSidebarOpen(false)}
-								/>
+								<>
+									<motion.div
+										initial={{ opacity: 0 }}
+										animate={{ opacity: 1 }}
+										exit={{ opacity: 0 }}
+										transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+										className="fixed inset-0 z-50 bg-zinc-900/50 backdrop-blur-sm lg:hidden"
+										onClick={() => setIsSidebarOpen(false)}
+									/>
+									<motion.div
+										initial={{ x: "100%" }}
+										animate={{ x: "0%" }}
+										exit={{ x: "100%" }}
+										transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+										className="fixed inset-y-0 right-0 z-50 w-full max-w-sm bg-white dark:bg-zinc-900 lg:hidden"
+									>
+										<Sidebar>
+											<SidebarHeader>
+												<Button
+													plain
+													onClick={() => setIsSidebarOpen(false)}
+													className="ml-auto"
+												>
+													<IconX />
+												</Button>
+											</SidebarHeader>
+											<SidebarBody>
+												<SidebarSection>
+													{navItems.map((item) => (
+														<SidebarItem key={item.url} href={item.url}>
+															<SidebarLabel>{item.label}</SidebarLabel>
+														</SidebarItem>
+													))}
+												</SidebarSection>
+												<SidebarSection>
+													<SidebarItem href={PWA_LINK} target="_blank">
+														<RainbowButton className="w-full">Join Us</RainbowButton>
+													</SidebarItem>
+												</SidebarSection>
+											</SidebarBody>
+										</Sidebar>
+									</motion.div>
+								</>
 							)}
-						</AnimatePresence>
-						<AnimatePresence>
-						{isSidebarOpen && (
-							<motion.div
-								initial={{ x: "100%" }}
-								animate={{ x: "0%" }}
-								exit={{ x: "100%" }}
-								transition={{ duration: 0.3, ease: "easeInOut" }}
-								className="fixed inset-y-0 right-0 z-50 w-full max-w-sm bg-white dark:bg-zinc-900 lg:hidden"
-							>
-								<Sidebar>
-									<SidebarHeader>
-										<Button
-											plain
-											onClick={() => setIsSidebarOpen(false)}
-											className="ml-auto"
-										>
-											<IconX />
-										</Button>
-									</SidebarHeader>
-									<SidebarBody>
-										<SidebarSection>
-											{navItems.map((item) => (
-												<SidebarItem key={item.url} href={item.url}>
-													<SidebarLabel>{item.label}</SidebarLabel>
-												</SidebarItem>
-											))}
-										</SidebarSection>
-										<SidebarSection>
-											<SidebarItem href={PWA_LINK} target="_blank">
-												<RainbowButton className="w-full">Join Us</RainbowButton>
-											</SidebarItem>
-										</SidebarSection>
-									</SidebarBody>
-								</Sidebar>
-							</motion.div>
-						)}
 						</AnimatePresence>
 					</div>
 				</TooltipProvider>
