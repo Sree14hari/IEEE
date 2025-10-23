@@ -64,7 +64,7 @@ export default function UpcomingEvents() {
                     className="flex flex-col md:flex-row gap-6 md:overflow-x-auto pb-4 md:scroll-smooth"
                     style={{ scrollbarWidth: 'none', '-ms-overflow-style': 'none' }}
                 >
-					<div className="flex flex-col md:flex-row gap-6 w-full items-center justify-center">
+					<div className="flex flex-col md:flex-row items-center justify-center gap-6 w-full">
 						{upcomingEvents.map((event) => (
 							<UpcomingEventCard key={event.id} event={event} />
 						))}
