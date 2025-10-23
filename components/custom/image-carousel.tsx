@@ -7,7 +7,6 @@ import { useWindowSize } from 'react-use';
 
 import { Button } from '@/components/ui/button';
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
-import { cn } from '@/lib/utils';
 
 const images = [
 	{
@@ -68,7 +67,7 @@ export function ImageCarousel() {
     useEffect(() => {
         if (width < 640) { // sm breakpoint
             setImagesPerPage(1);
-        } else if (width < 1024) { // md breakpoint
+        } else if (width < 768) { // md breakpoint
             setImagesPerPage(2);
         } else {
             setImagesPerPage(3);
@@ -89,6 +88,8 @@ export function ImageCarousel() {
 		return images.slice(start, end);
 	};
 
+	const gridCols = `grid-cols-${imagesPerPage}`;
+
 	return (
 		<div className="relative mt-10 w-full flex flex-col items-center justify-center">
 			<div className="relative w-full overflow-hidden h-64">
@@ -104,10 +105,7 @@ export function ImageCarousel() {
 							x: { type: 'spring', stiffness: 300, damping: 30 },
 							opacity: { duration: 0.2 },
 						}}
-						className={cn(
-							"absolute w-full h-full grid gap-4 px-4",
-							`grid-cols-${imagesPerPage}`
-						)}
+						className="absolute w-full h-full flex gap-4 px-4"
 					>
 						{getImagesForPage(pageIndex).map((image) => (
 							<div key={image.src} className="relative h-full w-full">
