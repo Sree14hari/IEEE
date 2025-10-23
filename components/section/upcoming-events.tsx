@@ -59,15 +59,16 @@ export default function UpcomingEvents() {
 				Upcoming Events
 			</h3>
 			<div className="relative">
-				<div 
+                <div 
                     ref={scrollContainerRef}
-                    className="grid justify-items-center gap-6 md:flex md:flex-row md:justify-start md:overflow-x-auto pb-4 md:scroll-smooth"
-                    style={{ scrollbarWidth: 'none', '-ms-overflow-style': 'none' }}
+                    className="flex gap-6 overflow-x-auto pb-4 scroll-smooth snap-x snap-mandatory"
+                    style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                 >
-					{upcomingEvents.map((event) => (
-						<UpcomingEventCard key={event.id} event={event} />
-					))}
-				</div>
+                    {upcomingEvents.map((event) => (
+                    <UpcomingEventCard key={event.id} event={event} />
+                    ))}
+                </div>
+
                 <div className="hidden md:flex justify-center items-center gap-4 mt-4">
                     <Button plain onClick={() => scroll('left')} className="rounded-full !p-2 bg-white/50 hover:bg-white/80">
                         <IconChevronLeft className="size-6" />
