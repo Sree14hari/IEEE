@@ -199,7 +199,7 @@ export default function RootLayout({
 
 						<footer className="py-16 mx-6">
 							<div className="mt-10 text-sm">
-								<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 text-center sm:text-left">
+								<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 text-left">
 									{footerSections.map((section) => (
 										<div key={section.title}>
 											<h3 className="font-bold text-zinc-900 dark:text-white">{section.title}</h3>
@@ -208,7 +208,7 @@ export default function RootLayout({
 													<li key={link.text}>
 														<Link
 															href={link.href}
-															className="text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 flex items-center justify-center sm:justify-start"
+															className="text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 flex items-center"
 														>
 															<IconChevronRight className="size-4 mr-1" />
 															{link.text}
