@@ -66,7 +66,7 @@ export function ImageCarousel() {
     const [imagesPerPage, setImagesPerPage] = useState(3);
 
     useEffect(() => {
-        if (width < 768) {
+        if (width < 640) { // sm breakpoint
             setImagesPerPage(1);
         } else {
             setImagesPerPage(3);
@@ -75,10 +75,10 @@ export function ImageCarousel() {
 
 
 	const numPages = Math.ceil(images.length / imagesPerPage);
-	const pageIndex = page % numPages;
+	const pageIndex = (page % numPages + numPages) % numPages;
 
 	const paginate = (newDirection: number) => {
-		setPage([(page + newDirection + numPages) % numPages, newDirection]);
+		setPage([page + newDirection, newDirection]);
 	};
 
 	const getImagesForPage = (p: number) => {
@@ -103,7 +103,7 @@ export function ImageCarousel() {
 					}}
 					className={cn(
 						"absolute w-full h-full grid gap-4 px-4 sm:px-12",
-						imagesPerPage === 1 ? "grid-cols-1" : "md:grid-cols-3"
+						"grid-cols-1 sm:grid-cols-3"
 					)}
 				>
 					{getImagesForPage(pageIndex).map((image) => (
