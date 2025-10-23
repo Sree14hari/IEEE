@@ -32,52 +32,53 @@ export function Hero() {
 	};
 
 	return (
-		<motion.div
-			className="relative"
-			variants={containerVariants}
-			initial="hidden"
-			animate="visible"
-		>
+		<div className="relative">
 			<motion.div
-				className="hidden sm:mb-8 sm:flex sm:justify-center"
-				variants={itemVariants}
+				variants={containerVariants}
+				initial="hidden"
+				animate="visible"
 			>
-				<div className="relative rounded-full px-3 py-1 text-sm leading-6 text-muted-foreground ring-[6px] ring-background border-2 border-zinc-300 hover:border-zinc-400 transition-all ">
-					Power What’s Next for <Strong>Tech</Strong>
-				</div>
-			</motion.div>
-			<motion.h1
-				className="mx-auto max-w-2xl text-balance text-center font-display text-4xl font-medium tracking-tight text-zinc-900 sm:text-7xl lg:mt-8"
-				variants={itemVariants}
-			>
-				IEEE Students
-				<br />
-				Branch.
-			</motion.h1>
-			<motion.p
-				className="mx-auto mt-6 max-w-2xl text-balance text-center text-lg tracking-tight text-muted-foreground"
-				variants={itemVariants}
-			>
-				Branch Code:{" "}
-				<span className="whitespace-nowrap">
-					<HyperText
-						className="text-foreground font-medium underline underline-offset-[2.9px]"
-						text="STB12941"
-					/>
-				</span>{" "}
-				{/* no <span className="strikethrough">ads</span> &{" "}
+				<motion.div
+					className="hidden sm:mb-8 sm:flex sm:justify-center"
+					variants={itemVariants}
+				>
+					<div className="relative rounded-full px-3 py-1 text-sm leading-6 text-muted-foreground ring-[6px] ring-background border-2 border-zinc-300 hover:border-zinc-400 transition-all ">
+						Power What’s Next for <Strong>Tech</Strong>
+					</div>
+				</motion.div>
+				<motion.h1
+					className="mx-auto max-w-2xl text-balance text-center font-display text-4xl font-medium tracking-tight text-zinc-900 sm:text-7xl lg:mt-8"
+					variants={itemVariants}
+				>
+					IEEE Students
+					<br />
+					Branch.
+				</motion.h1>
+				<motion.p
+					className="mx-auto mt-6 max-w-2xl text-balance text-center text-lg tracking-tight text-muted-foreground"
+					variants={itemVariants}
+				>
+					Branch Code:{" "}
+					<span className="whitespace-nowrap">
+						<HyperText
+							className="text-foreground font-medium underline underline-offset-[2.9px]"
+							text="STB12941"
+						/>
+					</span>{" "}
+					{/* no <span className="strikethrough">ads</span> &{" "}
 				<span className="strikethrough">data collection</span> */}
-			</motion.p>
-			<motion.div
+				</motion.p>
+			</motion.div>
+			
+			<div
 				className="mt-10 flex justify-center gap-x-6"
-				variants={itemVariants}
 			>
 				<Link href={PWA_LINK} target="_blank" aria-label="Join Us">
 					<RainbowButton className="h-14 px-8 text-lg relative z-20 ">
 						Join Us
 					</RainbowButton>
 				</Link>
-			</motion.div>
+			</div>
 
 			<motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, delay: 0.8 }}>
 				<Image
@@ -97,6 +98,6 @@ export function Hero() {
 					height={390}
 				/>
 			</motion.div>
-		</motion.div>
+		</div>
 	);
 }
