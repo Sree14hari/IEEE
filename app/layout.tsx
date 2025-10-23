@@ -24,6 +24,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import {
 	IconMenu2,
 	IconX,
+	IconChevronRight,
 } from "@tabler/icons-react";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -207,8 +208,9 @@ export default function RootLayout({
 													<li key={link.text}>
 														<Link
 															href={link.href}
-															className="text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200"
+															className="text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 flex items-center justify-center sm:justify-start"
 														>
+															<IconChevronRight className="size-4 mr-1" />
 															{link.text}
 														</Link>
 													</li>
