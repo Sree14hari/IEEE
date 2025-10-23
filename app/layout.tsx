@@ -197,18 +197,18 @@ export default function RootLayout({
 							<div className="grow p-6 lg:p-10 lg:pb-0">{children}</div>
 						</main>
 
-						<footer className="py-16 px-6">
+						<footer className="bg-black text-white py-16 px-6">
 							<div className="mx-auto max-w-7xl">
 								<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
 									{footerSections.map((section) => (
 										<div key={section.title}>
-											<h3 className="font-bold text-zinc-900 dark:text-white">{section.title}</h3>
+											<h3 className="font-bold text-white">{section.title}</h3>
 											<ul className="mt-4 space-y-2">
 												{section.links.map((link) => (
 													<li key={link.text}>
 														<Link
 															href={link.href}
-															className="text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 flex items-center"
+															className="text-zinc-300 hover:text-white flex items-center"
 														>
 															<IconChevronRight className="size-4 mr-1" />
 															{link.text}
@@ -219,10 +219,10 @@ export default function RootLayout({
 										</div>
 									))}
 								</div>
-								<div className="mt-12 pt-8 border-t border-dashed flex flex-wrap justify-center items-center text-sm text-zinc-500">
+								<div className="mt-12 pt-8 border-t border-dashed border-zinc-700 flex flex-wrap justify-center items-center text-sm text-zinc-400">
 									{footerBottomLinks.map((link, index) => (
 										<React.Fragment key={link.text}>
-											<Link href={link.href} className="hover:text-zinc-700 dark:hover:text-zinc-200">
+											<Link href={link.href} className="hover:text-white">
 												{link.text}
 											</Link>
 											{index < footerBottomLinks.length - 1 && (
@@ -234,7 +234,7 @@ export default function RootLayout({
 							</div>
 						</footer>
 						
-						<p className="text-center text-sm text-muted-foreground pb-12 mx-auto pt-4 border-dashed">
+						<p className="text-center text-sm text-muted-foreground pb-12 mx-auto pt-4 border-dashed bg-black w-full">
 							Copyright © 2025 SHR – All rights reserved.
 						</p>
 
