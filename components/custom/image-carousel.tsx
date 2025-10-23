@@ -90,38 +90,40 @@ export function ImageCarousel() {
 	};
 
 	return (
-		<div className="relative mt-10 w-full overflow-hidden h-64 flex items-center justify-center">
-			<AnimatePresence initial={false} custom={direction}>
-				<motion.div
-					key={page}
-					custom={direction}
-					variants={variants}
-					initial="enter"
-					animate="center"
-					exit="exit"
-					transition={{
-						x: { type: 'spring', stiffness: 300, damping: 30 },
-						opacity: { duration: 0.2 },
-					}}
-					className={cn(
-						"absolute w-full h-full grid gap-4 px-4 sm:px-12",
-						`grid-cols-${imagesPerPage}`
-					)}
-				>
-					{getImagesForPage(pageIndex).map((image) => (
-						<div key={image.src} className="relative h-full w-full">
-							<Image
-								src={image.src}
-								alt={image.alt}
-								fill
-								className="rounded-xl object-cover"
-								data-ai-hint={image.hint}
-							/>
-						</div>
-					))}
-				</motion.div>
-			</AnimatePresence>
-			<div className="absolute top-1/2 left-2 sm:left-4 z-20 -translate-y-1/2">
+		<div className="relative mt-10 w-full flex flex-col items-center justify-center">
+			<div className="relative w-full overflow-hidden h-64">
+				<AnimatePresence initial={false} custom={direction}>
+					<motion.div
+						key={page}
+						custom={direction}
+						variants={variants}
+						initial="enter"
+						animate="center"
+						exit="exit"
+						transition={{
+							x: { type: 'spring', stiffness: 300, damping: 30 },
+							opacity: { duration: 0.2 },
+						}}
+						className={cn(
+							"absolute w-full h-full grid gap-4 px-4",
+							`grid-cols-${imagesPerPage}`
+						)}
+					>
+						{getImagesForPage(pageIndex).map((image) => (
+							<div key={image.src} className="relative h-full w-full">
+								<Image
+									src={image.src}
+									alt={image.alt}
+									fill
+									className="rounded-xl object-cover"
+									data-ai-hint={image.hint}
+								/>
+							</div>
+						))}
+					</motion.div>
+				</AnimatePresence>
+			</div>
+			<div className="flex justify-center items-center gap-4 mt-4">
 				<Button
 					plain
 					onClick={() => paginate(-1)}
@@ -129,8 +131,6 @@ export function ImageCarousel() {
 				>
 					<IconChevronLeft className="size-6" />
 				</Button>
-			</div>
-			<div className="absolute top-1/2 right-2 sm:right-4 z-20 -translate-y-1/2">
 				<Button
 					plain
 					onClick={() => paginate(1)}
