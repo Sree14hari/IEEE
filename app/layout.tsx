@@ -20,7 +20,6 @@ import {
 	SidebarItem,
 	SidebarSection,
 	SidebarLabel,
-	SidebarHeading,
 } from "@/components/ui/sidebar";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import {
@@ -28,13 +27,14 @@ import {
 	IconX,
 	IconChevronRight,
 	IconChevronDown,
+	IconChevronUp,
 } from "@tabler/icons-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Fira_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import React, { useState } from "react";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion } from "framer-motion";
 import { PWA_LINK } from "@/lib/constants";
 import "./globals.css";
 
@@ -137,6 +137,8 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+	const [isExcomOpen, setIsExcomOpen] = useState(false);
+
 	return (
 		<html lang="en" className={`${font.variable} ${fontMono.variable}`}>
 			<head>
@@ -259,7 +261,7 @@ export default function RootLayout({
 										initial={{ opacity: 0 }}
 										animate={{ opacity: 1 }}
 										exit={{ opacity: 0 }}
-										transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+										transition={{ type: 'spring', stiffness: 400, damping: 40 }}
 										className="fixed inset-0 z-50 bg-zinc-900/50 backdrop-blur-sm lg:hidden"
 										onClick={() => setIsSidebarOpen(false)}
 									/>
@@ -267,7 +269,7 @@ export default function RootLayout({
 										initial={{ x: "100%" }}
 										animate={{ x: "0%" }}
 										exit={{ x: "100%" }}
-										transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+										transition={{ type: 'spring', stiffness: 400, damping: 40 }}
 										className="fixed inset-y-0 right-0 z-50 w-full max-w-sm bg-white dark:bg-zinc-900 lg:hidden"
 									>
 										<Sidebar>
@@ -287,13 +289,27 @@ export default function RootLayout({
 															<SidebarLabel>{item.label}</SidebarLabel>
 														</SidebarItem>
 													))}
-													<SidebarHeading>Excom</SidebarHeading>
-													<SidebarItem href="/excom/2025" onClick={() => setIsSidebarOpen(false)}>
-														<SidebarLabel>2025</SidebarLabel>
+													<SidebarItem onClick={() => setIsExcomOpen(!isExcomOpen)}>
+														<SidebarLabel>Excom</SidebarLabel>
+														{isExcomOpen ? <IconChevronUp className="ml-auto" /> : <IconChevronDown className="ml-auto" />}
 													</SidebarItem>
-													<SidebarItem href="/excom/2024" onClick={() => setIsSidebarOpen(false)}>
-														<SidebarLabel>2024</SidebarLabel>
-													</SidebarItem>
+													<AnimatePresence>
+														{isExcomOpen && (
+															<motion.div
+																initial={{ height: 0, opacity: 0 }}
+																animate={{ height: 'auto', opacity: 1 }}
+																exit={{ height: 0, opacity: 0 }}
+																className="overflow-hidden flex flex-col"
+															>
+																<SidebarItem href="/excom/2025" onClick={() => setIsSidebarOpen(false)} className="pl-8">
+																	<SidebarLabel>2025</SidebarLabel>
+																</SidebarItem>
+																<SidebarItem href="/excom/2024" onClick={() => setIsSidebarOpen(false)} className="pl-8">
+																	<SidebarLabel>2024</SidebarLabel>
+																</SidebarItem>
+															</motion.div>
+														)}
+													</AnimatePresence>
 												</SidebarSection>
 												<SidebarSection>
 													<SidebarItem href={PWA_LINK} target="_blank" onClick={() => setIsSidebarOpen(false)}>
@@ -312,3 +328,5 @@ export default function RootLayout({
 		</html>
 	);
 }
+
+    
