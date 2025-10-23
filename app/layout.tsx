@@ -197,9 +197,9 @@ export default function RootLayout({
 							<div className="grow p-6 lg:p-10 lg:pb-0">{children}</div>
 						</main>
 
-						<footer className="py-16 mx-6">
-							<div className="mt-10 text-sm">
-								<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 text-left">
+						<footer className="py-16 px-6">
+							<div className="mx-auto max-w-7xl">
+								<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
 									{footerSections.map((section) => (
 										<div key={section.title}>
 											<h3 className="font-bold text-zinc-900 dark:text-white">{section.title}</h3>
