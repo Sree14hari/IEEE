@@ -3,7 +3,6 @@
 import { AnimatePresence, motion } from 'motion/react';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
-import { useWindowSize } from 'react-use';
 
 import { Button } from '@/components/ui/button';
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
@@ -61,18 +60,34 @@ const variants = {
 
 export function ImageCarousel() {
 	const [[page, direction], setPage] = useState([0, 0]);
-	const { width } = useWindowSize();
-    const [imagesPerPage, setImagesPerPage] = useState(3);
+	const [imagesPerPage, setImagesPerPage] = useState(3);
+	const [isClient, setIsClient] = useState(false);
 
-    useEffect(() => {
-        if (width < 640) { // sm breakpoint
-            setImagesPerPage(1);
-        } else if (width < 768) { // md breakpoint
-            setImagesPerPage(2);
-        } else {
-            setImagesPerPage(3);
-        }
-    }, [width]);
+	useEffect(() => {
+		setIsClient(true);
+	}, []);
+
+	useEffect(() => {
+		if (!isClient) return;
+
+		const handleResize = () => {
+			if (window.innerWidth < 640) { // sm breakpoint
+				setImagesPerPage(1);
+			} else if (window.innerWidth < 768) { // md breakpoint
+				setImagesPerPage(2);
+			} else {
+				setImagesPerPage(3);
+			}
+		};
+
+		handleResize();
+		window.addEventListener('resize', handleResize);
+		return () => window.removeEventListener('resize', handleResize);
+	}, [isClient]);
+
+	if (!isClient) {
+		return null; // Render nothing on the server
+	}
 
 
 	const numPages = Math.ceil(images.length / imagesPerPage);
@@ -87,8 +102,6 @@ export function ImageCarousel() {
 		const end = start + imagesPerPage;
 		return images.slice(start, end);
 	};
-
-	const gridCols = `grid-cols-${imagesPerPage}`;
 
 	return (
 		<div className="relative mt-10 w-full flex flex-col items-center justify-center">
