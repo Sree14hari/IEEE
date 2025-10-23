@@ -77,23 +77,23 @@ export const metadata: Metadata = {
 	title: "IEEE SB SBCE",
 	description:
 		"Power What Next for Tech",
-	// openGraph: {
-	// 	title: "gider.im",
-	// 	description:
-	// 		"Free, privacy first, local first, no tracking, no ads, no data collection.",
-	// 	url: "https://gider.im",
-	// 	siteName: "gider.im",
-	// 	locale: "en_US",
-	// 	type: "website",
-	// 	images: [
-	// 		{
-	// 			url: "https://gider.im/og.png",
-	// 			width: 1200,
-	// 			height: 630,
-	// 			alt: "gider.im",
-	// 		},
-	// 	],
-	// },
+	openGraph: {
+		title: "IEEE SB SBCE",
+		description:
+			"",
+		url: "https://ieeesbsbce.in",
+		siteName: "IEEE.SBCE",
+		locale: "en_US",
+		type: "website",
+		images: [
+			{
+				url: "/og.png",
+				width: 1200,
+				height: 630,
+				alt: "IEEE",
+			},
+		],
+	},
 	
 	robots: {
 		index: true,
@@ -270,7 +270,7 @@ export default function RootLayout({
 						</footer>
 						
 						<p className="text-center text-sm text-muted-foreground pb-12 mx-auto pt-4 border-dashed">
-							Copyright © 2024 IEEE – All rights reserved.
+							Copyright © 2025 SHR – All rights reserved.
 						</p>
 
 						<BreakpointDebug />

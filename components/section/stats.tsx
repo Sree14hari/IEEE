@@ -7,6 +7,7 @@ const stats = [
 	{ value: 10, label: "Years", suffix: "+" },
 	{ value: 99, label: "Members", suffix: "+" },
 	{ value: 70, label: "Events", suffix: "+" },
+	{ value: 3, label: "Communities", suffix: "+" },
 ];
 
 function Stat({
@@ -54,7 +55,7 @@ export function Stats() {
 	return (
 		<div className="bg-white py-24 sm:py-32">
 			<div className="mx-auto max-w-7xl px-6 lg:px-8">
-				<div className="grid grid-cols-1 gap-x-8 gap-y-16 text-center md:grid-cols-3">
+				<div className="grid grid-cols-1 gap-x-8 gap-y-16 text-center md:grid-cols-2 lg:grid-cols-4">
 					{stats.map((stat) => (
 						<Stat
 							key={stat.label}
