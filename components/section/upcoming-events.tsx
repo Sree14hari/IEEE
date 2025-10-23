@@ -1,4 +1,9 @@
+'use client';
+
 import UpcomingEventCard from "@/components/custom/upcoming-event-card";
+import { Button } from "@/components/ui/button";
+import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
+import { useRef } from "react";
 
 const upcomingEvents = [
 	{
@@ -39,15 +44,40 @@ const upcomingEvents = [
 ];
 
 export default function UpcomingEvents() {
+    const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+    const scroll = (direction: 'left' | 'right') => {
+        if (scrollContainerRef.current) {
+            const scrollAmount = direction === 'left' ? -324 : 324;
+            scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
+    };
+
 	return (
 		<div>
 			<h3 className="text-2xl font-bold tracking-tight text-center mb-6">
 				Upcoming Events
 			</h3>
-			<div className="flex gap-6 overflow-x-auto pb-4">
-				{upcomingEvents.map((event) => (
-					<UpcomingEventCard key={event.id} event={event} />
-				))}
+			<div className="relative">
+				<div 
+                    ref={scrollContainerRef}
+                    className="flex gap-6 overflow-x-auto pb-4 scroll-smooth"
+                    style={{ scrollbarWidth: 'none', '-ms-overflow-style': 'none' }}
+                >
+					{upcomingEvents.map((event) => (
+						<UpcomingEventCard key={event.id} event={event} />
+					))}
+				</div>
+                <div className="absolute top-1/2 -translate-y-1/2 left-0">
+                    <Button plain onClick={() => scroll('left')} className="rounded-full !p-2 bg-white/50 hover:bg-white/80">
+                        <IconChevronLeft className="size-6" />
+                    </Button>
+                </div>
+                <div className="absolute top-1/2 -translate-y-1/2 right-0">
+                    <Button plain onClick={() => scroll('right')} className="rounded-full !p-2 bg-white/50 hover:bg-white/80">
+                        <IconChevronRight className="size-6" />
+                    </Button>
+                </div>
 			</div>
 		</div>
 	);
