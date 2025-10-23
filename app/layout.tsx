@@ -3,6 +3,7 @@
 import { BreakpointDebug } from "@/components/custom/breakpoint-debug";
 import Logo from "@/components/custom/logo";
 import { Button } from "@/components/ui/button";
+import { Dropdown, DropdownButton, DropdownItem, DropdownMenu } from "@/components/ui/dropdown";
 import { Link } from "@/components/ui/link";
 import {
 	Navbar,
@@ -19,12 +20,14 @@ import {
 	SidebarItem,
 	SidebarSection,
 	SidebarLabel,
+	SidebarHeading,
 } from "@/components/ui/sidebar";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import {
 	IconMenu2,
 	IconX,
 	IconChevronRight,
+	IconChevronDown,
 } from "@tabler/icons-react";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -64,7 +67,6 @@ const fontMono = Fira_Mono({
 
 const navItems = [
 	{ label: "Events", url: "/events" },
-	{ label: "Excom", url: "/excom" },
 	{ label: "About", url: "/about" },
 ];
 
@@ -174,6 +176,16 @@ export default function RootLayout({
 												{item.label}
 											</NavbarItem>
 										))}
+										<Dropdown>
+											<DropdownButton as={NavbarItem}>
+												Excom
+												<IconChevronDown />
+											</DropdownButton>
+											<DropdownMenu>
+												<DropdownItem href="/excom/2025">2025</DropdownItem>
+												<DropdownItem href="/excom/2024">2024</DropdownItem>
+											</DropdownMenu>
+										</Dropdown>
 									</NavbarSection>
 									<NavbarSpacer />
 									<NavbarSection>
@@ -275,6 +287,13 @@ export default function RootLayout({
 															<SidebarLabel>{item.label}</SidebarLabel>
 														</SidebarItem>
 													))}
+													<SidebarHeading>Excom</SidebarHeading>
+													<SidebarItem href="/excom/2025" onClick={() => setIsSidebarOpen(false)}>
+														<SidebarLabel>2025</SidebarLabel>
+													</SidebarItem>
+													<SidebarItem href="/excom/2024" onClick={() => setIsSidebarOpen(false)}>
+														<SidebarLabel>2024</SidebarLabel>
+													</SidebarItem>
 												</SidebarSection>
 												<SidebarSection>
 													<SidebarItem href={PWA_LINK} target="_blank" onClick={() => setIsSidebarOpen(false)}>
