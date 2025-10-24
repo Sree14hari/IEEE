@@ -8,35 +8,38 @@ import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
 
 const images = [
 	{
-		src: 'https://picsum.photos/seed/1/800/600',
+		src: '/Gallery/ieee.jpg',
 		alt: 'Carousel image 1',
 		hint: 'event photo',
 	},
 	{
-		src: 'https://picsum.photos/seed/2/800/600',
+		src: '/Gallery/ieee2.jpg',
 		alt: 'Carousel image 2',
 		hint: 'event photo',
 	},
 	{
-		src: 'https://picsum.photos/seed/3/800/600',
+		src: '/Gallery/ieee3.jpg',
 		alt: 'Carousel image 3',
 		hint: 'event photo',
 	},
 	{
-		src: 'https://picsum.photos/seed/4/800/600',
-		alt: 'Carousel image 4',
+		src: '/Gallery/ieee2.jpg',
+		alt: 'Carousel image 6',
 		hint: 'event photo',
 	},
 	{
-		src: 'https://picsum.photos/seed/5/800/600',
+		src: '/Gallery/ieee.jpg',
 		alt: 'Carousel image 5',
 		hint: 'event photo',
 	},
 	{
-		src: 'https://picsum.photos/seed/6/800/600',
-		alt: 'Carousel image 6',
+		src: '/Gallery/ieee3.jpg',
+		alt: 'Carousel image 7',
 		hint: 'event photo',
 	},
+	
+	
+	
 ];
 
 export function ImageCarousel() {
