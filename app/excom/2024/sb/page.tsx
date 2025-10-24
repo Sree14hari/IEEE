@@ -9,7 +9,7 @@ import { Link } from "@/components/ui/link";
 const branchCounsellor = {
 	name: "Prof. Ananthu Vijayakumar",
 	role: "Branch Counsellor",
-	image: "https://picsum.photos/seed/sb1/400/400",
+	image: "/Excom/excom2024sb/Ananthu.webp",
 	linkedin: null,
 };
 
@@ -17,13 +17,13 @@ const otherMembers = [
 	{
 		name: "NEHA SIJU",
 		role: "Chairman",
-		image: "https://picsum.photos/seed/sb2/400/400",
+		image: "/Excom/excom2024sb/Neha.webp",
 		linkedin: "https://www.linkedin.com/in/nehasiju/",
 	},
 	{
 		name: "SREYAS MOHAN",
 		role: "Vice Chair",
-		image: "https://picsum.photos/seed/sb3/400/400",
+		image: "/public/Excom/excom2024sb/s",
 		linkedin: "https://www.linkedin.com/in/sreyas-mohan-8a227027b/",
 	},
 	{
