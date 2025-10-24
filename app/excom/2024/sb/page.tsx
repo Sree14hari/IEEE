@@ -85,14 +85,16 @@ const otherMembers = [
 const MemberCard = ({ name, role, image, linkedin }: { name: string, role: string, image: string, linkedin: string | null }) => {
 	const cardContent = (
 		<Card className="group h-full overflow-hidden text-center transition-transform duration-300 hover:scale-105">
-			<div className="relative h-56 w-full">
-				<Image
-					src={image}
-					alt={`Photo of ${name}`}
-					fill
-					className="object-cover object-top"
-					data-ai-hint="person portrait"
-				/>
+			<div className="pt-8 pb-4 flex justify-center">
+				<div className="relative size-32">
+					<Image
+						src={image}
+						alt={`Photo of ${name}`}
+						fill
+						className="rounded-full object-cover object-top"
+						data-ai-hint="person portrait"
+					/>
+				</div>
 			</div>
 			<CardContent className="p-4">
 				<h3 className="text-lg font-bold">{name}</h3>
