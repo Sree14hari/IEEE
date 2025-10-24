@@ -51,7 +51,7 @@ export function PainPoint() {
 				<div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
 					<dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
 						{features.map((feature) => (
-							<div key={feature.name} className="relative pl-16">
+							<div key={feature.name} className="relative pl-16 transition-transform duration-300 hover:scale-105">
 								<dt className="text-lg font-medium leading-7 text-zinc-950">
 									<div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50">
 										<feature.icon

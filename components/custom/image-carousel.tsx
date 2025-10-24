@@ -89,7 +89,7 @@ export function ImageCarousel() {
 			<div className="relative w-full overflow-hidden h-64">
 				<div
 					key={page}
-					className="absolute w-full h-full flex gap-4 px-4"
+					className="absolute w-full h-full flex gap-4 px-4 transition-opacity duration-500"
 				>
 					{getImagesForPage(pageIndex).map((image) => (
 						<div key={image.src} className="relative h-full w-full">

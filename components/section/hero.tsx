@@ -53,7 +53,7 @@ export function Hero() {
 
 			<div>
 				<Image
-					className="absolute -bottom-0 left-0 pointer-events-none invisible xl:visible"
+					className="absolute -bottom-0 left-0 pointer-events-none invisible xl:visible animate-[float_6s_ease-in-out_infinite]"
 					alt="Hero left image"
 					src="/hero-left.svg"
 					width={360}
@@ -62,7 +62,7 @@ export function Hero() {
 			</div>
 			<div>
 				<Image
-					className="absolute -bottom-0 -right-2 pointer-events-none invisible xl:visible"
+					className="absolute -bottom-0 -right-2 pointer-events-none invisible xl:visible animate-[float_6s_ease-in-out_infinite_3s]"
 					alt="Hero right image"
 					src="/hero-right.svg"
 					width={390}

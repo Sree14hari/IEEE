@@ -8,28 +8,28 @@ export function Supporters() {
 				alt="IEEE Society Logo"
 				width={150}
 				height={60}
-				className="filter-black"
+				className="filter-black transition-transform duration-300 hover:scale-110"
 			/>
 			<Image
 				src="https://www.ieeesbsbce.in/assests/frond-page/ias.svg"
 				alt="IAS Society Logo"
 				width={150}
 				height={60}
-				className="filter-black"
+				className="filter-black transition-transform duration-300 hover:scale-110"
 			/>
 			<Image
 				src="https://www.ieeesbsbce.in/assests/frond-page/cs.svg"
 				alt="CS Society Logo"
 				width={150}
 				height={60}
-				className="filter-black"
+				className="filter-black transition-transform duration-300 hover:scale-110"
 			/>
 			<Image
 				src="https://www.ieeesbsbce.in/assests/frond-page/SPS_Logo_KO_RGB.png"
 				alt="SPS Society Logo"
 				width={150}
 				height={60}
-				className="filter-black"
+				className="filter-black transition-transform duration-300 hover:scale-110"
 			/>
 		</div>
 	);
