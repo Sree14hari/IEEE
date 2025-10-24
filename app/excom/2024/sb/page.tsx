@@ -5,7 +5,6 @@ import {
 	CardContent,
 } from "@/components/ui/card";
 import { Link } from "@/components/ui/link";
-import { Linkedin } from "lucide-react";
 
 const branchCounsellor = {
 	name: "Prof. Ananthu Vijayakumar",
@@ -83,6 +82,37 @@ const otherMembers = [
 	},
 ];
 
+const MemberCard = ({ name, role, image, linkedin }: { name: string, role: string, image: string, linkedin: string | null }) => {
+	const cardContent = (
+		<Card className="group h-full overflow-hidden text-center transition-transform duration-300 hover:scale-105">
+			<div className="relative h-64 w-full">
+				<Image
+					src={image}
+					alt={`Photo of ${name}`}
+					fill
+					className="object-cover object-top"
+					data-ai-hint="person portrait"
+				/>
+			</div>
+			<CardContent className="p-4">
+				<h3 className="text-lg font-bold">{name}</h3>
+				<p className="text-sm text-muted-foreground">{role}</p>
+			</CardContent>
+		</Card>
+	);
+
+	if (linkedin) {
+		return (
+			<Link href={linkedin} target="_blank" className="block h-full">
+				{cardContent}
+			</Link>
+		);
+	}
+
+	return <div className="h-full">{cardContent}</div>;
+};
+
+
 export default function Page() {
 	return (
 		<div className="mx-auto max-w-7xl px-4 sm:px-0">
@@ -97,63 +127,13 @@ export default function Page() {
 				</div>
                 <div className="mt-12 flex justify-center">
                     <div className="w-full max-w-sm">
-                        <Card key={branchCounsellor.name} className="group overflow-hidden text-center hover:scale-105 transition-transform duration-300">
-                            <div className="relative h-64 w-full">
-                                <Image
-                                    src={branchCounsellor.image}
-                                    alt={`Photo of ${branchCounsellor.name}`}
-                                    fill
-                                    className="object-cover object-top"
-                                    data-ai-hint="person portrait"
-                                />
-                                {branchCounsellor.linkedin && (
-                                    <Link
-                                        href={branchCounsellor.linkedin}
-                                        target="_blank"
-                                        className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"
-                                    >
-                                        <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/70 backdrop-blur-sm">
-                                            <Linkedin className="h-5 w-5 text-blue-600" />
-                                        </span>
-                                    </Link>
-                                )}
-                            </div>
-                            <CardContent className="p-4">
-                                <h3 className="text-lg font-bold">{branchCounsellor.name}</h3>
-                                <p className="text-sm text-muted-foreground">{branchCounsellor.role}</p>
-                            </CardContent>
-                        </Card>
+						<MemberCard {...branchCounsellor} />
                     </div>
                 </div>
 
 				<div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 					{otherMembers.map((member) => (
-						<Card key={member.name} className="group overflow-hidden text-center hover:scale-105 transition-transform duration-300">
-							<div className="relative h-64 w-full">
-								<Image
-									src={member.image}
-									alt={`Photo of ${member.name}`}
-									fill
-									className="object-cover object-top"
-									data-ai-hint="person portrait"
-								/>
-								{member.linkedin && (
-									<Link
-										href={member.linkedin}
-										target="_blank"
-										className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"
-									>
-										<span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/70 backdrop-blur-sm">
-											<Linkedin className="h-5 w-5 text-blue-600" />
-										</span>
-									</Link>
-								)}
-							</div>
-							<CardContent className="p-4">
-								<h3 className="text-lg font-bold">{member.name}</h3>
-								<p className="text-sm text-muted-foreground">{member.role}</p>
-							</CardContent>
-						</Card>
+						<MemberCard key={member.name} {...member} />
 					))}
 				</div>
 			</div>
