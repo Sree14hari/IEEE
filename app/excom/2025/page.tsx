@@ -7,9 +7,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 const committees = [
-	{ title: "SB Excom", slug: "sb", image: "https://www.ieeesbsbce.in/assests/frond-page/ieee.svg", hint: "team planning" },
-	{ title: "CS Excom", slug: "cs", image: "https://www.ieeesbsbce.in/assests/frond-page/cs.svg", hint: "software development" },
-	{ title: "IAS Excom", slug: "ias", image: "https://www.ieeesbsbce.in/assests/frond-page/ias.svg", hint: "automation technology" },
+	{ title: "SB Excom", slug: "sb", image: "/Excom/SB.webp", hint: "team meeting" },
+	{ title: "CS Excom", slug: "cs", image: "/Excom/CS.webp", hint: "people coding" },
+	{ title: "IAS Excom", slug: "ias", image: "/Excom/IAS.webp", hint: "industrial machinery" },
 ];
 
 export default function Page() {
