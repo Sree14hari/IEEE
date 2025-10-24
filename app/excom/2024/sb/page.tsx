@@ -97,7 +97,7 @@ export default function Page() {
 				</div>
                 <div className="mt-12 flex justify-center">
                     <div className="w-full max-w-sm">
-                        <Card key={branchCounsellor.name} className="group overflow-hidden text-center">
+                        <Card key={branchCounsellor.name} className="group overflow-hidden text-center hover:scale-105 transition-transform duration-300">
                             <div className="relative h-64 w-full">
                                 <Image
                                     src={branchCounsellor.image}
@@ -128,7 +128,7 @@ export default function Page() {
 
 				<div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 					{otherMembers.map((member) => (
-						<Card key={member.name} className="group overflow-hidden text-center">
+						<Card key={member.name} className="group overflow-hidden text-center hover:scale-105 transition-transform duration-300">
 							<div className="relative h-64 w-full">
 								<Image
 									src={member.image}
