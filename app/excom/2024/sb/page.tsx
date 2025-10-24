@@ -85,7 +85,7 @@ const otherMembers = [
 const MemberCard = ({ name, role, image, linkedin }: { name: string, role: string, image: string, linkedin: string | null }) => {
 	const cardContent = (
 		<Card className="group h-full overflow-hidden text-center transition-transform duration-300 hover:scale-105">
-			<div className="relative h-64 w-full">
+			<div className="relative h-56 w-full">
 				<Image
 					src={image}
 					alt={`Photo of ${name}`}
