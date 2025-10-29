@@ -85,6 +85,16 @@ export const Navbar = ({ children, className }: NavbarProps) => {
 };
 
 export const NavBody = ({ children, className, visible }: NavBodyProps) => {
+	const [isMobile, setIsMobile] = useState(false);
+
+	React.useEffect(() => {
+		const checkMobile = () => {
+			setIsMobile(window.innerWidth < 1024);
+		};
+		checkMobile();
+		window.addEventListener("resize", checkMobile);
+		return () => window.removeEventListener("resize", checkMobile);
+	}, []);
   return (
     <motion.div
       animate={{
@@ -92,8 +102,8 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
         boxShadow: visible
           ? "0 0 24px rgba(34, 42, 53, 0.06), 0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset"
           : "none",
-        width: visible ? "40%" : "100%",
-        y: visible ? 20 : 0,
+        width: visible && !isMobile ? "40%" : "100%",
+        y: visible && !isMobile ? 20 : 0,
       }}
       transition={{
         type: "spring",
