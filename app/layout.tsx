@@ -222,7 +222,7 @@ export default function RootLayout({
 									<Link href={PWA_LINK} target="_blank" aria-label="Join Us" className="w-full">
 										<RainbowButton
 											onClick={() => setIsMobileMenuOpen(false)}
-											className="w-full h-10 px-4 text-sm"
+											className="w-full h-9 px-3 text-sm"
 										>
 											Join Us
 										</RainbowButton>
