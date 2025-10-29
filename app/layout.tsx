@@ -218,11 +218,11 @@ export default function RootLayout({
 								<a href="/excom/2024" onClick={() => setIsMobileMenuOpen(false)} className="relative text-neutral-600 dark:text-neutral-300">
 									Excom 2024
 								</a>
-								<div className="flex w-full max-w-xs flex-col gap-4">
-									<Link href={PWA_LINK} target="_blank" aria-label="Join Us" className="w-full">
+								<div className="flex w-full justify-center flex-col items-center gap-4">
+									<Link href={PWA_LINK} target="_blank" aria-label="Join Us">
 										<RainbowButton
 											onClick={() => setIsMobileMenuOpen(false)}
-											className="w-full h-9 px-3 text-sm"
+											className="h-9 px-4 text-sm"
 										>
 											Join Us
 										</RainbowButton>
