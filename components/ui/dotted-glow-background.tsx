@@ -1,3 +1,4 @@
+
 "use client";
 import React, { useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
@@ -88,17 +89,16 @@ const DottedGlowBackground: React.FC<DottedGlowBackgroundProps> = ({
 			const isDark =
 				window.matchMedia &&
 				window.matchMedia("(prefers-color-scheme: dark)").matches;
-			const color = getComputedStyle(document.documentElement)
-				.getPropertyValue(isDark ? colorDarkVar : colorLightVar)
-				.trim();
-			const glowColor = getComputedStyle(document.documentElement)
-				.getPropertyValue(isDark ? glowColorDarkVar : glowColorLightVar)
-				.trim();
+			const colorVar = isDark ? colorDarkVar : colorLightVar;
+			const glowColorVar = isDark ? glowColorDarkVar : glowColorLightVar;
 
+			const colorVal = getComputedStyle(document.documentElement).getPropertyValue(colorVar).trim();
+			const glowColorVal = getComputedStyle(document.documentElement).getPropertyValue(glowColorVar).trim();
+			
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 			if (backgroundOpacity > 0) {
-				ctx.fillStyle = `hsla(${color}, ${backgroundOpacity})`;
+				ctx.fillStyle = `hsla(${colorVal}, ${backgroundOpacity})`;
 				ctx.fillRect(0, 0, canvas.width, canvas.height);
 			}
 
@@ -111,12 +111,12 @@ const DottedGlowBackground: React.FC<DottedGlowBackgroundProps> = ({
 				canvas.height / window.devicePixelRatio / 2,
 				glowRadius,
 			);
-			gradient.addColorStop(0, `hsla(${glowColor} / ${glowOpacity})`);
-			gradient.addColorStop(1, `hsla(${glowColor} / 0)`);
+			gradient.addColorStop(0, `hsla(${glowColorVal}, ${glowOpacity})`);
+			gradient.addColorStop(1, `hsla(${glowColorVal}, 0)`);
 			ctx.fillStyle = gradient;
 			ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-			ctx.fillStyle = `hsla(${color} / ${opacity})`;
+			ctx.fillStyle = `hsla(${colorVal}, ${opacity})`;
 			dots.forEach((dot) => {
 				ctx.beginPath();
 				ctx.arc(dot.x, dot.y, radius, 0, 2 * Math.PI);
