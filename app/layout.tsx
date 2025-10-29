@@ -154,7 +154,7 @@ export default function RootLayout({
 									className="filter-black w-24 h-auto md:w-24"
 								/>
 							</a>
-							<div className="hidden lg:flex items-center gap-2">
+							<div className="hidden lg:flex items-center gap-x-2">
 								<NavItems items={navItems} />
 								<Dropdown>
 									<DropdownButton className="relative px-4 py-2 text-neutral-600 dark:text-neutral-300 font-medium text-sm flex items-center gap-1">
