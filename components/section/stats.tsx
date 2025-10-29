@@ -2,7 +2,6 @@
 
 import { animate, useInView } from "motion/react";
 import { useEffect, useRef } from "react";
-import DottedGlowBackground from "@/components/ui/dotted-glow-background";
 
 const stats = [
 	{ value: 10, label: "Years", suffix: "+" },
@@ -41,17 +40,6 @@ function Stat({
 
 	return (
 		<div className="relative flex flex-col items-center justify-center overflow-hidden rounded-lg border bg-background p-4 sm:p-8 shadow-sm h-40">
-			<DottedGlowBackground
-				className="pointer-events-none"
-				opacity={0.5}
-				gap={8}
-				radius={1}
-				colorLightVar="--color-zinc-500"
-				glowColorLightVar="--color-zinc-600"
-				colorDarkVar="--color-zinc-500"
-				glowColorDarkVar="--color-sky-800"
-				backgroundOpacity={0}
-			/>
 			<p
 				ref={ref}
 				className="text-4xl font-bold tracking-tighter text-foreground sm:text-6xl relative z-10"
