@@ -30,9 +30,9 @@ const DottedGlowBackground: React.FC<DottedGlowBackgroundProps> = ({
 	radius = 2,
 	glowOpacity = 0.04,
 	glowRadius = 150,
-	colorLightVar = "--color-neutral-500",
-	colorDarkVar = "--color-neutral-500",
-	glowColorLightVar = "--color-neutral-600",
+	colorLightVar = "--color-zinc-500",
+	colorDarkVar = "--color-zinc-500",
+	glowColorLightVar = "--color-zinc-600",
 	glowColorDarkVar = "--color-sky-800",
 	backgroundOpacity = 0,
 	speedMin = 0.3,
@@ -111,12 +111,12 @@ const DottedGlowBackground: React.FC<DottedGlowBackgroundProps> = ({
 				canvas.height / window.devicePixelRatio / 2,
 				glowRadius,
 			);
-			gradient.addColorStop(0, `hsla(${glowColor}, ${glowOpacity})`);
-			gradient.addColorStop(1, `hsla(${glowColor}, 0)`);
+			gradient.addColorStop(0, `hsla(${glowColor} / ${glowOpacity})`);
+			gradient.addColorStop(1, `hsla(${glowColor} / 0)`);
 			ctx.fillStyle = gradient;
 			ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-			ctx.fillStyle = `hsla(${color}, ${opacity})`;
+			ctx.fillStyle = `hsla(${color} / ${opacity})`;
 			dots.forEach((dot) => {
 				ctx.beginPath();
 				ctx.arc(dot.x, dot.y, radius, 0, 2 * Math.PI);
