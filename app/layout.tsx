@@ -12,18 +12,14 @@ import {
 	Navbar,
 	NavBody,
 	NavItems,
-	MobileNav,
-	NavbarLogo,
-	NavbarButton,
-	MobileNavHeader,
-	MobileNavToggle,
 	MobileNavMenu,
+	MobileNavToggle,
 } from "@/components/ui/resizable-navbar";
 import { useState } from "react";
 import Image from "next/image";
 import { Dropdown, DropdownButton, DropdownItem, DropdownMenu } from "@/components/ui/dropdown";
 import { Link } from "@/components/ui/link";
-import { IconChevronDown, IconHome, IconCalendarEvent, IconInfoCircle, IconUsersGroup } from "@tabler/icons-react";
+import { IconChevronDown } from "@tabler/icons-react";
 
 import "./globals.css";
 
@@ -155,7 +151,7 @@ export default function RootLayout({
 									alt="IEEE Logo"
 									width={100}
 									height={50}
-									className="filter-black"
+									className="filter-black w-24 h-auto md:w-24"
 								/>
 							</a>
 							<div className="hidden lg:flex items-center gap-2">
@@ -172,13 +168,15 @@ export default function RootLayout({
 								</Dropdown>
 							</div>
 
-							<div className="hidden lg:flex items-center gap-4">
-								<Link href={PWA_LINK} target="_blank" aria-label="Join Us">
-									<RainbowButton>Join Us</RainbowButton>
-								</Link>
-							</div>
-							<div className="lg:hidden">
-								<MobileNavToggle isOpen={isMobileMenuOpen} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} />
+							<div className="flex items-center gap-4">
+								<div className="hidden lg:flex">
+									<Link href={PWA_LINK} target="_blank" aria-label="Join Us">
+										<RainbowButton>Join Us</RainbowButton>
+									</Link>
+								</div>
+								<div className="lg:hidden">
+									<MobileNavToggle isOpen={isMobileMenuOpen} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} />
+								</div>
 							</div>
 						</NavBody>
 						<MobileNavMenu isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)}>

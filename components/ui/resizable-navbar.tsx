@@ -113,7 +113,7 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
       className={cn(
         "relative z-[60] mx-auto flex w-full max-w-7xl flex-row items-center justify-between self-start bg-transparent px-4 py-2 dark:bg-transparent",
         visible && "bg-white/80 dark:bg-neutral-950/80",
-        !isMobile && "rounded-full",
+        !isMobile && visible && "rounded-full",
         className,
       )}
     >
@@ -197,7 +197,7 @@ export const MobileNavMenu = ({
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
           className={cn(
-            "fixed inset-x-0 top-20 z-50 flex w-full flex-col items-center justify-center gap-4 bg-white dark:bg-neutral-950 p-4 shadow-lg lg:hidden",
+            "fixed inset-x-0 top-0 z-50 flex h-screen w-full flex-col items-center justify-center gap-4 bg-white p-4 dark:bg-neutral-950 lg:hidden",
             className,
           )}
         >
