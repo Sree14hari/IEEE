@@ -23,9 +23,10 @@ import { useState } from "react";
 import Image from "next/image";
 import { Dropdown, DropdownButton, DropdownItem, DropdownMenu } from "@/components/ui/dropdown";
 import { Link } from "@/components/ui/link";
-import { IconChevronDown } from "@tabler/icons-react";
+import { IconChevronDown, IconHome, IconCalendarEvent, IconInfoCircle, IconUsersGroup } from "@tabler/icons-react";
 
 import "./globals.css";
+import { FloatingDock } from "@/components/ui/floating-dock";
 
 const font = localFont({
 	src: [
@@ -58,6 +59,29 @@ const navItems = [
 	{ name: "Events", link: "/events" },
 	{ name: "About", link: "/about" },
 ];
+
+const dockLinks = [
+    {
+      title: "Home",
+      icon: <IconHome className="size-6 text-neutral-500 dark:text-neutral-300" />,
+      href: "/",
+    },
+    {
+      title: "Events",
+      icon: <IconCalendarEvent className="size-6 text-neutral-500 dark:text-neutral-300" />,
+      href: "/events",
+    },
+    {
+      title: "About",
+      icon: <IconInfoCircle className="size-6 text-neutral-500 dark:text-neutral-300" />,
+      href: "/about",
+    },
+    {
+      title: "Excom",
+      icon: <IconUsersGroup className="size-6 text-neutral-500 dark:text-neutral-300" />,
+      href: "/excom",
+    },
+  ];
 
 const footerSections = [
 	{
@@ -180,7 +204,7 @@ export default function RootLayout({
 							</div>
 						</NavBody>
 
-						{/* Mobile Navigation */}
+						{/* Mobile Navigation Header (retained for logo) */}
 						<MobileNav>
 							<MobileNavHeader>
 								<a href="/" className="flex items-center">
@@ -192,49 +216,19 @@ export default function RootLayout({
 										className="filter-black"
 									/>
 								</a>
-								<MobileNavToggle
-									isOpen={isMobileMenuOpen}
-									onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-								/>
+                                <Link href={PWA_LINK} target="_blank" aria-label="Join Us">
+									<RainbowButton>Join Us</RainbowButton>
+								</Link>
 							</MobileNavHeader>
-
-							<MobileNavMenu
-								isOpen={isMobileMenuOpen}
-								onClose={() => setIsMobileMenuOpen(false)}
-							>
-								{navItems.map((item, idx) => (
-									<a
-										key={`mobile-link-${idx}`}
-										href={item.link}
-										onClick={() => setIsMobileMenuOpen(false)}
-										className="relative text-neutral-600 dark:text-neutral-300"
-									>
-										<span className="block">{item.name}</span>
-									</a>
-								))}
-								<a href="/excom/2025" onClick={() => setIsMobileMenuOpen(false)} className="relative text-neutral-600 dark:text-neutral-300">
-									Excom 2025
-								</a>
-								<a href="/excom/2024" onClick={() => setIsMobileMenuOpen(false)} className="relative text-neutral-600 dark:text-neutral-300">
-									Excom 2024
-								</a>
-								<div className="flex w-full justify-center flex-col items-center gap-4">
-									<Link href={PWA_LINK} target="_blank" aria-label="Join Us">
-										<RainbowButton
-											onClick={() => setIsMobileMenuOpen(false)}
-											className="h-9 px-4 text-sm"
-										>
-											Join Us
-										</RainbowButton>
-									</Link>
-								</div>
-							</MobileNavMenu>
 						</MobileNav>
 					</Navbar>
-
+                    
 					<main className="flex flex-1 flex-col pb-24">
 						<div className="grow p-6 lg:p-10 lg:pb-0">{children}</div>
 					</main>
+                    
+                    <FloatingDock items={dockLinks} />
+
 
 					<footer className="bg-black text-white py-12 px-6">
 						<div className="mx-auto max-w-7xl">
