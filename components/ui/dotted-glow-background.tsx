@@ -63,7 +63,6 @@ const DottedGlowBackground: React.FC<DottedGlowBackgroundProps> = ({
 
 		const createDots = () => {
 			dots = [];
-			const dpr = window.devicePixelRatio || 1;
 			const rect = canvas.getBoundingClientRect();
 			const width = rect.width;
 			const height = rect.height;
@@ -85,6 +84,7 @@ const DottedGlowBackground: React.FC<DottedGlowBackgroundProps> = ({
 
 		const draw = () => {
 			if (!ctx) return;
+			const rect = canvas.getBoundingClientRect();
 
 			const isDark =
 				window.matchMedia &&
@@ -98,30 +98,35 @@ const DottedGlowBackground: React.FC<DottedGlowBackgroundProps> = ({
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 			if (backgroundOpacity > 0) {
-				ctx.fillStyle = `hsla(${colorVal}, ${backgroundOpacity})`;
+				ctx.globalAlpha = backgroundOpacity;
+				ctx.fillStyle = colorVal;
 				ctx.fillRect(0, 0, canvas.width, canvas.height);
 			}
 
 			// Create a glow effect for the entire canvas
 			const gradient = ctx.createRadialGradient(
-				canvas.width / window.devicePixelRatio / 2,
-				canvas.height / window.devicePixelRatio / 2,
+				rect.width / 2,
+				rect.height / 2,
 				0,
-				canvas.width / window.devicePixelRatio / 2,
-				canvas.height / window.devicePixelRatio / 2,
+				rect.width / 2,
+				rect.height / 2,
 				glowRadius,
 			);
-			gradient.addColorStop(0, `hsla(${glowColorVal}, ${glowOpacity})`);
-			gradient.addColorStop(1, `hsla(${glowColorVal}, 0)`);
-			ctx.fillStyle = gradient;
+			
+			ctx.globalAlpha = glowOpacity;
+			ctx.fillStyle = glowColorVal;
 			ctx.fillRect(0, 0, canvas.width, canvas.height);
+			ctx.globalAlpha = 1;
 
-			ctx.fillStyle = `hsla(${colorVal}, ${opacity})`;
+
+			ctx.globalAlpha = opacity;
+			ctx.fillStyle = colorVal;
 			dots.forEach((dot) => {
 				ctx.beginPath();
 				ctx.arc(dot.x, dot.y, radius, 0, 2 * Math.PI);
 				ctx.fill();
 			});
+			ctx.globalAlpha = 1;
 		};
 
 		const update = () => {
