@@ -1,40 +1,30 @@
 
 'use client';
 import { BreakpointDebug } from "@/components/custom/breakpoint-debug";
-import Logo from "@/components/custom/logo";
-import { Button } from "@/components/ui/button";
-import { Dropdown, DropdownButton, DropdownItem, DropdownMenu } from "@/components/ui/dropdown";
-import { Link } from "@/components/ui/link";
-import {
-	Navbar,
-	NavbarDivider,
-	NavbarItem,
-	NavbarSection,
-	NavbarSpacer,
-} from "@/components/ui/navbar";
 import { RainbowButton } from "@/components/ui/rainbow-button";
-import {
-	Sidebar,
-	SidebarBody,
-	SidebarHeader,
-	SidebarItem,
-	SidebarSection,
-	SidebarLabel,
-} from "@/components/ui/sidebar";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import {
-	IconMenu2,
-	IconX,
-	IconChevronRight,
-	IconChevronDown,
-	IconChevronUp,
-} from "@tabler/icons-react";
+import { PWA_LINK } from "@/lib/constants";
 import type { Metadata } from "next";
-import Image from "next/image";
 import { Fira_Mono } from "next/font/google";
 import localFont from "next/font/local";
-import React, { useState } from "react";
-import { PWA_LINK } from "@/lib/constants";
+import React from "react";
+
+import {
+	Navbar,
+	NavBody,
+	NavItems,
+	MobileNav,
+	NavbarLogo,
+	NavbarButton,
+	MobileNavHeader,
+	MobileNavToggle,
+	MobileNavMenu,
+} from "@/components/ui/resizable-navbar";
+import { useState } from "react";
+import Image from "next/image";
+import { Dropdown, DropdownButton, DropdownItem, DropdownMenu } from "@/components/ui/dropdown";
+import { Link } from "@/components/ui/link";
+import { IconChevronDown } from "@tabler/icons-react";
+
 import "./globals.css";
 
 const font = localFont({
@@ -65,8 +55,8 @@ const fontMono = Fira_Mono({
 });
 
 const navItems = [
-	{ label: "Events", url: "/events" },
-	{ label: "About", url: "/about" },
+	{ name: "Events", link: "/events" },
+	{ name: "About", link: "/about" },
 ];
 
 const footerSections = [
@@ -130,13 +120,13 @@ const footerBottomLinks = [
 	{ text: "Terms & Disclosures", href: "#" },
 ];
 
+
 export default function RootLayout({
 	children,
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
-	const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-	const [isExcomOpen, setIsExcomOpen] = useState(false);
+	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
 	return (
 		<html lang="en" className={`${font.variable} ${fontMono.variable}`}>
@@ -156,158 +146,141 @@ export default function RootLayout({
 				/>
 			</head>
 			<body>
-				<TooltipProvider delayDuration={0} disableHoverableContent>
-					<div className="relative isolate flex min-h-svh w-full flex-col bg-white dark:bg-zinc-900">
-						<header className="flex items-center px-4">
-							<div className="min-w-0 flex-1">
-								<Navbar>
-									<Button href="/" plain>
-										<Image
-											src="/logo.png"
-											alt="IEEE Logo"
-											width={100}
-											height={50}
-											className="filter-black"
-										/>
-									</Button>
-									<NavbarDivider className="max-lg:hidden" />
-									<NavbarSection className="max-lg:hidden">
-										{navItems.map((item) => (
-											<NavbarItem key={item.url} href={item.url}>
-												{item.label}
-											</NavbarItem>
-										))}
-										<Dropdown>
-											<DropdownButton as={NavbarItem}>
-												Excom
-												<IconChevronDown />
-											</DropdownButton>
-											<DropdownMenu>
-												<DropdownItem href="/excom/2025">2025</DropdownItem>
-												<DropdownItem href="/excom/2024">2024</DropdownItem>
-											</DropdownMenu>
-										</Dropdown>
-									</NavbarSection>
-									<NavbarSpacer />
-									<NavbarSection>
-										<Link
-											href={PWA_LINK}
-											target="_blank"
-											aria-label="Join Us"
-											className="max-lg:hidden"
-										>
-											<RainbowButton>Join Us</RainbowButton>
-										</Link>
-										<Button plain className="lg:hidden" onClick={() => setIsSidebarOpen(true)}>
-											<IconMenu2 />
-										</Button>
-									</NavbarSection>
-								</Navbar>
-							</div>
-						</header>
-
-						<main className="flex flex-1 flex-col pb-24">
-							<div className="grow p-6 lg:p-10 lg:pb-0">{children}</div>
-						</main>
-
-						<footer className="bg-black text-white py-12 px-6">
-							<div className="mx-auto max-w-7xl">
-								<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-									{footerSections.map((section) => (
-										<div key={section.title}>
-											<h3 className="font-bold text-white text-sm">{section.title}</h3>
-											<ul className="mt-4 space-y-2">
-												{section.links.map((link) => (
-													<li key={link.text}>
-														<Link
-															href={link.href}
-															className="text-zinc-300 hover:text-white flex items-center text-xs"
-														>
-															<IconChevronRight className="size-4 mr-1" />
-															{link.text}
-														</Link>
-													</li>
-												))}
-											</ul>
-										</div>
-									))}
-								</div>
-								<div className="mt-12 pt-8 border-t border-dashed border-zinc-700 flex flex-wrap justify-center items-center text-xs text-zinc-400">
-									{footerBottomLinks.map((link, index) => (
-										<React.Fragment key={link.text}>
-											<Link href={link.href} className="hover:text-white">
-												{link.text}
-											</Link>
-											{index < footerBottomLinks.length - 1 && (
-												<span className="mx-2">|</span>
-											)}
-										</React.Fragment>
-									))}
-								</div>
-							</div>
-						</footer>
-						
-						<p className="text-center text-sm text-muted-foreground pb-12 mx-auto pt-4 border-dashed bg-black w-full">
-							Copyright © 2025 SHR – All rights reserved.
-						</p>
-
-						<BreakpointDebug />
-
-						{isSidebarOpen && (
-							<>
-								<div
-									className="fixed inset-0 z-40 bg-zinc-900/50 backdrop-blur-sm lg:hidden"
-									onClick={() => setIsSidebarOpen(false)}
+				<div className="relative isolate flex min-h-svh w-full flex-col bg-white dark:bg-zinc-900">
+					<Navbar>
+						{/* Desktop Navigation */}
+						<NavBody>
+							<a href="/" className="flex items-center">
+								<Image
+									src="/logo.png"
+									alt="IEEE Logo"
+									width={100}
+									height={50}
+									className="filter-black"
 								/>
-								<div
-									className="fixed inset-y-0 right-0 z-50 w-full max-w-sm bg-white dark:bg-zinc-900 lg:hidden"
-								>
-									<Sidebar>
-										<SidebarHeader>
-											<Button
-												plain
-												onClick={() => setIsSidebarOpen(false)}
-												className="ml-auto"
-											>
-												<IconX />
-											</Button>
-										</SidebarHeader>
-										<SidebarBody>
-											<SidebarSection>
-												{navItems.map((item) => (
-													<SidebarItem key={item.url} href={item.url} onClick={() => setIsSidebarOpen(false)}>
-														<SidebarLabel>{item.label}</SidebarLabel>
-													</SidebarItem>
-												))}
-												<SidebarItem onClick={() => setIsExcomOpen(!isExcomOpen)}>
-													<SidebarLabel>Excom</SidebarLabel>
-													{isExcomOpen ? <IconChevronUp className="ml-auto" /> : <IconChevronDown className="ml-auto" />}
-												</SidebarItem>
-												{isExcomOpen && (
-													<div className="overflow-hidden flex flex-col">
-														<SidebarItem href="/excom/2025" onClick={() => setIsSidebarOpen(false)} className="pl-8">
-															<SidebarLabel>2025</SidebarLabel>
-														</SidebarItem>
-														<SidebarItem href="/excom/2024" onClick={() => setIsSidebarOpen(false)} className="pl-8">
-															<SidebarLabel>2024</SidebarLabel>
-														</SidebarItem>
-													</div>
-												)}
-											</SidebarSection>
-											<SidebarSection>
-												<SidebarItem href={PWA_LINK} target="_blank" onClick={() => setIsSidebarOpen(false)}>
-													<RainbowButton className="w-full">Join Us</RainbowButton>
-												</SidebarItem>
-											</SidebarSection>
-										</SidebarBody>
-									</Sidebar>
+							</a>
+							<div className="flex items-center gap-2">
+								<NavItems items={navItems} />
+								<Dropdown>
+									<DropdownButton className="relative px-4 py-2 text-neutral-600 dark:text-neutral-300 font-medium text-sm flex items-center gap-1">
+										Excom
+										<IconChevronDown size={16} />
+									</DropdownButton>
+									<DropdownMenu>
+										<DropdownItem href="/excom/2025">2025</DropdownItem>
+										<DropdownItem href="/excom/2024">2024</DropdownItem>
+									</DropdownMenu>
+								</Dropdown>
+							</div>
+
+							<div className="flex items-center gap-4">
+								<Link href={PWA_LINK} target="_blank" aria-label="Join Us">
+									<RainbowButton>Join Us</RainbowButton>
+								</Link>
+							</div>
+						</NavBody>
+
+						{/* Mobile Navigation */}
+						<MobileNav>
+							<MobileNavHeader>
+								<a href="/" className="flex items-center">
+									<Image
+										src="/logo.png"
+										alt="IEEE Logo"
+										width={100}
+										height={50}
+										className="filter-black"
+									/>
+								</a>
+								<MobileNavToggle
+									isOpen={isMobileMenuOpen}
+									onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+								/>
+							</MobileNavHeader>
+
+							<MobileNavMenu
+								isOpen={isMobileMenuOpen}
+								onClose={() => setIsMobileMenuOpen(false)}
+							>
+								{navItems.map((item, idx) => (
+									<a
+										key={`mobile-link-${idx}`}
+										href={item.link}
+										onClick={() => setIsMobileMenuOpen(false)}
+										className="relative text-neutral-600 dark:text-neutral-300"
+									>
+										<span className="block">{item.name}</span>
+									</a>
+								))}
+								<a href="/excom/2025" onClick={() => setIsMobileMenuOpen(false)} className="relative text-neutral-600 dark:text-neutral-300">
+									Excom 2025
+								</a>
+								<a href="/excom/2024" onClick={() => setIsMobileMenuOpen(false)} className="relative text-neutral-600 dark:text-neutral-300">
+									Excom 2024
+								</a>
+								<div className="flex w-full flex-col gap-4">
+									<Link href={PWA_LINK} target="_blank" aria-label="Join Us" className="w-full">
+										<RainbowButton
+											onClick={() => setIsMobileMenuOpen(false)}
+											className="w-full"
+										>
+											Join Us
+										</RainbowButton>
+									</Link>
 								</div>
-							</>
-						)}
-					</div>
-				</TooltipProvider>
+							</MobileNavMenu>
+						</MobileNav>
+					</Navbar>
+
+					<main className="flex flex-1 flex-col pb-24">
+						<div className="grow p-6 lg:p-10 lg:pb-0">{children}</div>
+					</main>
+
+					<footer className="bg-black text-white py-12 px-6">
+						<div className="mx-auto max-w-7xl">
+							<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+								{footerSections.map((section) => (
+									<div key={section.title}>
+										<h3 className="font-bold text-white text-sm">{section.title}</h3>
+										<ul className="mt-4 space-y-2">
+											{section.links.map((link) => (
+												<li key={link.text}>
+													<Link
+														href={link.href}
+														className="text-zinc-300 hover:text-white flex items-center text-xs"
+													>
+														{/* <IconChevronRight className="size-4 mr-1" /> */}
+														{link.text}
+													</Link>
+												</li>
+											))}
+										</ul>
+									</div>
+								))}
+							</div>
+							<div className="mt-12 pt-8 border-t border-dashed border-zinc-700 flex flex-wrap justify-center items-center text-xs text-zinc-400">
+								{footerBottomLinks.map((link, index) => (
+									<React.Fragment key={link.text}>
+										<Link href={link.href} className="hover:text-white">
+											{link.text}
+										</Link>
+										{index < footerBottomLinks.length - 1 && (
+											<span className="mx-2">|</span>
+										)}
+									</React.Fragment>
+								))}
+							</div>
+						</div>
+					</footer>
+					
+					<p className="text-center text-sm text-muted-foreground pb-12 mx-auto pt-4 border-dashed bg-black w-full">
+						Copyright © 2025 SHR – All rights reserved.
+					</p>
+
+					<BreakpointDebug />
+
+				</div>
 			</body>
 		</html>
 	);
 }
-    
