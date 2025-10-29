@@ -4,7 +4,6 @@ import { BreakpointDebug } from "@/components/custom/breakpoint-debug";
 import Logo from "@/components/custom/logo";
 import { Button } from "@/components/ui/button";
 import { Dropdown, DropdownButton, DropdownItem, DropdownMenu } from "@/components/ui/dropdown";
-import { FloatingDock } from "@/components/ui/floating-dock";
 import { Link } from "@/components/ui/link";
 import {
 	Navbar,
@@ -29,11 +28,6 @@ import {
 	IconChevronRight,
 	IconChevronDown,
 	IconChevronUp,
-	IconHome,
-	IconCalendarEvent,
-	IconUsers,
-	IconInfoCircle,
-	IconPlus,
 } from "@tabler/icons-react";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -73,35 +67,6 @@ const fontMono = Fira_Mono({
 const navItems = [
 	{ label: "Events", url: "/events" },
 	{ label: "About", url: "/about" },
-];
-
-const dockItems = [
-	{
-		title: "Home",
-		icon: <IconHome className="size-full" />,
-		href: "/",
-	},
-	{
-		title: "Events",
-		icon: <IconCalendarEvent className="size-full" />,
-		href: "/events",
-	},
-	{
-		title: "Excom",
-		icon: <IconUsers className="size-full" />,
-		href: "/excom",
-	},
-	{
-		title: "About",
-		icon: <IconInfoCircle className="size-full" />,
-		href: "/about",
-	},
-	{
-		title: "Join Us",
-		icon: <IconPlus className="size-full" />,
-		href: PWA_LINK,
-		target: "_blank"
-	},
 ];
 
 const footerSections = [
@@ -339,7 +304,6 @@ export default function RootLayout({
 								</div>
 							</>
 						)}
-						<FloatingDock items={dockItems} />
 					</div>
 				</TooltipProvider>
 			</body>
