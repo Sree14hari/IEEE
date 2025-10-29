@@ -149,7 +149,7 @@ export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
   return (
     <div
       className={cn(
-        "relative z-50 mx-auto flex w-full flex-col items-center justify-between bg-white px-4 py-2 shadow-sm lg:hidden dark:bg-zinc-900",
+        "relative z-50 mx-auto flex w-full flex-col items-center justify-between bg-white px-4 py-4 shadow-sm lg:hidden dark:bg-zinc-900",
         className,
       )}
     >
