@@ -26,7 +26,6 @@ import { Link } from "@/components/ui/link";
 import { IconChevronDown, IconHome, IconCalendarEvent, IconInfoCircle, IconUsersGroup } from "@tabler/icons-react";
 
 import "./globals.css";
-import { FloatingDock } from "@/components/ui/floating-dock";
 
 const font = localFont({
 	src: [
@@ -59,29 +58,6 @@ const navItems = [
 	{ name: "Events", link: "/events" },
 	{ name: "About", link: "/about" },
 ];
-
-const dockLinks = [
-    {
-      title: "Home",
-      icon: <IconHome className="size-6 text-neutral-500 dark:text-neutral-300" />,
-      href: "/",
-    },
-    {
-      title: "Events",
-      icon: <IconCalendarEvent className="size-6 text-neutral-500 dark:text-neutral-300" />,
-      href: "/events",
-    },
-    {
-      title: "About",
-      icon: <IconInfoCircle className="size-6 text-neutral-500 dark:text-neutral-300" />,
-      href: "/about",
-    },
-    {
-      title: "Excom",
-      icon: <IconUsersGroup className="size-6 text-neutral-500 dark:text-neutral-300" />,
-      href: "/excom",
-    },
-  ];
 
 const footerSections = [
 	{
@@ -227,9 +203,6 @@ export default function RootLayout({
 						<div className="grow p-6 lg:p-10 lg:pb-0">{children}</div>
 					</main>
                     
-                    <FloatingDock items={dockLinks} />
-
-
 					<footer className="bg-black text-white py-12 px-6">
 						<div className="mx-auto max-w-7xl">
 							<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
