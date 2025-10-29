@@ -1,9 +1,8 @@
 
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import {
 	motion,
-	AnimatePresence,
 	useSpring,
 	useMotionValue,
 	useTransform,
@@ -34,7 +33,7 @@ export const FloatingDock = ({
 				onMouseMove={(e) => mouseX.set(e.pageX)}
 				onMouseLeave={() => mouseX.set(Infinity)}
 				className={cn(
-					"hidden md:flex mx-auto py-2.5 items-end fixed inset-x-0 bottom-6 z-50",
+					"hidden md:flex items-end fixed inset-x-0 bottom-6 z-50 justify-center",
 					className,
 				)}
 			>
