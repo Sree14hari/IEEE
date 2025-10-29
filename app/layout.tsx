@@ -148,7 +148,6 @@ export default function RootLayout({
 			<body>
 				<div className="relative isolate flex min-h-svh w-full flex-col bg-white dark:bg-zinc-900">
 					<Navbar>
-						{/* Desktop Navigation */}
 						<NavBody>
 							<a href="/" className="flex items-center">
 								<Image
@@ -159,7 +158,7 @@ export default function RootLayout({
 									className="filter-black"
 								/>
 							</a>
-							<div className="flex items-center gap-2">
+							<div className="hidden lg:flex items-center gap-2">
 								<NavItems items={navItems} />
 								<Dropdown>
 									<DropdownButton className="relative px-4 py-2 text-neutral-600 dark:text-neutral-300 font-medium text-sm flex items-center gap-1">
@@ -173,30 +172,33 @@ export default function RootLayout({
 								</Dropdown>
 							</div>
 
-							<div className="flex items-center gap-4">
+							<div className="hidden lg:flex items-center gap-4">
 								<Link href={PWA_LINK} target="_blank" aria-label="Join Us">
 									<RainbowButton>Join Us</RainbowButton>
 								</Link>
 							</div>
+							<div className="lg:hidden">
+								<MobileNavToggle isOpen={isMobileMenuOpen} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} />
+							</div>
 						</NavBody>
-
-						{/* Mobile Navigation Header (retained for logo) */}
-						<MobileNav>
-							<MobileNavHeader>
-								<a href="/" className="flex items-center">
-									<Image
-										src="/logo.png"
-										alt="IEEE Logo"
-										width={100}
-										height={50}
-										className="filter-black"
-									/>
-								</a>
-                                <Link href={PWA_LINK} target="_blank" aria-label="Join Us">
+						<MobileNavMenu isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)}>
+							<div className="flex flex-col items-center gap-4">
+								<NavItems items={navItems} onItemClick={() => setIsMobileMenuOpen(false)} />
+								<Dropdown>
+									<DropdownButton className="relative px-4 py-2 text-neutral-600 dark:text-neutral-300 font-medium text-sm flex items-center gap-1">
+										Excom
+										<IconChevronDown size={16} />
+									</DropdownButton>
+									<DropdownMenu>
+										<DropdownItem href="/excom/2025" onClick={() => setIsMobileMenuOpen(false)}>2025</DropdownItem>
+										<DropdownItem href="/excom/2024" onClick={() => setIsMobileMenuOpen(false)}>2024</DropdownItem>
+									</DropdownMenu>
+								</Dropdown>
+								<Link href={PWA_LINK} target="_blank" aria-label="Join Us" onClick={() => setIsMobileMenuOpen(false)}>
 									<RainbowButton>Join Us</RainbowButton>
 								</Link>
-							</MobileNavHeader>
-						</MobileNav>
+							</div>
+						</MobileNavMenu>
 					</Navbar>
                     
 					<main className="flex flex-1 flex-col pb-24">
