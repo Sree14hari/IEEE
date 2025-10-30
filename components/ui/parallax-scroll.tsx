@@ -30,11 +30,19 @@ export const ParallaxScroll = ({
 
   return (
     <div
-      className={cn("h-[40rem] items-start overflow-y-auto w-full no-scrollbar", className)}
+      className={cn("h-screen items-start overflow-y-auto w-full no-scrollbar", className)}
       ref={gridRef}
     >
+      <div className="mx-auto text-center space-y-4 py-12 sticky top-0 z-20 bg-white/80 backdrop-blur-sm dark:bg-zinc-900/80">
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+              Gallery
+          </h2>
+          <p className="text-lg leading-8 text-muted-foreground">
+              A glimpse into our events and activities.
+          </p>
+      </div>
       <div
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-start  max-w-5xl mx-auto gap-10 py-40 px-10"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-start  max-w-5xl mx-auto gap-10 py-10 px-10"
         ref={gridRef}
       >
         <div className="grid gap-10">
