@@ -33,9 +33,6 @@ export default function Page() {
 						</p>
 					</div>
 				</div>
-				<div className="mt-16">
-					<Gallery />
-				</div>
 			</div>
 		</div>
 	);
