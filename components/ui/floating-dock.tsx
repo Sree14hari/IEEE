@@ -6,6 +6,7 @@ import {
   motion,
   useIsPresent,
   useMotionValue,
+  type MotionValue,
 } from "motion/react";
 import React, { useState } from "react";
 import { Link } from "./link";
@@ -27,7 +28,7 @@ export const FloatingDock = ({
 }: FloatingDockProps) => {
   const [hovered, setHovered] = useState<number | null>(null);
 
-  const mouseX = useMotionValue(0);
+  const mouseX = useMotionValue<number>(0);
 
   const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     mouseX.set(e.nativeEvent.x);
@@ -87,7 +88,7 @@ const DockItem = ({
   };
   onHover: () => void;
   isHovered: boolean;
-  mouseX: ReturnType<typeof useMotionValue>;
+  mouseX: MotionValue<number>;
 }) => {
   const ref = React.useRef<HTMLDivElement>(null);
   const isPresent = useIsPresent();
