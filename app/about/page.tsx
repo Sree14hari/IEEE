@@ -1,3 +1,6 @@
+
+import { Gallery } from "@/components/section/gallery";
+
 export default function Page() {
 	return (
 		<div className="mx-auto max-w-full lg:flex lg:items-start lg:gap-x-10 px-4 sm:px-0">
@@ -29,6 +32,9 @@ export default function Page() {
 							solutions.
 						</p>
 					</div>
+				</div>
+				<div className="mt-16">
+					<Gallery />
 				</div>
 			</div>
 		</div>
