@@ -53,7 +53,6 @@ const fontMono = Fira_Mono({
 const navItems = [
 	{ name: "Events", link: "/events" },
 	{ name: "About", link: "/about" },
-	{ name: "Gallery", link: "/gallery" },
 ];
 
 const footerSections = [
