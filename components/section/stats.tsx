@@ -39,14 +39,14 @@ function Stat({
 	}, [isInView, value, suffix]);
 
 	return (
-		<div className="flex flex-col items-center rounded-lg border bg-black p-4 sm:p-8 shadow-sm">
+		<div className="relative flex flex-col items-center justify-center overflow-hidden rounded-lg border bg-background p-4 sm:p-8 shadow-sm h-40">
 			<p
 				ref={ref}
-				className="text-4xl font-bold tracking-tighter text-white sm:text-6xl"
+				className="text-4xl font-bold tracking-tighter text-foreground sm:text-6xl relative z-10"
 			>
 				{`0${suffix || ""}`}
 			</p>
-			<p className="mt-2 text-lg text-zinc-300">{label}</p>
+			<p className="mt-2 text-lg text-muted-foreground relative z-10">{label}</p>
 		</div>
 	);
 }
