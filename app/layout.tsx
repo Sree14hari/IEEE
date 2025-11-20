@@ -154,7 +154,7 @@ export default function RootLayout({
 									className="filter-black w-16 h-auto md:w-24"
 								/>
 							</a>
-							<div className="hidden lg:flex items-center">
+							<div className="hidden lg:flex items-center gap-6">
 								<NavItems items={navItems} />
 								<Dropdown>
 									<DropdownButton className="relative px-4 py-2 text-neutral-600 dark:text-neutral-300 font-medium text-sm flex items-center gap-1">
@@ -180,12 +180,12 @@ export default function RootLayout({
 							</div>
 						</NavBody>
 						<MobileNavMenu isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)}>
-							<div className="flex flex-col items-center gap-4">
-								<NavItems items={navItems} onItemClick={() => setIsMobileMenuOpen(false)} />
-								<div className="flex flex-col items-center gap-2">
-									<h3 className="text-sm font-medium text-zinc-500">Excom</h3>
-									<Link href="/excom/2025" className="px-4 py-2 text-neutral-600 dark:text-neutral-300" onClick={() => setIsMobileMenuOpen(false)}>2025</Link>
-									<Link href="/excom/2024" className="px-4 py-2 text-neutral-600 dark:text-neutral-300" onClick={() => setIsMobileMenuOpen(false)}>2024</Link>
+							<div className="flex flex-col items-center gap-6">
+								<NavItems items={navItems} onItemClick={() => setIsMobileMenuOpen(false)} className="text-xl" />
+								<div className="flex flex-col items-center gap-4">
+									<h3 className="text-lg font-medium text-zinc-500">Excom</h3>
+									<Link href="/excom/2025" className="px-4 py-2 text-xl text-neutral-600 dark:text-neutral-300" onClick={() => setIsMobileMenuOpen(false)}>2025</Link>
+									<Link href="/excom/2024" className="px-4 py-2 text-xl text-neutral-600 dark:text-neutral-300" onClick={() => setIsMobileMenuOpen(false)}>2024</Link>
 								</div>
 								<Link href={PWA_LINK} target="_blank" aria-label="Join Us" onClick={() => setIsMobileMenuOpen(false)}>
 									<RainbowButton>Join Us</RainbowButton>
