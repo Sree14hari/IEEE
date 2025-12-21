@@ -1,46 +1,43 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import Image from "next/image";
+import { useState, useEffect } from "react";
 
-import { Button } from '@/components/ui/button';
-import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { Button } from "@/components/ui/button";
+import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
+import { motion, AnimatePresence } from "motion/react";
 
 const images = [
 	{
-		src: '/Gallery/ieee.jpg',
-		alt: 'Carousel image 1',
-		hint: 'event photo',
+		src: "/Gallery/ieee.jpg",
+		alt: "Carousel image 1",
+		hint: "event photo",
 	},
 	{
-		src: '/Gallery/ieee2.jpg',
-		alt: 'Carousel image 2',
-		hint: 'event photo',
+		src: "/Gallery/ieee2.jpg",
+		alt: "Carousel image 2",
+		hint: "event photo",
 	},
 	{
-		src: '/Gallery/ieee3.jpg',
-		alt: 'Carousel image 3',
-		hint: 'event photo',
+		src: "/Gallery/ieee3.jpg",
+		alt: "Carousel image 3",
+		hint: "event photo",
 	},
 	{
-		src: '/Gallery/ieee2.jpg',
-		alt: 'Carousel image 6',
-		hint: 'event photo',
+		src: "/Gallery/ieee2.jpg",
+		alt: "Carousel image 6",
+		hint: "event photo",
 	},
 	{
-		src: '/Gallery/ieee.jpg',
-		alt: 'Carousel image 5',
-		hint: 'event photo',
+		src: "/Gallery/ieee.jpg",
+		alt: "Carousel image 5",
+		hint: "event photo",
 	},
 	{
-		src: '/Gallery/ieee3.jpg',
-		alt: 'Carousel image 7',
-		hint: 'event photo',
+		src: "/Gallery/ieee3.jpg",
+		alt: "Carousel image 7",
+		hint: "event photo",
 	},
-	
-	
-	
 ];
 
 export function ImageCarousel() {
@@ -56,9 +53,11 @@ export function ImageCarousel() {
 		if (!isClient) return;
 
 		const handleResize = () => {
-			if (window.innerWidth < 640) { // sm breakpoint
+			if (window.innerWidth < 640) {
+				// sm breakpoint
 				setImagesPerPage(1);
-			} else if (window.innerWidth < 768) { // md breakpoint
+			} else if (window.innerWidth < 768) {
+				// md breakpoint
 				setImagesPerPage(2);
 			} else {
 				setImagesPerPage(3);
@@ -66,17 +65,16 @@ export function ImageCarousel() {
 		};
 
 		handleResize();
-		window.addEventListener('resize', handleResize);
-		return () => window.removeEventListener('resize', handleResize);
+		window.addEventListener("resize", handleResize);
+		return () => window.removeEventListener("resize", handleResize);
 	}, [isClient]);
 
 	if (!isClient) {
 		return null; // Render nothing on the server
 	}
 
-
 	const numPages = Math.ceil(images.length / imagesPerPage);
-	const pageIndex = (page % numPages + numPages) % numPages;
+	const pageIndex = ((page % numPages) + numPages) % numPages;
 
 	const paginate = (newDirection: number) => {
 		setPage([page + newDirection, newDirection]);
@@ -92,25 +90,28 @@ export function ImageCarousel() {
 		enter: (direction: number) => {
 			return {
 				x: direction > 0 ? 1000 : -1000,
-				opacity: 0
+				opacity: 0,
 			};
 		},
 		center: {
 			zIndex: 1,
 			x: 0,
-			opacity: 1
+			opacity: 1,
 		},
 		exit: (direction: number) => {
 			return {
 				zIndex: 0,
 				x: direction < 0 ? 1000 : -1000,
-				opacity: 0
+				opacity: 0,
 			};
-		}
+		},
 	};
 
 	return (
 		<div className="relative mt-10 w-full flex flex-col items-center justify-center">
+			<h2 className="text-3xl font-bold tracking-tight sm:text-4xl text-zinc-900 dark:text-zinc-50 font-display mb-8">
+				Gallery
+			</h2>
 			<div className="relative w-full overflow-hidden h-64">
 				<AnimatePresence initial={false} custom={direction}>
 					<motion.div
@@ -122,7 +123,7 @@ export function ImageCarousel() {
 						exit="exit"
 						transition={{
 							x: { type: "spring", stiffness: 300, damping: 30 },
-							opacity: { duration: 0.2 }
+							opacity: { duration: 0.2 },
 						}}
 						className="absolute w-full h-full flex gap-4 px-4"
 					>

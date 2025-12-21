@@ -57,6 +57,7 @@ const fontMono = Fira_Mono({
 
 const navItems = [
 	{ name: "Events", link: "/events" },
+	{ name: "Societies", link: "/societies" },
 	{ name: "About", link: "/about" },
 ];
 
