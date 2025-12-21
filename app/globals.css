@@ -198,19 +198,19 @@
   html {
     @apply antialiased min-h-screen bg-background text-foreground;
     font-size: 18px;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
   }
+  
+  html::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
+
   body {
     @apply min-h-screen font-display bg-background text-foreground;
   }
   .filter-black {
     filter: brightness(0);
-  }
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-  .no-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
   }
 }
 

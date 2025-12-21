@@ -1,5 +1,4 @@
-
-'use client';
+"use client";
 import HyperText from "@/components/ui/hyper-text";
 import { RainbowButton } from "@/components/ui/rainbow-button";
 import { Strong } from "@/components/ui/text";
@@ -8,27 +7,20 @@ import Image from "next/image";
 import Link from "next/link";
 
 export function Hero() {
-
 	return (
 		<div className="relative">
-			<div>
-				<div
-					className="hidden sm:mb-8 sm:flex sm:justify-center"
-				>
+			<div className="relative z-10">
+				<div className="mb-8 flex justify-center">
 					<div className="relative rounded-full px-3 py-1 text-sm leading-6 text-muted-foreground ring-[6px] ring-background border-2 border-zinc-300 hover:border-zinc-400 transition-all ">
 						Power What’s Next for <Strong>Tech</Strong>
 					</div>
 				</div>
-				<h1
-					className="mx-auto max-w-2xl text-balance text-center font-display text-4xl font-medium tracking-tight text-zinc-900 sm:text-7xl lg:mt-8"
-				>
+				<h1 className="mx-auto max-w-2xl text-balance text-center font-display text-4xl font-medium tracking-tight text-zinc-900 sm:text-7xl lg:mt-8">
 					IEEE Students
 					<br />
 					Branch.
 				</h1>
-				<p
-					className="mx-auto mt-6 max-w-2xl text-balance text-center text-lg tracking-tight text-muted-foreground"
-				>
+				<p className="mx-auto mt-6 max-w-2xl text-balance text-center text-lg tracking-tight text-muted-foreground">
 					Branch Code:{" "}
 					<span className="whitespace-nowrap">
 						<HyperText
@@ -40,10 +32,8 @@ export function Hero() {
 				<span className="strikethrough">data collection</span> */}
 				</p>
 			</div>
-			
-			<div
-				className="mt-10 flex justify-center gap-x-6"
-			>
+
+			<div className="mt-10 flex justify-center gap-x-6">
 				<Link href={PWA_LINK} target="_blank" aria-label="Join Us">
 					<RainbowButton className="h-14 px-8 text-lg relative z-20 ">
 						Join Us

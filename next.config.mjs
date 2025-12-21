@@ -10,6 +10,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'www.ieeesbsbce.in',
       },
+      {
+        protocol: 'https',
+        hostname: 'sbce.ac.in',
+      },
     ],
   },
 };

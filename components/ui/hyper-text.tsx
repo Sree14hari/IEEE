@@ -11,6 +11,7 @@ interface HyperTextProps {
 	framerProps?: Variants;
 	className?: string;
 	animateOnLoad?: boolean;
+	delay?: number;
 }
 
 const alphabets = "abcdefghijklmnopqrstuvwxyz".split("");
@@ -27,6 +28,7 @@ export default function HyperText({
 	},
 	className,
 	animateOnLoad = true,
+	delay = 0,
 }: HyperTextProps) {
 	const [displayText, setDisplayText] = useState(text.split(""));
 	const [trigger, setTrigger] = useState(false);
@@ -40,42 +42,51 @@ export default function HyperText({
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
-		const interval = setInterval(
-			() => {
-				if (!animateOnLoad && isFirstRender.current) {
-					clearInterval(interval);
-					isFirstRender.current = false;
-					return;
-				}
-				if (interations.current < text.length) {
-					setDisplayText((t) =>
-						t.map((l, i) =>
-							l === " "
-								? l
-								: i <= interations.current
-									? text[i]
-									: alphabets[getRandomInt(26)],
-						),
-					);
-					interations.current = interations.current + 0.1;
-				} else {
-					setTrigger(false);
-					clearInterval(interval);
-				}
-			},
-			duration / (text.length * 10),
-		);
+		let interval: NodeJS.Timeout;
+		let loopInterval: NodeJS.Timeout;
 
-		const loopInterval = setInterval(() => {
-			triggerAnimation();
-		}, 5000);
+		const startAnimation = () => {
+			interval = setInterval(
+				() => {
+					if (!animateOnLoad && isFirstRender.current) {
+						clearInterval(interval);
+						isFirstRender.current = false;
+						return;
+					}
+					if (interations.current < text.length) {
+						setDisplayText((t) =>
+							t.map((l, i) =>
+								l === " "
+									? l
+									: i <= interations.current
+										? text[i]
+										: alphabets[getRandomInt(26)],
+							),
+						);
+						interations.current = interations.current + 0.1;
+					} else {
+						setTrigger(false);
+						clearInterval(interval);
+					}
+				},
+				duration / (text.length * 10),
+			);
+		};
+
+		const timeoutId = setTimeout(() => {
+			startAnimation();
+			loopInterval = setInterval(() => {
+				triggerAnimation();
+			}, 5000);
+		}, delay);
 
 		// Clean up interval on unmount
 		return () => {
+			clearTimeout(timeoutId);
 			clearInterval(loopInterval);
 			clearInterval(interval);
 		};
-	}, [text, duration, trigger, animateOnLoad]);
+	}, [text, duration, trigger, animateOnLoad, delay]);
 
 	return (
 		<span

@@ -1,6 +1,6 @@
-
-'use client';
+"use client";
 import { BreakpointDebug } from "@/components/custom/breakpoint-debug";
+import { SplashScreen } from "@/components/custom/splash-screen";
 import { RainbowButton } from "@/components/ui/rainbow-button";
 import { PWA_LINK } from "@/lib/constants";
 import type { Metadata } from "next";
@@ -17,7 +17,12 @@ import {
 } from "@/components/ui/resizable-navbar";
 import { useState } from "react";
 import Image from "next/image";
-import { Dropdown, DropdownButton, DropdownItem, DropdownMenu } from "@/components/ui/dropdown";
+import {
+	Dropdown,
+	DropdownButton,
+	DropdownItem,
+	DropdownMenu,
+} from "@/components/ui/dropdown";
 import { Link } from "@/components/ui/link";
 import { IconChevronDown } from "@tabler/icons-react";
 
@@ -116,7 +121,6 @@ const footerBottomLinks = [
 	{ text: "Terms & Disclosures", href: "#" },
 ];
 
-
 export default function RootLayout({
 	children,
 }: Readonly<{
@@ -143,6 +147,7 @@ export default function RootLayout({
 			</head>
 			<body>
 				<div className="relative isolate flex min-h-svh w-full flex-col bg-white dark:bg-zinc-900">
+					<SplashScreen />
 					<Navbar>
 						<NavBody>
 							<a href="/" className="flex items-center">
@@ -175,35 +180,64 @@ export default function RootLayout({
 									</Link>
 								</div>
 								<div className="lg:hidden">
-									<MobileNavToggle isOpen={isMobileMenuOpen} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} />
+									<MobileNavToggle
+										isOpen={isMobileMenuOpen}
+										onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+									/>
 								</div>
 							</div>
 						</NavBody>
-						<MobileNavMenu isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)}>
+						<MobileNavMenu
+							isOpen={isMobileMenuOpen}
+							onClose={() => setIsMobileMenuOpen(false)}
+						>
 							<div className="flex flex-col items-center gap-6">
-								<NavItems items={navItems} onItemClick={() => setIsMobileMenuOpen(false)} className="text-xl" />
+								<NavItems
+									items={navItems}
+									onItemClick={() => setIsMobileMenuOpen(false)}
+									className="text-xl"
+								/>
 								<div className="flex flex-col items-center gap-4">
 									<h3 className="text-lg font-medium text-zinc-500">Excom</h3>
-									<Link href="/excom/2025" className="px-4 py-2 text-xl text-neutral-600 dark:text-neutral-300" onClick={() => setIsMobileMenuOpen(false)}>2025</Link>
-									<Link href="/excom/2024" className="px-4 py-2 text-xl text-neutral-600 dark:text-neutral-300" onClick={() => setIsMobileMenuOpen(false)}>2024</Link>
+									<Link
+										href="/excom/2025"
+										className="px-4 py-2 text-xl text-neutral-600 dark:text-neutral-300"
+										onClick={() => setIsMobileMenuOpen(false)}
+									>
+										2025
+									</Link>
+									<Link
+										href="/excom/2024"
+										className="px-4 py-2 text-xl text-neutral-600 dark:text-neutral-300"
+										onClick={() => setIsMobileMenuOpen(false)}
+									>
+										2024
+									</Link>
 								</div>
-								<Link href={PWA_LINK} target="_blank" aria-label="Join Us" onClick={() => setIsMobileMenuOpen(false)}>
+								<Link
+									href={PWA_LINK}
+									target="_blank"
+									aria-label="Join Us"
+									onClick={() => setIsMobileMenuOpen(false)}
+								>
 									<RainbowButton>Join Us</RainbowButton>
 								</Link>
 							</div>
 						</MobileNavMenu>
 					</Navbar>
-                    
+
 					<main className="flex flex-1 flex-col pb-24">
 						<div className="grow p-6 lg:p-10 lg:pb-0">{children}</div>
 					</main>
-                    
+
 					<footer className="bg-black text-white py-12 px-6">
 						<div className="mx-auto max-w-7xl">
 							<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
 								{footerSections.map((section) => (
 									<div key={section.title}>
-										<h3 className="font-bold text-white text-sm">{section.title}</h3>
+										<h3 className="font-bold text-white text-sm">
+											{section.title}
+										</h3>
 										<ul className="mt-4 space-y-2">
 											{section.links.map((link) => (
 												<li key={link.text}>
@@ -234,13 +268,12 @@ export default function RootLayout({
 							</div>
 						</div>
 					</footer>
-					
+
 					<p className="text-center text-sm text-muted-foreground pb-12 mx-auto pt-4 border-dashed bg-black w-full">
 						Copyright © 2025 SHR – All rights reserved.
 					</p>
 
 					<BreakpointDebug />
-
 				</div>
 			</body>
 		</html>
