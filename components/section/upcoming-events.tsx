@@ -1,65 +1,23 @@
-'use client';
+"use client";
 
 import UpcomingEventCard from "@/components/custom/upcoming-event-card";
 import { Button } from "@/components/ui/button";
+import { events as upcomingEvents } from "@/lib/data";
 import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 import { useRef } from "react";
 
-const upcomingEvents: any[] = [
-	{
-		id: "1",
-		title: "Poster Design Competition",
-		date: "2025-06-23",
-		image: "/Events/Poster Designing Competition.jpg",
-		hint: "tech conference",
-	},
-	{
-		id: "2",
-		title: "Workshop on AI",
-		date: "2024-11-05",
-		image: "/Events/AI Insight.jpg",
-		hint: "AI workshop",
-	},
-	{
-		id: "3",
-		title: "Networking Gala",
-		date: "2024-11-20",
-		image: "/Events/Brush and Blush.jpg",
-		hint: "networking event",
-	},
-	{
-		id: "4",
-		title: "Hackathon 2024",
-		date: "2024-12-01",
-		image: "/Events/Cine Show.jpg",
-		hint: "hackathon code",
-	},
-	{
-		id: "5",
-		title: "Student Chapter Meetup",
-		date: "2025-01-10",
-		image: "/Events/Drone Workshop.jpg",
-		hint: "student meetup",
-	},
-	{
-		id: "6",
-		title: "Guest Lecture Series",
-		date: "2025-02-05",
-		image: "/Events/Quiz Competition.jpg",
-		hint: "lecture hall",
-	},
-	// 	
-];
-
 export default function UpcomingEvents() {
-    const scrollContainerRef = useRef<HTMLDivElement>(null);
+	const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-    const scroll = (direction: 'left' | 'right') => {
-        if (scrollContainerRef.current) {
-            const scrollAmount = direction === 'left' ? -324 : 324;
-            scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-        }
-    };
+	const scroll = (direction: "left" | "right") => {
+		if (scrollContainerRef.current) {
+			const scrollAmount = direction === "left" ? -324 : 324;
+			scrollContainerRef.current.scrollBy({
+				left: scrollAmount,
+				behavior: "smooth",
+			});
+		}
+	};
 
 	if (upcomingEvents.length === 0) {
 		return (
@@ -89,24 +47,32 @@ export default function UpcomingEvents() {
 
 			{/* Desktop: Horizontal Scroll */}
 			<div className="relative hidden md:block">
-                <div 
-                    ref={scrollContainerRef}
-                    className="flex gap-6 overflow-x-auto pb-4 scroll-smooth snap-x snap-mandatory px-4"
-                    style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-                >
-                    {upcomingEvents.map((event) => (
+				<div
+					ref={scrollContainerRef}
+					className="flex gap-6 overflow-x-auto pb-4 scroll-smooth snap-x snap-mandatory px-4"
+					style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+				>
+					{upcomingEvents.map((event) => (
 						<UpcomingEventCard key={event.id} event={event} />
-                    ))}
-                </div>
+					))}
+				</div>
 
-                <div className="flex justify-center items-center gap-4 mt-4">
-                    <Button plain onClick={() => scroll('left')} className="rounded-full !p-2 bg-white/50 hover:bg-white/80">
-                        <IconChevronLeft className="size-6" />
-                    </Button>
-                    <Button plain onClick={() => scroll('right')} className="rounded-full !p-2 bg-white/50 hover:bg-white/80">
-                        <IconChevronRight className="size-6" />
-                    </Button>
-                </div>
+				<div className="flex justify-center items-center gap-4 mt-4">
+					<Button
+						plain
+						onClick={() => scroll("left")}
+						className="rounded-full !p-2 bg-white/50 hover:bg-white/80"
+					>
+						<IconChevronLeft className="size-6" />
+					</Button>
+					<Button
+						plain
+						onClick={() => scroll("right")}
+						className="rounded-full !p-2 bg-white/50 hover:bg-white/80"
+					>
+						<IconChevronRight className="size-6" />
+					</Button>
+				</div>
 			</div>
 		</div>
 	);

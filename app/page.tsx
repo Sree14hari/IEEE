@@ -1,4 +1,5 @@
 import { Hero } from "@/components/section/hero";
+import { FeaturedEvents } from "@/components/section/featured-events";
 import { ImageCarousel } from "@/components/custom/image-carousel";
 import { PainPoint } from "@/components/section/pain-point";
 import { Stats } from "@/components/section/stats";
@@ -18,6 +19,7 @@ export default function Home() {
 				<PainPoint />
 				<ImageCarousel />
 			</div>
+			<FeaturedEvents />
 		</>
 	);
 }
