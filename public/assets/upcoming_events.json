@@ -1,0 +1,92 @@
+[
+  {
+    "id": "1",
+    "title": "Future Tech Summit",
+    "date": "2026-03-15",
+    "image": "/Events/Poster Designing Competition.jpg",
+    "hint": "technology summit",
+    "description": "Join us for the Future Tech Summit, where industry leaders and innovators converge to discuss the latest trends in technology. This event will cover a wide range of topics including artificial intelligence, blockchain, and sustainable tech. Network with professionals, attend interactive workshops, and gain insights from keynote speeches by tech giants.",
+    "link": "https://example.com/register-future-tech-summit"
+  },
+  {
+    "id": "2",
+    "title": "AI in Healthcare",
+    "date": "2026-04-20",
+    "image": "/Events/AI Insight.jpg",
+    "hint": "AI healthcare",
+    "description": "Explore the transformative power of artificial intelligence in healthcare. This workshop will showcase cutting-edge AI applications in diagnostics, patient care, and medical research. Learn from healthcare professionals and AI experts about the future of medicine and how technology is revolutionizing patient outcomes.",
+    "link": "https://example.com/register-ai-healthcare"
+  },
+  {
+    "id": "3",
+    "title": "Robot Expo 2026",
+    "date": "2026-05-10",
+    "image": "/Events/Drone Workshop.jpg",
+    "hint": "robotics expo",
+    "description": "Experience the future of robotics at our annual Robot Expo. Witness live demonstrations of advanced robotic systems, autonomous drones, and industrial automation solutions. Engage with robotics engineers, participate in hands-on sessions, and discover the latest innovations in the field of robotics and automation.",
+    "link": "https://example.com/register-robot-expo"
+  },
+  {
+    "id": "4",
+    "title": "Blockchain Revolution",
+    "date": "2026-05-25",
+    "image": "/Events/Drone Workshop.jpg",
+    "hint": "blockchain technology",
+    "description": "Dive deep into the world of blockchain technology and decentralized systems. This seminar covers cryptocurrency, smart contracts, NFTs, and the future of Web3. Perfect for developers, entrepreneurs, and anyone interested in understanding how blockchain is reshaping industries worldwide.",
+    "link": "https://example.com/register-blockchain"
+  }, 
+  {
+    "id": "5",
+    "title": "Cybersecurity Workshop",
+    "date": "2026-06-15",
+    "image": "/Events/Drone Workshop.jpg",
+    "hint": "cybersecurity",
+    "description": "Learn essential cybersecurity practices to protect your digital assets. This comprehensive workshop covers threat detection, ethical hacking, network security, and data protection strategies. Gain practical skills from industry experts and understand the latest security challenges facing organizations today.",
+    "link": "https://example.com/register-cybersecurity"
+  },
+  {
+    "id": "6",
+    "title": "IoT Innovation Summit",
+    "date": "2026-07-08",
+    "image": "/Events/Drone Workshop.jpg",
+    "hint": "IoT innovation",
+    "description": "Discover the Internet of Things ecosystem and its impact on smart cities, homes, and industries. Explore IoT architecture, sensor networks, edge computing, and real-world applications. Connect with IoT developers and learn how connected devices are transforming our daily lives.",
+    "link": "https://example.com/register-iot-summit"
+  },
+  {
+    "id": "7",
+    "title": "Cloud Computing Conference",
+    "date": "2026-08-12",
+    "image": "/Events/Drone Workshop.jpg",
+    "hint": "cloud computing",
+    "description": "Master cloud computing technologies including AWS, Azure, and Google Cloud Platform. This conference features sessions on cloud architecture, serverless computing, containerization, and DevOps practices. Ideal for developers and IT professionals looking to advance their cloud expertise.",
+    "link": "https://example.com/register-cloud-conference"
+  },
+  {
+    "id": "8",
+    "title": "Data Science Bootcamp",
+    "date": "2026-09-05",
+    "image": "/Events/Drone Workshop.jpg",
+    "hint": "data science",
+    "description": "Unlock the power of data with our intensive Data Science Bootcamp. Learn data analysis, machine learning algorithms, statistical modeling, and data visualization techniques. Work on real-world projects and gain hands-on experience with Python, R, and popular data science frameworks.",
+    "link": "https://example.com/register-data-science"
+  },
+  {
+    "id": "9",
+    "title": "Mobile App Development",
+    "date": "2026-10-18",
+    "image": "/Events/Drone Workshop.jpg",
+    "hint": "mobile development",
+    "description": "Build stunning mobile applications for iOS and Android platforms. This workshop covers React Native, Flutter, and native app development. Learn UI/UX best practices, app architecture, and deployment strategies from experienced mobile developers.",
+    "link": "https://example.com/register-mobile-dev"
+  },
+  {
+    "id": "10",
+    "title": "Quantum Computing Seminar",
+    "date": "2026-11-22",
+    "image": "/Events/Drone Workshop.jpg",
+    "hint": "quantum computing",
+    "description": "Step into the quantum realm and explore the future of computing. This seminar introduces quantum mechanics principles, quantum algorithms, and potential applications in cryptography, optimization, and simulation. Perfect for researchers and tech enthusiasts curious about quantum technology.",
+    "link": "https://example.com/register-quantum-computing"
+  }
+]

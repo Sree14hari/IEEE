@@ -2,6 +2,7 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { RainbowButton } from "@/components/ui/rainbow-button";
 import Image from "next/image";
+import Link from "next/link";
 
 interface UpcomingEventCardProps {
 	event: {
@@ -15,9 +16,7 @@ interface UpcomingEventCardProps {
 
 export default function UpcomingEventCard({ event }: UpcomingEventCardProps) {
 	return (
-		<div
-			className="w-full max-w-[300px] flex-shrink-0"
-		>
+		<div className="w-full max-w-[300px] flex-shrink-0">
 			<Card className="w-full">
 				<CardHeader className="p-0">
 					<div className="relative h-40 w-full">
@@ -33,7 +32,9 @@ export default function UpcomingEventCard({ event }: UpcomingEventCardProps) {
 				<CardContent className="p-4">
 					<h3 className="text-lg font-bold">{event.title}</h3>
 					<p className="text-sm text-muted-foreground">{event.date}</p>
-					<RainbowButton className="w-full mt-4">View Event</RainbowButton>
+					<Link href={`/events/${event.id}`}>
+						<RainbowButton className="w-full mt-4">View Event</RainbowButton>
+					</Link>
 				</CardContent>
 			</Card>
 		</div>

@@ -1,0 +1,38 @@
+[
+  {
+    "id": "101",
+    "title": "Hackathon 2025",
+    "date": "2025-11-01",
+    "image": "/Events/Cine Show.jpg",
+    "hint": "coding hackathon",
+    "description": "Our annual 24-hour coding marathon brought together 200+ developers to build innovative solutions. Teams competed across multiple tracks including AI/ML, Web Development, and Mobile Apps. Winners received prizes worth $10,000 and mentorship opportunities with leading tech companies.",
+    "link": "https://example.com/hackathon-2025-results"
+  },
+  {
+    "id": "102",
+    "title": "Networking Gala",
+    "date": "2025-10-15",
+    "image": "/Events/Brush and Blush.jpg",
+    "hint": "networking",
+    "description": "A prestigious evening of networking with industry leaders, alumni, and fellow IEEE members. The gala featured keynote speeches, panel discussions, and opportunities to connect with professionals from various tech sectors. Over 300 attendees made valuable connections and explored collaboration opportunities.",
+    "link": "https://example.com/networking-gala-highlights"
+  },
+  {
+    "id": "103",
+    "title": "Quiz Competition",
+    "date": "2025-09-10",
+    "image": "/Events/Quiz Competition.jpg",
+    "hint": "quiz",
+    "description": "An exciting technical quiz competition testing knowledge across electronics, computer science, and emerging technologies. Teams from various colleges participated in multiple rounds of challenging questions. The event promoted healthy competition and learning among students passionate about technology.",
+    "link": "https://example.com/quiz-competition-results"
+  },
+  {
+    "id": "104",
+    "title": "Tech Talk Series",
+    "date": "2025-08-22",
+    "image": "/Events/Quiz Competition.jpg",
+    "hint": "tech talks",
+    "description": "A series of inspiring talks by industry experts covering topics like machine learning, cloud architecture, and software engineering best practices. Students gained insights into real-world applications and career opportunities in the tech industry. The interactive Q&A sessions provided valuable guidance for aspiring engineers.",
+    "link": "https://example.com/tech-talk-recordings"
+  }
+]
