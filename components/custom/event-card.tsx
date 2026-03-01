@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/card";
 import { RainbowButton } from "@/components/ui/rainbow-button";
 import Image from "next/image";
+import Link from "next/link";
 
 interface EventCardProps {
 	event: {
@@ -16,6 +17,7 @@ interface EventCardProps {
 		date: string;
 		image: string;
 		hint: string;
+		link?: string;
 	};
 }
 
@@ -38,7 +40,9 @@ export default function EventCard({ event }: EventCardProps) {
 				<p className="text-sm text-muted-foreground">{event.date}</p>
 			</CardContent>
 			<CardFooter>
-				<RainbowButton className="w-full">View Event</RainbowButton>
+				<Link href={event.link || "/#"} target="_blank" className="w-full">
+					<RainbowButton className="w-full">View Event</RainbowButton>
+				</Link>
 			</CardFooter>
 		</Card>
 	);

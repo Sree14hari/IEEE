@@ -11,6 +11,7 @@ interface UpcomingEventCardProps {
 		date: string;
 		image: string;
 		hint: string;
+		link?: string;
 	};
 }
 
@@ -32,7 +33,7 @@ export default function UpcomingEventCard({ event }: UpcomingEventCardProps) {
 				<CardContent className="p-4">
 					<h3 className="text-lg font-bold">{event.title}</h3>
 					<p className="text-sm text-muted-foreground">{event.date}</p>
-					<Link href={`/events/${event.id}`}>
+					<Link href={event.link || "/#"} target="_blank">
 						<RainbowButton className="w-full mt-4">View Event</RainbowButton>
 					</Link>
 				</CardContent>

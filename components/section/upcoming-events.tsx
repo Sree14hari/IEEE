@@ -3,6 +3,7 @@
 import UpcomingEventCard from "@/components/custom/upcoming-event-card";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 interface Event {
@@ -11,6 +12,7 @@ interface Event {
 	date: string;
 	image: string;
 	hint: string;
+	link?: string;
 }
 
 export default function UpcomingEvents() {
@@ -23,13 +25,35 @@ export default function UpcomingEvents() {
 	useEffect(() => {
 		const fetchEvents = async () => {
 			try {
-				const upcomingResponse = await fetch("/assets/upcoming_events.json");
-				const upcomingData = await upcomingResponse.json();
-				setUpcomingEvents(upcomingData);
+				const response = await fetch(
+					"https://ieee-events-api.ieeesbcesb20.workers.dev/events",
+				);
+				const data = await response.json();
+				// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+				const mappedData = data.map((e: any) => ({
+					id: e.id,
+					title: e.title,
+					date: e.event_date,
+					image: e.image_url || "/placeholder.svg", // Fallback image
+					hint: e.description || e.title,
+					link: e.registration_link,
+				}));
+				setUpcomingEvents(mappedData);
 
-				const pastResponse = await fetch("/assets/past_events.json");
+				const pastResponse = await fetch(
+					"https://ieee-events-api.ieeesbcesb20.workers.dev/pastevents",
+				);
 				const pastData = await pastResponse.json();
-				setPastEvents(pastData);
+				// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+				const mappedPastData = pastData.map((e: any) => ({
+					id: e.id,
+					title: e.title,
+					date: e.event_date,
+					image: e.image_url || "/placeholder.svg", // Fallback image
+					hint: e.description || e.title,
+					link: e.registration_link,
+				}));
+				setPastEvents(mappedPastData);
 			} catch (error) {
 				console.error("Error fetching events:", error);
 			}
@@ -146,10 +170,23 @@ export default function UpcomingEvents() {
 					<h3 className="text-2xl font-bold tracking-tight text-center mb-6">
 						Past Events
 					</h3>
-					<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+					<div className="flex flex-col gap-4 max-w-4xl mx-auto">
 						{pastEvents.map((event) => (
-							<div key={event.id} className="flex justify-center">
-								<UpcomingEventCard event={event} />
+							<div
+								key={event.id}
+								className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-4 border rounded-lg bg-card hover:border-zinc-400 transition-colors"
+							>
+								<div>
+									<h4 className="text-lg font-bold">{event.title}</h4>
+									<p className="text-sm text-muted-foreground">{event.date}</p>
+								</div>
+								<Link
+									href={event.link || "/#"}
+									target="_blank"
+									className="mt-4 sm:mt-0"
+								>
+									<Button outline>View Details</Button>
+								</Link>
 							</div>
 						))}
 					</div>
