@@ -47,6 +47,8 @@ export default function UpcomingEvents() {
 	}, []);
 
 	useEffect(() => {
+		if (upcomingEvents.length === 0) return;
+
 		// Initial check with a small delay to ensure DOM is ready
 		const timer = setTimeout(() => {
 			checkScrollButtons();

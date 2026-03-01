@@ -4,21 +4,21 @@ export function Supporters() {
 	return (
 		<div className="mt-10 grid grid-cols-2 sm:flex sm:flex-row justify-items-center items-center gap-10 sm:gap-x-20 sm:justify-center">
 			<Image
-				src="https://www.ieeesbsbce.in/assests/frond-page/ieee.svg"
+				src="/logo/ieee.svg"
 				alt="IEEE Society Logo"
 				width={150}
 				height={60}
 				className="filter-black transition-transform duration-300 hover:scale-110"
 			/>
 			<Image
-				src="https://www.ieeesbsbce.in/assests/frond-page/ias.svg"
+				src="/logo/ias.svg"
 				alt="IAS Society Logo"
 				width={150}
 				height={60}
 				className="filter-black transition-transform duration-300 hover:scale-110"
 			/>
 			<Image
-				src="https://www.ieeesbsbce.in/assests/frond-page/cs.svg"
+				src="/logo/cs.svg"
 				alt="CS Society Logo"
 				width={150}
 				height={60}
