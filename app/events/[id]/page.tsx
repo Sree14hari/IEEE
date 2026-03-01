@@ -48,15 +48,16 @@ async function getEventData(id: string) {
 // --------------------
 // Page
 // --------------------
-export default async function EventPage({
-	params,
-}: {
-	params: { id: string };
-}) {
-	const event = await getEventData(params.id);
-	if (!event) notFound();
+export default async function EventPage(
+    props: {
+        params: Promise<{ id: string }>;
+    }
+) {
+    const params = await props.params;
+    const event = await getEventData(params.id);
+    if (!event) notFound();
 
-	return (
+    return (
 		<div className="min-h-screen bg-background pt-20">
 			{/* Main Content */}
 			<div className="max-w-7xl mx-auto px-6 py-12">

@@ -25,7 +25,7 @@ export function Supporters() {
 				className="filter-black transition-transform duration-300 hover:scale-110"
 			/>
 			<Image
-				src="https://www.ieeesbsbce.in/assests/frond-page/SPS_Logo_KO_RGB.png"
+				src="/logo/SPS_Logo_KO_RGB.webp"
 				alt="SPS Society Logo"
 				width={150}
 				height={60}

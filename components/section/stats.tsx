@@ -5,9 +5,9 @@ import { useEffect, useRef } from "react";
 
 const stats = [
 	{ value: 10, label: "Years", suffix: "+" },
-	{ value: 99, label: "Members", suffix: "+" },
-	{ value: 70, label: "Events", suffix: "+" },
-	{ value: 3, label: "Communities", suffix: "+" },
+	{ value: 100, label: "Members", suffix: "+" },
+	{ value: 100, label: "Events", suffix: "+" },
+	{ value: 4, label: "Societies", suffix: "+" },
 ];
 
 function Stat({
@@ -29,9 +29,7 @@ function Stat({
 				ease: "easeOut",
 				onUpdate(latest) {
 					if (ref.current) {
-						ref.current.textContent = `${Math.round(latest)}${
-							suffix || ""
-						}`;
+						ref.current.textContent = `${Math.round(latest)}${suffix || ""}`;
 					}
 				},
 			});
@@ -46,7 +44,9 @@ function Stat({
 			>
 				{`0${suffix || ""}`}
 			</p>
-			<p className="mt-2 text-lg text-muted-foreground relative z-10">{label}</p>
+			<p className="mt-2 text-lg text-muted-foreground relative z-10">
+				{label}
+			</p>
 		</div>
 	);
 }
