@@ -34,59 +34,61 @@ const footerSections = [
 		description:
 			"IEEE is the world's largest technical professional organization dedicated to advancing technology for the benefit of humanity.",
 		links: [
-			{ text: "Learn more about IEEE", href: "#" },
-			{ text: "IEEE Mission & Vision", href: "#" },
+			{ text: "Learn more about IEEE", href: "https://www.ieee.org/about/index.html" },
+			{ text: "IEEE Mission & Vision", href: "https://www.ieee.org/about/vision-mission.html" },
 		],
 	},
 	{
 		title: "Locations",
 		description:
 			"IEEE has a global presence with seven offices internationally.",
-		links: [{ text: "IEEE office locations", href: "#" }],
+		links: [{ text: "IEEE office locations", href: "https://www.ieee.org/about/locations/index.html" }],
 	},
 	{
 		title: "Membership",
 		links: [
-			{ text: "Join", href: "#" },
-			{ text: "Renew", href: "#" },
-			{ text: "Benefits", href: "#" },
-			{ text: "IEEE Collabratec", href: "#" },
+			{ text: "Join", href: "https://www.ieee.org/membership/join/index.html" },
+			{ text: "Renew", href: "https://www.ieee.org/membership/renew.html" },
+			{ text: "Benefits", href: "https://www.ieee.org/membership/benefits/index.html" },
+			{ text: "IEEE Collabratec", href: "https://ieee-collabratec.ieee.org/" },
 		],
 	},
 	{
 		title: "Get involved",
 		links: [
-			{ text: "Conferences", href: "#" },
-			{ text: "Local activities", href: "#" },
-			{ text: "Publishing", href: "#" },
-			{ text: "Societies", href: "#" },
-			{ text: "Councils", href: "#" },
-			{ text: "Standards", href: "#" },
-			{ text: "Technical careers", href: "#" },
-			{ text: "Volunteer", href: "#" },
+			{ text: "Conferences", href: "https://www.ieee.org/conferences/index.html" },
+			{ text: "Local activities", href: "https://mga.ieee.org/" },
+			{ text: "Publishing", href: "https://www.ieee.org/publications/index.html" },
+			{ text: "Societies", href: "https://www.ieee.org/communities/societies/index.html" },
+			{ text: "Councils", href: "https://www.ieee.org/communities/councils/index.html" },
+			{ text: "Standards", href: "https://standards.ieee.org/" },
+			{ text: "Technical careers", href: "https://www.ieee.org/education/careers/index.html" },
+			{ text: "Volunteer", href: "https://www.ieee.org/about/volunteers/index.html" },
 		],
 	},
 	{
 		title: "Connect with IEEE",
 		isConnect: true,
 		links: [
-			{ text: "IEEE Collabratec", href: "#" },
-			{ text: "Careers at IEEE", href: "#" },
-			{ text: "IEEE Newsroom", href: "#" },
-			{ text: "IEEE Media Kit", href: "#" },
-			{ text: "IEEE Learning Network", href: "#" },
+			{ text: "IEEE Collabratec", href: "https://ieee-collabratec.ieee.org/" },
+			{ text: "Careers at IEEE", href: "https://www.ieee.org/about/careers/index.html" },
+			{ text: "IEEE Newsroom", href: "https://www.ieee.org/about/news/index.html" },
+			{ text: "IEEE Media Kit", href: "https://transmitter.ieee.org/media-kit/" },
+			{ text: "IEEE Learning Network", href: "https://iln.ieee.org/" },
+			{ text: "SBCE LinkedIn", href: "https://www.linkedin.com/company/ieeesbsbce" },
+			{ text: "SBCE Instagram", href: "https://www.instagram.com/ieeesbsbce" },
 		],
 	},
 ];
 
 const footerBottomLinks = [
-	{ text: "Home", href: "#" },
-	{ text: "Contact & Support", href: "#" },
-	{ text: "Accessibility", href: "#" },
-	{ text: "Nondiscrimination Policy", href: "#" },
-	{ text: "IEEE Ethics Reporting", href: "#" },
-	{ text: "IEEE Privacy Policy", href: "#" },
-	{ text: "Terms & Disclosures", href: "#" },
+	{ text: "Home", href: "/" },
+	{ text: "Contact & Support", href: "https://www.ieee.org/about/contact.html" },
+	{ text: "Accessibility", href: "https://www.ieee.org/accessibility-statement.html" },
+	{ text: "Nondiscrimination Policy", href: "https://www.ieee.org/nondiscrimination.html" },
+	{ text: "IEEE Ethics Reporting", href: "https://www.ieee.org/about/corporate/compliance/index.html" },
+	{ text: "IEEE Privacy Policy", href: "https://www.ieee.org/security-privacy.html" },
+	{ text: "Terms & Disclosures", href: "https://www.ieee.org/about/help/site-terms-conditions.html" },
 ];
 
 export function SiteShell({ children }: { children: React.ReactNode }) {
