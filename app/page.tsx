@@ -5,6 +5,16 @@ import { PainPoint } from "@/components/section/pain-point";
 import { Stats } from "@/components/section/stats";
 import { Supporters } from "@/components/section/supporters";
 import { MarqueeBanner } from "@/components/section/marquee-banner";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Home",
+	description:
+		"Discover IEEE SB SBCE events, societies, achievements, and student initiatives in one place.",
+	alternates: {
+		canonical: "/",
+	},
+};
 
 export default function Home() {
 	return (

@@ -5,6 +5,16 @@ import {
 } from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Excom 2025",
+	description:
+		"Meet the IEEE SB SBCE Executive Committee for 2025 across SB, CS, and IAS teams.",
+	alternates: {
+		canonical: "/excom/2025",
+	},
+};
 
 const committees = [
 	{ title: "SB Excom", slug: "sb", image: "/Excom/SB.webp", hint: "team meeting" },

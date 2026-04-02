@@ -3,6 +3,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { Linkedin } from "lucide-react";
 import data from "@/public/Excom/2025/2025.json";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "IAS Excom 2025",
+	description:
+		"View the IEEE IAS Executive Committee members of IEEE SB SBCE for 2025.",
+	alternates: {
+		canonical: "/excom/2025/ias",
+	},
+};
 
 interface ExecomMember {
 	id: string;

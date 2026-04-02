@@ -1,5 +1,15 @@
 import { AboutCollege } from "@/components/section/about-college";
 import Image from "next/image";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "About",
+	description:
+		"Learn about IEEE SB SBCE, our mission, vision, and commitment to advancing technology and student leadership.",
+	alternates: {
+		canonical: "/about",
+	},
+};
 
 export default function Page() {
 	return (

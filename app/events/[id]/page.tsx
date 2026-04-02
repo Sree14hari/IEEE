@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { MoveLeft, ExternalLink, Calendar, Tag } from "lucide-react";
+import type { Metadata } from "next";
 
 // --------------------
 // Types
@@ -43,6 +44,52 @@ async function getEventData(id: string) {
 	}
 
 	return event;
+}
+
+export async function generateMetadata(
+	props: {
+		params: Promise<{ id: string }>;
+	},
+): Promise<Metadata> {
+	const params = await props.params;
+	const event = await getEventData(params.id);
+
+	if (!event) {
+		return {
+			title: "Event Not Found",
+			description: "The requested event could not be found.",
+		};
+	}
+
+	const description =
+		event.description ??
+		`${event.title} by IEEE SB SBCE. Explore event details, category, and registration information.`;
+
+	return {
+		title: `${event.title} | Events`,
+		description,
+		alternates: {
+			canonical: `/events/${event.id}`,
+		},
+		openGraph: {
+			title: event.title,
+			description,
+			type: "article",
+			url: `/events/${event.id}`,
+			images: [
+				{
+					url: event.image,
+					alt: event.title,
+				},
+			],
+		},
+		twitter: {
+			card: "summary_large_image",
+			title: event.title,
+			description,
+			images: [event.image],
+		},
+	};
 }
 
 // --------------------

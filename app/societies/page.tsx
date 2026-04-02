@@ -1,4 +1,14 @@
 import Image from "next/image";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Societies",
+	description:
+		"Meet the IEEE SB SBCE societies including IEEE SB, IAS, CS, and SPS chapters.",
+	alternates: {
+		canonical: "/societies",
+	},
+};
 
 export default function Page() {
 	return (
