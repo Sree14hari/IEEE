@@ -163,13 +163,15 @@ export default function RootLayout({
 							<div className="hidden lg:flex items-center gap-6">
 								<NavItems items={navItems} />
 								<Dropdown>
-									<DropdownButton className="relative px-4 py-2 text-neutral-600 dark:text-neutral-300 font-medium text-sm flex items-center gap-1">
+									<DropdownButton
+										id="excom-dropdown-button"
+										className="relative px-4 py-2 text-neutral-600 dark:text-neutral-300 font-medium text-sm flex items-center gap-1"
+									>
 										Excom
 										<IconChevronDown size={16} />
 									</DropdownButton>
 									<DropdownMenu>
 										<DropdownItem href="/excom/2025">2025</DropdownItem>
-										<DropdownItem href="/excom/2024">2024</DropdownItem>
 									</DropdownMenu>
 								</Dropdown>
 							</div>
@@ -206,13 +208,6 @@ export default function RootLayout({
 										onClick={() => setIsMobileMenuOpen(false)}
 									>
 										2025
-									</Link>
-									<Link
-										href="/excom/2024"
-										className="px-4 py-2 text-xl text-neutral-600 dark:text-neutral-300"
-										onClick={() => setIsMobileMenuOpen(false)}
-									>
-										2024
 									</Link>
 								</div>
 								<Link
