@@ -13,6 +13,7 @@ interface Event {
 	image: string;
 	hint: string;
 	link?: string;
+	organizer?: string;
 }
 
 export default function UpcomingEvents() {
@@ -30,7 +31,7 @@ export default function UpcomingEvents() {
 				);
 				const data = await response.json();
 				// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-				const mappedData = data.map((e: any) => ({
+				const mappedData = data.flat().map((e: any) => ({
 					id: e.id,
 					title: e.title,
 					date: e.event_date,
@@ -44,15 +45,31 @@ export default function UpcomingEvents() {
 					"https://ieee-events-api.ieeesbcesb20.workers.dev/pastevents",
 				);
 				const pastData = await pastResponse.json();
-				// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-				const mappedPastData = pastData.map((e: any) => ({
-					id: e.id,
-					title: e.title,
-					date: e.event_date,
-					image: e.image_url || "/placeholder.svg", // Fallback image
-					hint: e.description || e.title,
-					link: e.registration_link,
-				}));
+				const mappedPastData = pastData
+					.flat()
+					// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+					.map((e: any) => ({
+						id: e.id,
+						title: e.title,
+						date: e.event_date,
+						image: e.image_url || "/placeholder.svg", // Fallback image
+						hint: e.description || e.title,
+						link: e.registration_link,
+						organizer: e.organizer,
+					}))
+					.sort((a: Event, b: Event) => {
+						const parseDate = (dStr: string) => {
+							if (!dStr) return 0;
+							const match = dStr.match(/(\d{2})\/(\d{4})/);
+							if (!match) return 0;
+							const month = match[1];
+							const year = match[2];
+							const dayMatch = dStr.match(/(\d{1,2})[^\/]*\/\d{2}\/\d{4}/);
+							const day = dayMatch ? dayMatch[1].padStart(2, "0") : "01";
+							return new Date(`${year}-${month}-${day}T00:00:00Z`).getTime();
+						};
+						return parseDate(b.date) - parseDate(a.date);
+					});
 				setPastEvents(mappedPastData);
 			} catch (error) {
 				console.error("Error fetching events:", error);
@@ -170,23 +187,38 @@ export default function UpcomingEvents() {
 					<h3 className="text-2xl font-bold tracking-tight text-center mb-6">
 						Past Events
 					</h3>
-					<div className="flex flex-col gap-4 max-w-4xl mx-auto">
+					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
 						{pastEvents.map((event) => (
 							<div
 								key={event.id}
-								className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-4 border rounded-lg bg-card hover:border-zinc-400 transition-colors"
+								className="group flex flex-col justify-between p-6 rounded-2xl bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-900/50 dark:hover:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 transition-all duration-300"
 							>
 								<div>
-									<h4 className="text-lg font-bold">{event.title}</h4>
-									<p className="text-sm text-muted-foreground">{event.date}</p>
+									<div className="flex justify-between items-center mb-4">
+										<span className="text-sm font-mono text-zinc-500 dark:text-zinc-400">
+											{event.date}
+										</span>
+										{event.organizer && (
+											<span className="text-xs font-bold px-3 py-1 bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 rounded-full">
+												{event.organizer}
+											</span>
+										)}
+									</div>
+									<h4 className="text-lg font-semibold text-zinc-900 dark:text-white leading-tight">
+										{event.title}
+									</h4>
 								</div>
-								<Link
-									href={event.link || "/#"}
-									target="_blank"
-									className="mt-4 sm:mt-0"
-								>
-									<Button outline>View Details</Button>
-								</Link>
+								{event.link && (
+									<Link
+										href={event.link}
+										target="_blank"
+										className="mt-6 inline-block"
+									>
+										<Button outline className="w-full">
+											View Details
+										</Button>
+									</Link>
+								)}
 							</div>
 						))}
 					</div>
