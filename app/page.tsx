@@ -4,6 +4,7 @@ import { ImageCarousel } from "@/components/custom/image-carousel";
 import { PainPoint } from "@/components/section/pain-point";
 import { Stats } from "@/components/section/stats";
 import { Supporters } from "@/components/section/supporters";
+import { MarqueeBanner } from "@/components/section/marquee-banner";
 
 export default function Home() {
 	return (
@@ -16,6 +17,7 @@ export default function Home() {
 			</div>
 			<div className="-mx-6 sm:mx-0 lg:-mx-10 relative space-y-4 bg-white rounded-lg">
 				<Stats />
+				<MarqueeBanner />
 				<PainPoint />
 				<ImageCarousel />
 			</div>
