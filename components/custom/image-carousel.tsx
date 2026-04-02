@@ -5,21 +5,35 @@ import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 
-const images = [
-	{ src: "/Gallery/ieee.jpg", alt: "IEEE event photo" },
-	{ src: "/Gallery/ieee2.jpg", alt: "IEEE event photo" },
-	{ src: "/Gallery/ieee3.jpg", alt: "IEEE event photo" },
-	{ src: "/Gallery/ieee2.jpg", alt: "IEEE event photo" },
-	{ src: "/Gallery/ieee.jpg", alt: "IEEE event photo" },
-	{ src: "/Gallery/ieee3.jpg", alt: "IEEE event photo" },
-];
-
 export function ImageCarousel() {
 	const [[current, direction], setCurrent] = useState([0, 0]);
 	const [isHovered, setIsHovered] = useState(false);
+	const [images, setImages] = useState<{ src: string; alt: string }[]>([]);
+
+	useEffect(() => {
+		const fetchGallery = async () => {
+			try {
+				const res = await fetch(
+					"https://ieee-events-api.ieeesbcesb20.workers.dev/gallery",
+				);
+				const data = await res.json();
+				if (Array.isArray(data) && data.length > 0) {
+					// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+					const mapped = data.map((item: any) => ({
+						src: item.image_url,
+						alt: item.title || item.description || "IEEE Event Gallery Photo",
+					}));
+					setImages(mapped);
+				}
+			} catch (error) {
+				console.error("Failed to fetch gallery:", error);
+			}
+		};
+		fetchGallery();
+	}, []);
 
 	const total = images.length;
-	const index = ((current % total) + total) % total;
+	const index = total > 0 ? ((current % total) + total) % total : 0;
 
 	const go = useCallback((dir: number) => {
 		setCurrent(([prev]) => [prev + dir, dir]);
@@ -27,10 +41,10 @@ export function ImageCarousel() {
 
 	// Auto-play
 	useEffect(() => {
-		if (isHovered) return;
+		if (isHovered || total === 0) return;
 		const id = setInterval(() => go(1), 4000);
 		return () => clearInterval(id);
-	}, [go, isHovered]);
+	}, [go, isHovered, total]);
 
 	const variants = {
 		enter: (d: number) => ({ x: d > 0 ? "100%" : "-100%", opacity: 0 }),
@@ -38,8 +52,18 @@ export function ImageCarousel() {
 		exit: (d: number) => ({ x: d < 0 ? "100%" : "-100%", opacity: 0 }),
 	};
 
-	const prev = ((index - 1) + total) % total;
-	const next = (index + 1) % total;
+	const prev = total > 0 ? ((index - 1) + total) % total : 0;
+	const next = total > 0 ? (index + 1) % total : 0;
+
+	if (images.length === 0) {
+		return (
+			<div className="relative bg-white py-16 sm:py-24 overflow-hidden min-h-[400px] flex items-center justify-center">
+				<p className="text-zinc-500 font-medium animate-pulse">
+					Loading gallery...
+				</p>
+			</div>
+		);
+	}
 
 	return (
 		<div className="relative bg-white py-16 sm:py-24 overflow-hidden">
