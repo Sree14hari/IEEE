@@ -11,7 +11,7 @@ export default async function EventList() {
 		);
 		const eventsData = await res.json();
 		// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-		allEvents = eventsData.map((e: any) => ({
+		allEvents = eventsData.flat().map((e: any) => ({
 			id: e.id,
 			title: e.title,
 			date: e.event_date,

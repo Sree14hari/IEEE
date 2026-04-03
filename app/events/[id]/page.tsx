@@ -1,11 +1,17 @@
-import fs from "node:fs/promises";
-import path from "node:path";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { MoveLeft, ExternalLink, Calendar, Tag } from "lucide-react";
+import {
+	MoveLeft,
+	ExternalLink,
+	Calendar,
+	Tag,
+	MapPin,
+	ArrowLeft,
+} from "lucide-react";
 import type { Metadata } from "next";
+import { RainbowButton } from "@/components/ui/rainbow-button";
 
 // --------------------
 // Types
@@ -18,39 +24,61 @@ interface Event {
 	hint: string;
 	description?: string;
 	link?: string;
+	location?: string;
 }
 
 // --------------------
 // Data fetch
 // --------------------
-async function getEventData(id: string) {
-	const publicDir = path.join(process.cwd(), "public");
-
-	const upcomingPath = path.join(publicDir, "assets", "upcoming_events.json");
-	const pastPath = path.join(publicDir, "assets", "past_events.json");
-
-	let event: Event | undefined;
+async function getEventData(id: string): Promise<Event | null> {
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+	let event: any;
 
 	try {
-		const upcoming = JSON.parse(await fs.readFile(upcomingPath, "utf-8"));
-		event = upcoming.find((e: Event) => e.id === id);
+		// Fetch upcoming events
+		const resUpcoming = await fetch(
+			"https://ieee-events-api.ieeesbcesb20.workers.dev/events",
+			{ next: { revalidate: 60 } },
+		);
+		const dataUpcoming = await resUpcoming.json();
+		const upcoming = dataUpcoming.flat() || [];
+		// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+		event = upcoming.find((e: any) => e.id === id);
 
 		if (!event) {
-			const past = JSON.parse(await fs.readFile(pastPath, "utf-8"));
-			event = past.find((e: Event) => e.id === id);
+			const resPast = await fetch(
+				"https://ieee-events-api.ieeesbcesb20.workers.dev/pastevents",
+				{ next: { revalidate: 60 } },
+			);
+			const dataPast = await resPast.json();
+			const past = dataPast.flat() || [];
+			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+			event = past.find((e: any) => e.id === id);
 		}
-	} catch {
+
+		if (event) {
+			return {
+				id: event.id,
+				title: event.title,
+				date: event.event_date,
+				image: event.image_url,
+				hint: event.description ? "Event" : "Workshop",
+				description: event.description,
+				link: event.registration_link,
+				location: event.location,
+			};
+		}
+	} catch (error) {
+		console.error("Error fetching event:", error);
 		return null;
 	}
 
-	return event;
+	return null;
 }
 
-export async function generateMetadata(
-	props: {
-		params: Promise<{ id: string }>;
-	},
-): Promise<Metadata> {
+export async function generateMetadata(props: {
+	params: Promise<{ id: string }>;
+}): Promise<Metadata> {
 	const params = await props.params;
 	const event = await getEventData(params.id);
 
@@ -95,125 +123,93 @@ export async function generateMetadata(
 // --------------------
 // Page
 // --------------------
-export default async function EventPage(
-    props: {
-        params: Promise<{ id: string }>;
-    }
-) {
-    const params = await props.params;
-    const event = await getEventData(params.id);
-    if (!event) notFound();
+export default async function EventPage(props: {
+	params: Promise<{ id: string }>;
+}) {
+	const params = await props.params;
+	const event = await getEventData(params.id);
+	if (!event) notFound();
 
-    return (
-		<div className="min-h-screen bg-background pt-20">
-			{/* Main Content */}
-			<div className="max-w-7xl mx-auto px-6 py-12">
-				<div className="mb-8">
-					<Link href="/events">
-						<Button outline className="gap-2">
-							<MoveLeft className="h-4 w-4" />
-							Back to Events
-						</Button>
-					</Link>
-				</div>
+	return (
+		<div className="w-full pb-16">
+			<div className="mx-auto max-w-6xl">
+				<Link
+					href="/events"
+					className="inline-flex items-center text-sm font-medium text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors mb-8"
+				>
+					<ArrowLeft className="mr-2 h-4 w-4" />
+					Back to Events
+				</Link>
 
-				<div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-					{/* Left: Image */}
-					<div className="relative aspect-[4/5] lg:sticky lg:top-24 rounded-2xl overflow-hidden shadow-2xl">
-						<Image
-							src={event.image}
-							alt={event.title}
-							fill
-							className="object-cover"
-							priority
-						/>
-					</div>
+				<div className="overflow-hidden rounded-3xl bg-white dark:bg-zinc-900 shadow-2xl ring-1 ring-zinc-200 dark:ring-zinc-800">
+					<div className="grid md:grid-cols-5 gap-0">
+						{/* Poster Section - Using 3 cols out of 5 for a wider poster */}
+						<div className="relative min-h-[400px] md:min-h-[600px] w-full bg-zinc-100 dark:bg-zinc-950 md:col-span-3">
+							<Image
+								src={event.image || "/placeholder.svg"}
+								alt={event.title}
+								fill
+								className="object-contain p-6"
+								sizes="(max-width: 768px) 100vw, 60vw"
+								priority
+							/>
+						</div>
 
-					{/* Right: Details */}
-					<div className="space-y-8">
-						{/* Title */}
-						<div>
-							<h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+						{/* Details Section */}
+						<div className="flex flex-col p-8 lg:p-12 md:col-span-2">
+							<div className="flex items-center gap-2 mb-4">
+								<span className="inline-flex items-center rounded-full bg-indigo-50 dark:bg-indigo-500/10 px-3 py-1 text-xs font-semibold text-indigo-600 dark:text-indigo-400">
+									{event.hint}
+								</span>
+							</div>
+
+							<h1 className="text-2xl font-bold tracking-tight leading-tight text-zinc-900 dark:text-zinc-50 sm:text-3xl mb-6">
 								{event.title}
 							</h1>
-							<div className="flex flex-wrap gap-4 text-muted-foreground">
-								<div className="flex items-center gap-2">
-									<Calendar className="h-5 w-5" />
-									<span className="text-lg">{event.date}</span>
+
+							<div className="space-y-4 mb-8">
+								<div className="flex items-center text-zinc-700 dark:text-zinc-300">
+									<div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-800 mr-4">
+										<Calendar className="h-5 w-5 text-zinc-600 dark:text-zinc-400" />
+									</div>
+									<span className="text-base font-medium">{event.date}</span>
 								</div>
-								<div className="flex items-center gap-2">
-									<Tag className="h-5 w-5" />
-									<span className="text-lg capitalize">{event.hint}</span>
-								</div>
+								{event.location && (
+									<div className="flex items-center text-zinc-700 dark:text-zinc-300">
+										<div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-800 mr-4">
+											<MapPin className="h-5 w-5 text-zinc-600 dark:text-zinc-400" />
+										</div>
+										<span className="text-base font-medium">
+											{event.location}
+										</span>
+									</div>
+								)}
 							</div>
-						</div>
 
-						{/* Divider */}
-						<div className="h-px bg-border" />
-
-						{/* Description */}
-						<div>
-							<h2 className="text-2xl font-semibold mb-4">About This Event</h2>
-							<p className="text-lg text-muted-foreground leading-relaxed">
-								{event.description ||
-									"Detailed information for this event is coming soon."}
-							</p>
-						</div>
-
-						{/* Link Button */}
-						{event.link && (
-							<div>
-								<a
-									href={event.link}
-									target="_blank"
-									rel="noopener noreferrer"
-									className="inline-block"
-								>
-									<Button className="gap-2 text-lg px-8 py-6" color="dark">
-										Register Now
-										<ExternalLink className="h-5 w-5" />
-									</Button>
-								</a>
+							<div className="prose prose-zinc dark:prose-invert max-w-none flex-1">
+								<h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-100 flex items-center mb-3">
+									About Event
+								</h3>
+								<p className="whitespace-pre-wrap text-base leading-relaxed text-zinc-600 dark:text-zinc-400">
+									{event.description ||
+										"No description provided. Please register to discover more details!"}
+								</p>
 							</div>
-						)}
 
-						{/* Additional Info Card */}
-						<div className="bg-card border border-border rounded-2xl p-6 space-y-4">
-							<h3 className="text-xl font-semibold">Event Details</h3>
-							<div className="space-y-3 text-muted-foreground">
-								<div className="flex justify-between">
-									<span>Category:</span>
-									<span className="font-medium text-foreground capitalize">
-										{event.hint}
-									</span>
+							{event.link && (
+								<div className="pt-8 mt-8 border-t border-zinc-200 dark:border-zinc-800 block w-full">
+									<a
+										href={event.link}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="block w-full"
+									>
+										<RainbowButton className="w-full py-5 text-base font-bold shadow-xl">
+											Register Now
+										</RainbowButton>
+									</a>
 								</div>
-								<div className="flex justify-between">
-									<span>Date:</span>
-									<span className="font-medium text-foreground">
-										{event.date}
-									</span>
-								</div>
-								<div className="flex justify-between">
-									<span>Organized by:</span>
-									<span className="font-medium text-foreground">
-										IEEE Student Branch
-									</span>
-								</div>
-							</div>
-						</div>
-
-						{/* CTA Card */}
-						<div className="bg-gradient-to-br from-zinc-900 to-zinc-800 text-white rounded-2xl p-8">
-							<h3 className="text-2xl font-semibold mb-3">
-								Want to stay updated?
-							</h3>
-							<p className="text-white/90 mb-6">
-								Join IEEE Student Branch to get notified about upcoming events
-								and opportunities.
-							</p>
-							<Button className="border border-white/20 bg-white/5 text-white hover:bg-white/10 font-semibold">
-								Join IEEE SB
-							</Button>
+							)}
 						</div>
 					</div>
 				</div>

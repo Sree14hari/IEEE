@@ -14,7 +14,7 @@ export async function FeaturedEvents() {
 		);
 		const events = await res.json();
 		// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-		featuredEvents = events.slice(0, 3).map((e: any) => ({
+		featuredEvents = events.flat().slice(0, 3).map((e: any) => ({
 			id: e.id,
 			title: e.title,
 			date: e.event_date,
