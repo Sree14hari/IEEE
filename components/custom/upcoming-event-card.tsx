@@ -13,6 +13,7 @@ interface UpcomingEventCardProps {
 		image: string;
 		hint: string;
 		link?: string;
+		isPast?: boolean;
 	};
 }
 
@@ -25,12 +26,14 @@ export default function UpcomingEventCard({ event }: UpcomingEventCardProps) {
 					src={event.image || "/placeholder.svg"}
 					alt={event.title}
 					fill
-					className="object-cover transition-transform duration-500 group-hover:scale-105"
+					className={`object-cover transition-transform duration-500 group-hover:scale-105 ${
+						event.isPast ? "grayscale opacity-80" : ""
+					}`}
 					data-ai-hint={event.hint}
 				/>
 				{/* Gradient Overlay */}
 				<div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-70" />
-				
+
 				{/* Date Badge */}
 				<div className="absolute bottom-4 left-4 flex items-center gap-2 rounded-full bg-white/95 px-3 py-1.5 text-xs font-semibold text-zinc-900 shadow-sm backdrop-blur-md dark:bg-zinc-900/95 dark:text-zinc-100">
 					<Calendar className="h-3.5 w-3.5" />
@@ -45,12 +48,16 @@ export default function UpcomingEventCard({ event }: UpcomingEventCardProps) {
 						{event.title}
 					</h3>
 					<p className="mt-2 text-xs text-zinc-500 dark:text-zinc-400 line-clamp-2">
-						{event.hint && event.hint !== event.title ? event.hint : "Don't miss out on this amazing opportunity. Join us and engage with the community!"}
+						{event.hint && event.hint !== event.title
+							? event.hint
+							: "Don't miss out on this amazing opportunity. Join us and engage with the community!"}
 					</p>
 				</div>
-				
+
 				<Link href={`/events/${event.id}`} className="w-full mt-auto">
-					<RainbowButton className="w-full py-2 text-sm font-semibold shadow-sm">View Details</RainbowButton>
+					<RainbowButton className="w-full py-2 text-sm font-semibold shadow-sm">
+						View Details
+					</RainbowButton>
 				</Link>
 			</div>
 		</div>

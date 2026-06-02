@@ -2,17 +2,6 @@
 
 import { BreakpointDebug } from "@/components/custom/breakpoint-debug";
 import { SplashScreen } from "@/components/custom/splash-screen";
-import { RainbowButton } from "@/components/ui/rainbow-button";
-import { PWA_LINK } from "@/lib/constants";
-import React, { useState } from "react";
-import Image from "next/image";
-import {
-	Navbar,
-	NavBody,
-	NavItems,
-	MobileNavMenu,
-	MobileNavToggle,
-} from "@/components/ui/resizable-navbar";
 import {
 	Dropdown,
 	DropdownButton,
@@ -20,7 +9,18 @@ import {
 	DropdownMenu,
 } from "@/components/ui/dropdown";
 import { Link } from "@/components/ui/link";
+import { RainbowButton } from "@/components/ui/rainbow-button";
+import {
+	MobileNavMenu,
+	MobileNavToggle,
+	NavBody,
+	NavItems,
+	Navbar,
+} from "@/components/ui/resizable-navbar";
+import { PWA_LINK } from "@/lib/constants";
 import { IconChevronDown } from "@tabler/icons-react";
+import Image from "next/image";
+import React, { useState } from "react";
 
 const navItems = [
 	{ name: "Events", link: "/events" },
@@ -34,36 +34,68 @@ const footerSections = [
 		description:
 			"IEEE is the world's largest technical professional organization dedicated to advancing technology for the benefit of humanity.",
 		links: [
-			{ text: "Learn more about IEEE", href: "https://www.ieee.org/about/index.html" },
-			{ text: "IEEE Mission & Vision", href: "https://www.ieee.org/about/vision-mission.html" },
+			{
+				text: "Learn more about IEEE",
+				href: "https://www.ieee.org/about/index.html",
+			},
+			{
+				text: "IEEE Mission & Vision",
+				href: "https://www.ieee.org/about/vision-mission.html",
+			},
 		],
 	},
 	{
 		title: "Locations",
 		description:
 			"IEEE has a global presence with seven offices internationally.",
-		links: [{ text: "IEEE office locations", href: "https://www.ieee.org/about/locations/index.html" }],
+		links: [
+			{
+				text: "IEEE office locations",
+				href: "https://www.ieee.org/about/locations/index.html",
+			},
+		],
 	},
 	{
 		title: "Membership",
 		links: [
 			{ text: "Join", href: "https://www.ieee.org/membership/join/index.html" },
 			{ text: "Renew", href: "https://www.ieee.org/membership/renew.html" },
-			{ text: "Benefits", href: "https://www.ieee.org/membership/benefits/index.html" },
+			{
+				text: "Benefits",
+				href: "https://www.ieee.org/membership/benefits/index.html",
+			},
 			{ text: "IEEE Collabratec", href: "https://ieee-collabratec.ieee.org/" },
 		],
 	},
 	{
 		title: "Get involved",
 		links: [
-			{ text: "Conferences", href: "https://www.ieee.org/conferences/index.html" },
+			{
+				text: "Conferences",
+				href: "https://www.ieee.org/conferences/index.html",
+			},
 			{ text: "Local activities", href: "https://mga.ieee.org/" },
-			{ text: "Publishing", href: "https://www.ieee.org/publications/index.html" },
-			{ text: "Societies", href: "https://www.ieee.org/communities/societies/index.html" },
-			{ text: "Councils", href: "https://www.ieee.org/communities/councils/index.html" },
+			{
+				text: "Publishing",
+				href: "https://www.ieee.org/publications/index.html",
+			},
+			{
+				text: "Societies",
+				href: "https://www.ieee.org/communities/societies/index.html",
+			},
+			{
+				text: "Councils",
+				href: "https://www.ieee.org/communities/councils/index.html",
+			},
 			{ text: "Standards", href: "https://standards.ieee.org/" },
-			{ text: "Technical careers", href: "https://www.ieee.org/education/careers/index.html" },
-			{ text: "Volunteer", href: "https://www.ieee.org/about/volunteers/index.html" },
+			{
+				text: "Technical careers",
+				href: "https://www.ieee.org/education/careers/index.html",
+			},
+			{
+				text: "Volunteer",
+				href: "https://www.ieee.org/about/volunteers/index.html",
+			},
 		],
 	},
 	{
@@ -71,11 +103,23 @@ const footerSections = [
 		isConnect: true,
 		links: [
 			{ text: "IEEE Collabratec", href: "https://ieee-collabratec.ieee.org/" },
-			{ text: "Careers at IEEE", href: "https://www.ieee.org/about/careers/index.html" },
-			{ text: "IEEE Newsroom", href: "https://www.ieee.org/about/news/index.html" },
-			{ text: "IEEE Media Kit", href: "https://transmitter.ieee.org/media-kit/" },
+			{
+				text: "Careers at IEEE",
+				href: "https://www.ieee.org/about/careers/index.html",
+			},
+			{
+				text: "IEEE Newsroom",
+				href: "https://www.ieee.org/about/news/index.html",
+			},
+			{
+				text: "IEEE Media Kit",
+				href: "https://transmitter.ieee.org/media-kit/",
+			},
 			{ text: "IEEE Learning Network", href: "https://iln.ieee.org/" },
-			{ text: "SBCE LinkedIn", href: "https://www.linkedin.com/company/ieeesbsbce" },
+			{
+				text: "SBCE LinkedIn",
+				href: "https://www.linkedin.com/company/ieeesbsbce",
+			},
 			{ text: "SBCE Instagram", href: "https://www.instagram.com/ieeesbsbce" },
 		],
 	},
@@ -83,12 +127,30 @@ const footerSections = [
 
 const footerBottomLinks = [
 	{ text: "Home", href: "/" },
-	{ text: "Contact & Support", href: "https://www.ieee.org/about/contact.html" },
-	{ text: "Accessibility", href: "https://www.ieee.org/accessibility-statement.html" },
-	{ text: "Nondiscrimination Policy", href: "https://www.ieee.org/nondiscrimination.html" },
-	{ text: "IEEE Ethics Reporting", href: "https://www.ieee.org/about/corporate/compliance/index.html" },
-	{ text: "IEEE Privacy Policy", href: "https://www.ieee.org/security-privacy.html" },
-	{ text: "Terms & Disclosures", href: "https://www.ieee.org/about/help/site-terms-conditions.html" },
+	{
+		text: "Contact & Support",
+		href: "https://www.ieee.org/about/contact.html",
+	},
+	{
+		text: "Accessibility",
+		href: "https://www.ieee.org/accessibility-statement.html",
+	},
+	{
+		text: "Nondiscrimination Policy",
+		href: "https://www.ieee.org/nondiscrimination.html",
+	},
+	{
+		text: "IEEE Ethics Reporting",
+		href: "https://www.ieee.org/about/corporate/compliance/index.html",
+	},
+	{
+		text: "IEEE Privacy Policy",
+		href: "https://www.ieee.org/security-privacy.html",
+	},
+	{
+		text: "Terms & Disclosures",
+		href: "https://www.ieee.org/about/help/site-terms-conditions.html",
+	},
 ];
 
 export function SiteShell({ children }: { children: React.ReactNode }) {
@@ -115,11 +177,11 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
 								id="excom-dropdown-button"
 								className="relative px-4 py-2 text-neutral-600 dark:text-neutral-300 font-medium text-sm flex items-center gap-1"
 							>
-								Excom
+								Execom
 								<IconChevronDown size={16} />
 							</DropdownButton>
 							<DropdownMenu>
-								<DropdownItem href="/excom/2025">2025</DropdownItem>
+								<DropdownItem href="/excom/2026">2026</DropdownItem>
 							</DropdownMenu>
 						</Dropdown>
 					</div>
@@ -149,13 +211,13 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
 							className="text-xl"
 						/>
 						<div className="flex flex-col items-center gap-4">
-							<h3 className="text-lg font-medium text-zinc-500">Excom</h3>
+							<h3 className="text-lg font-medium text-zinc-500">Execom</h3>
 							<Link
-								href="/excom/2025"
+								href="/excom/2026"
 								className="px-4 py-2 text-xl text-neutral-600 dark:text-neutral-300"
 								onClick={() => setIsMobileMenuOpen(false)}
 							>
-								2025
+								2026
 							</Link>
 						</div>
 						<Link
@@ -179,7 +241,9 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
 					<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
 						{footerSections.map((section) => (
 							<div key={section.title}>
-								<h3 className="font-bold text-white text-sm">{section.title}</h3>
+								<h3 className="font-bold text-white text-sm">
+									{section.title}
+								</h3>
 								<ul className="mt-4 space-y-2">
 									{section.links.map((link) => (
 										<li key={link.text}>

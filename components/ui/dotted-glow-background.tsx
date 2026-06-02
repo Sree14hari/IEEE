@@ -1,7 +1,7 @@
-
 "use client";
-import React, { useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
+import type React from "react";
+import { useEffect, useRef } from "react";
 
 interface DottedGlowBackgroundProps {
 	children?: React.ReactNode;
@@ -92,9 +92,13 @@ const DottedGlowBackground: React.FC<DottedGlowBackgroundProps> = ({
 			const colorVar = isDark ? colorDarkVar : colorLightVar;
 			const glowColorVar = isDark ? glowColorDarkVar : glowColorLightVar;
 
-			const colorVal = getComputedStyle(document.documentElement).getPropertyValue(colorVar).trim();
-			const glowColorVal = getComputedStyle(document.documentElement).getPropertyValue(glowColorVar).trim();
-			
+			const colorVal = getComputedStyle(document.documentElement)
+				.getPropertyValue(colorVar)
+				.trim();
+			const glowColorVal = getComputedStyle(document.documentElement)
+				.getPropertyValue(glowColorVar)
+				.trim();
+
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 			if (backgroundOpacity > 0) {
@@ -112,12 +116,11 @@ const DottedGlowBackground: React.FC<DottedGlowBackgroundProps> = ({
 				rect.height / 2,
 				glowRadius,
 			);
-			
+
 			ctx.globalAlpha = glowOpacity;
 			ctx.fillStyle = glowColorVal;
 			ctx.fillRect(0, 0, canvas.width, canvas.height);
 			ctx.globalAlpha = 1;
-
 
 			ctx.globalAlpha = opacity;
 			ctx.fillStyle = colorVal;
@@ -190,4 +193,3 @@ const DottedGlowBackground: React.FC<DottedGlowBackgroundProps> = ({
 };
 
 export default DottedGlowBackground;
-

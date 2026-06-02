@@ -22,7 +22,10 @@ export function Supporters() {
 			{/* Marquee — all screen sizes */}
 			<div className="flex w-max items-center animate-marquee">
 				{[0, 1].map((i) => (
-					<div key={i} className="flex items-center gap-12 sm:gap-20 px-6 sm:px-10">
+					<div
+						key={i}
+						className="flex items-center gap-12 sm:gap-20 px-6 sm:px-10"
+					>
 						{logos.map((logo, index) => (
 							<div
 								key={`logo-${i}-${index}`}

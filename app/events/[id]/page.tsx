@@ -1,17 +1,17 @@
-import { notFound } from "next/navigation";
-import Image from "next/image";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { RainbowButton } from "@/components/ui/rainbow-button";
 import {
-	MoveLeft,
-	ExternalLink,
-	Calendar,
-	Tag,
-	MapPin,
 	ArrowLeft,
+	Calendar,
+	ExternalLink,
+	MapPin,
+	MoveLeft,
+	Tag,
 } from "lucide-react";
 import type { Metadata } from "next";
-import { RainbowButton } from "@/components/ui/rainbow-button";
+import Image from "next/image";
+import Link from "next/link";
+import { notFound } from "next/navigation";
 
 // --------------------
 // Types

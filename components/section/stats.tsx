@@ -1,14 +1,43 @@
 "use client";
 
+import {
+	IconBuildingCommunity,
+	IconCalendarEvent,
+	IconClockHour4,
+	IconUsers,
+} from "@tabler/icons-react";
 import { animate, useInView } from "motion/react";
 import { useEffect, useRef } from "react";
-import { IconCalendarEvent, IconUsers, IconBuildingCommunity, IconClockHour4 } from "@tabler/icons-react";
 
 const stats = [
-	{ value: 10, label: "Years Active", suffix: "+", icon: IconClockHour4, description: "A decade of innovation" },
-	{ value: 100, label: "Members", suffix: "+", icon: IconUsers, description: "Students across chapters" },
-	{ value: 100, label: "Events", suffix: "+", icon: IconCalendarEvent, description: "Workshops, talks & more" },
-	{ value: 4, label: "Societies", suffix: "+", icon: IconBuildingCommunity, description: "Specialized IEEE chapters" },
+	{
+		value: 10,
+		label: "Years Active",
+		suffix: "+",
+		icon: IconClockHour4,
+		description: "A decade of innovation",
+	},
+	{
+		value: 100,
+		label: "Members",
+		suffix: "+",
+		icon: IconUsers,
+		description: "Students across chapters",
+	},
+	{
+		value: 100,
+		label: "Events",
+		suffix: "+",
+		icon: IconCalendarEvent,
+		description: "Workshops, talks & more",
+	},
+	{
+		value: 4,
+		label: "Societies",
+		suffix: "+",
+		icon: IconBuildingCommunity,
+		description: "Specialized IEEE chapters",
+	},
 ];
 
 function Stat({
@@ -78,10 +107,14 @@ function Stat({
 				</p>
 
 				{/* Label */}
-				<p className="mt-1 text-sm sm:text-lg font-semibold text-zinc-700">{label}</p>
+				<p className="mt-1 text-sm sm:text-lg font-semibold text-zinc-700">
+					{label}
+				</p>
 
 				{/* Description */}
-				<p className="mt-0.5 text-xs sm:text-sm text-zinc-400 group-hover:text-zinc-600 transition-colors duration-300">{description}</p>
+				<p className="mt-0.5 text-xs sm:text-sm text-zinc-400 group-hover:text-zinc-600 transition-colors duration-300">
+					{description}
+				</p>
 			</div>
 		</div>
 	);
@@ -94,7 +127,8 @@ export function Stats() {
 			<div
 				className="absolute inset-0 opacity-[0.4]"
 				style={{
-					backgroundImage: "radial-gradient(circle, #e4e4e7 1px, transparent 1px)",
+					backgroundImage:
+						"radial-gradient(circle, #e4e4e7 1px, transparent 1px)",
 					backgroundSize: "30px 30px",
 				}}
 			/>
@@ -106,9 +140,12 @@ export function Stats() {
 			<div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 				{/* Section header */}
 				<div className="text-center mb-14">
-					<p className="text-xs sm:text-sm font-semibold uppercase tracking-widest text-zinc-500 mb-2">Our Impact</p>
+					<p className="text-xs sm:text-sm font-semibold uppercase tracking-widest text-zinc-500 mb-2">
+						Our Impact
+					</p>
 					<h2 className="text-2xl sm:text-4xl font-extrabold text-zinc-900 font-display tracking-tight">
-						Growing Together, <span className="text-zinc-900">Year by Year</span>
+						Growing Together,{" "}
+						<span className="text-zinc-900">Year by Year</span>
 					</h2>
 				</div>
 

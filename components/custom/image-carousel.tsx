@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
-import { useState, useEffect, useCallback } from "react";
-import { motion, AnimatePresence } from "motion/react";
 import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
+import { AnimatePresence, motion } from "motion/react";
+import Image from "next/image";
+import { useCallback, useEffect, useState } from "react";
 
 export function ImageCarousel() {
 	const [[current, direction], setCurrent] = useState([0, 0]);
@@ -52,7 +52,7 @@ export function ImageCarousel() {
 		exit: (d: number) => ({ x: d < 0 ? "100%" : "-100%", opacity: 0 }),
 	};
 
-	const prev = total > 0 ? ((index - 1) + total) % total : 0;
+	const prev = total > 0 ? (index - 1 + total) % total : 0;
 	const next = total > 0 ? (index + 1) % total : 0;
 
 	if (images.length === 0) {
@@ -160,7 +160,9 @@ export function ImageCarousel() {
 						<button
 							type="button"
 							key={`dot-${i}`}
-							onClick={() => setCurrent(([prev]) => [prev + (i - index), i - index])}
+							onClick={() =>
+								setCurrent(([prev]) => [prev + (i - index), i - index])
+							}
 							className={`rounded-full transition-all duration-300 ${
 								i === index
 									? "w-6 h-2 bg-zinc-900"

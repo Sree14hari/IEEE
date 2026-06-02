@@ -1,12 +1,35 @@
-const row1 = ["Opportunity", "Innovation", "Networks", "Resources", "Leadership", "Growth", "Community", "Excellence"];
-const row2 = ["Workshops", "IEEE Members", "Tech Talks", "Conferences", "Research", "Collaboration", "Awards", "Mentorship"];
+const row1 = [
+	"Opportunity",
+	"Innovation",
+	"Networks",
+	"Resources",
+	"Leadership",
+	"Growth",
+	"Community",
+	"Excellence",
+];
+const row2 = [
+	"Workshops",
+	"IEEE Members",
+	"Tech Talks",
+	"Conferences",
+	"Research",
+	"Collaboration",
+	"Awards",
+	"Mentorship",
+];
 
-function MarqueeRow({ items, reverse = false }: { items: string[]; reverse?: boolean }) {
+function MarqueeRow({
+	items,
+	reverse = false,
+}: { items: string[]; reverse?: boolean }) {
 	return (
 		<div className="flex overflow-hidden w-full">
 			<div
 				className="flex w-max items-center gap-0"
-				style={{ animation: `${reverse ? "marquee-reverse" : "marquee"} 28s linear infinite` }}
+				style={{
+					animation: `${reverse ? "marquee-reverse" : "marquee"} 28s linear infinite`,
+				}}
 			>
 				{[0, 1].map((i) => (
 					<div key={i} className="flex items-center">

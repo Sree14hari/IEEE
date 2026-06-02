@@ -1,7 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
-import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/seo";
+import type { MetadataRoute } from "next";
 
 type EventItem = {
 	id: string;
@@ -16,6 +16,7 @@ const STATIC_ROUTES = [
 	"/excom/2025/sb",
 	"/excom/2025/cs",
 	"/excom/2025/ias",
+	"/excom/2026",
 ];
 
 async function getEventIds(): Promise<string[]> {
@@ -30,9 +31,7 @@ async function getEventIds(): Promise<string[]> {
 		]);
 		const upcoming = JSON.parse(upcomingRaw) as EventItem[];
 		const past = JSON.parse(pastRaw) as EventItem[];
-		const ids = [...upcoming, ...past]
-			.map((event) => event.id)
-			.filter(Boolean);
+		const ids = [...upcoming, ...past].map((event) => event.id).filter(Boolean);
 
 		return Array.from(new Set(ids));
 	} catch {

@@ -1,9 +1,9 @@
 import { Card, CardContent } from "@/components/ui/card";
+import data from "@/public/Excom/2025/2025.json";
+import { Linkedin } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Linkedin } from "lucide-react";
-import data from "@/public/Excom/2025/2025.json";
-import type { Metadata } from "next";
 
 export const metadata: Metadata = {
 	title: "SB Excom 2025",
@@ -86,7 +86,7 @@ export default async function Page() {
 					{members.map((member: ExecomMember, index: number) => (
 						<div
 							key={member.id}
-							className="group relative overflow-hidden rounded-3xl bg-zinc-100 dark:bg-zinc-900 transition-all duration-500 hover:shadow-2xl dark:hover:shadow-blue-900/20"
+							className="group relative overflow-hidden rounded-3xl bg-zinc-100 dark:bg-zinc-900 transition-shadow duration-300 hover:shadow-2xl dark:hover:shadow-blue-900/20"
 							style={{
 								animation: `fadeInUp 0.6s ease-out forwards ${index * 0.1}s`,
 								opacity: 0,
@@ -98,10 +98,10 @@ export default async function Page() {
 									src={member.image_url || "/placeholder.svg"}
 									alt={member.name}
 									fill
-									className="object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"
+									className="object-cover transition-transform duration-300 ease-out group-hover:scale-105 transform-gpu"
 								/>
 								<div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 transition-opacity duration-300 group-hover:opacity-90" />
-								<div className="absolute inset-x-0 bottom-0 p-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-300 ease-in-out">
+								<div className="absolute inset-x-0 bottom-0 p-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-300 ease-out transform-gpu">
 									<h3 className="text-2xl font-bold text-white mb-1">
 										{member.name}
 									</h3>

@@ -1,9 +1,11 @@
 "use client";
 
 import UpcomingEventCard from "@/components/custom/upcoming-event-card";
+
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
+
 import { useCallback, useEffect, useRef, useState } from "react";
 
 interface Event {
@@ -14,10 +16,39 @@ interface Event {
 	hint: string;
 	link?: string;
 	organizer?: string;
+	isPast?: boolean;
 }
+
+const parseEventDate = (dStr: string): number => {
+	if (!dStr) return 0;
+
+	// Try standard parse first (works for "4 April 2026", "2026-04-04", etc.)
+	const parsed = Date.parse(dStr);
+	if (!Number.isNaN(parsed)) return parsed;
+
+	// Handle DD/MM/YYYY or D/M/YYYY
+	const dmyMatch = dStr.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})/);
+	if (dmyMatch) {
+		const day = Number.parseInt(dmyMatch[1], 10);
+		const month = Number.parseInt(dmyMatch[2], 10) - 1;
+		const year = Number.parseInt(dmyMatch[3], 10);
+		return new Date(year, month, day).getTime();
+	}
+
+	// Handle MM/YYYY or M/YYYY
+	const myMatch = dStr.match(/^(\d{1,2})[\/\-](\d{4})/);
+	if (myMatch) {
+		const month = Number.parseInt(myMatch[1], 10) - 1;
+		const year = Number.parseInt(myMatch[2], 10);
+		return new Date(year, month, 1).getTime();
+	}
+
+	return 0;
+};
 
 export default function UpcomingEvents() {
 	const [upcomingEvents, setUpcomingEvents] = useState<Event[]>([]);
+	const [passedUpcomingEvents, setPassedUpcomingEvents] = useState<Event[]>([]);
 	const [pastEvents, setPastEvents] = useState<Event[]>([]);
 	const scrollContainerRef = useRef<HTMLDivElement>(null);
 	const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -39,7 +70,30 @@ export default function UpcomingEvents() {
 					hint: e.description || e.title,
 					link: e.registration_link,
 				}));
-				setUpcomingEvents(mappedData);
+
+				// Sort upcoming events in descending order (latest first)
+				const sortedData = mappedData.sort(
+					(a: { date: string }, b: { date: string }) =>
+						parseEventDate(b.date) - parseEventDate(a.date),
+				);
+
+				// Filter by current date to separate actual upcoming events from passed ones
+				const today = new Date();
+				today.setHours(0, 0, 0, 0);
+				const todayTimestamp = today.getTime();
+
+				const futureEvents = sortedData.filter(
+					(e: { date: string }) => parseEventDate(e.date) >= todayTimestamp,
+				);
+				const passedEventsList = sortedData
+					.filter(
+						(e: { date: string }) => parseEventDate(e.date) < todayTimestamp,
+					)
+					// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+					.map((e: any) => ({ ...e, isPast: true }));
+
+				setUpcomingEvents(futureEvents);
+				setPassedUpcomingEvents(passedEventsList);
 
 				const pastResponse = await fetch(
 					"https://ieee-events-api.ieeesbcesb20.workers.dev/pastevents",
@@ -56,20 +110,12 @@ export default function UpcomingEvents() {
 						hint: e.description || e.title,
 						link: e.registration_link,
 						organizer: e.organizer,
+						isPast: true,
 					}))
-					.sort((a: Event, b: Event) => {
-						const parseDate = (dStr: string) => {
-							if (!dStr) return 0;
-							const match = dStr.match(/(\d{2})\/(\d{4})/);
-							if (!match) return 0;
-							const month = match[1];
-							const year = match[2];
-							const dayMatch = dStr.match(/(\d{1,2})[^\/]*\/\d{2}\/\d{4}/);
-							const day = dayMatch ? dayMatch[1].padStart(2, "0") : "01";
-							return new Date(`${year}-${month}-${day}T00:00:00Z`).getTime();
-						};
-						return parseDate(b.date) - parseDate(a.date);
-					});
+					.sort(
+						(a: Event, b: Event) =>
+							parseEventDate(b.date) - parseEventDate(a.date),
+					);
 				setPastEvents(mappedPastData);
 			} catch (error) {
 				console.error("Error fetching events:", error);
@@ -123,7 +169,11 @@ export default function UpcomingEvents() {
 		}
 	};
 
-	if (upcomingEvents.length === 0 && pastEvents.length === 0) {
+	if (
+		upcomingEvents.length === 0 &&
+		passedUpcomingEvents.length === 0 &&
+		pastEvents.length === 0
+	) {
 		return (
 			<div className="text-center py-12">
 				<h3 className="text-2xl font-bold tracking-tight mb-4">Events</h3>
@@ -178,50 +228,68 @@ export default function UpcomingEvents() {
 				</div>
 			)}
 
-			{upcomingEvents.length > 0 && pastEvents.length > 0 && (
-				<div className="border-t-2 border-dashed border-zinc-200" />
-			)}
+			{upcomingEvents.length > 0 &&
+				(pastEvents.length > 0 || passedUpcomingEvents.length > 0) && (
+					<div className="border-t-2 border-dashed border-zinc-200 dark:border-zinc-800" />
+				)}
 
-			{pastEvents.length > 0 && (
+			{(pastEvents.length > 0 || passedUpcomingEvents.length > 0) && (
 				<div>
 					<h3 className="text-2xl font-bold tracking-tight text-center mb-6">
 						Past Events
 					</h3>
-					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-						{pastEvents.map((event) => (
-							<div
-								key={event.id}
-								className="group flex flex-col justify-between p-6 rounded-2xl bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-900/50 dark:hover:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 transition-all duration-300"
-							>
-								<div>
-									<div className="flex justify-between items-center mb-4">
-										<span className="text-sm font-mono text-zinc-500 dark:text-zinc-400">
-											{event.date}
-										</span>
-										{event.organizer && (
-											<span className="text-xs font-bold px-3 py-1 bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 rounded-full">
-												{event.organizer}
-											</span>
-										)}
-									</div>
-									<h4 className="text-lg font-semibold text-zinc-900 dark:text-white leading-tight">
-										{event.title}
-									</h4>
-								</div>
-								{event.link && (
-									<Link
-										href={event.link}
-										target="_blank"
-										className="mt-6 inline-block"
-									>
-										<Button outline className="w-full">
-											View Details
-										</Button>
-									</Link>
-								)}
+
+					{passedUpcomingEvents.length > 0 && (
+						<div className="mb-10">
+							<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto justify-items-center">
+								{passedUpcomingEvents.map((event) => (
+									<UpcomingEventCard key={event.id} event={event} />
+								))}
 							</div>
-						))}
-					</div>
+						</div>
+					)}
+
+					{passedUpcomingEvents.length > 0 && pastEvents.length > 0 && (
+						<div className="my-8 border-t border-dashed border-zinc-200 dark:border-zinc-800" />
+					)}
+
+					{pastEvents.length > 0 && (
+						<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+							{pastEvents.map((event) => (
+								<div
+									key={event.id}
+									className="group flex flex-col justify-between p-6 rounded-2xl bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-900/50 dark:hover:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 transition-all duration-300"
+								>
+									<div>
+										<div className="flex justify-between items-center mb-4">
+											<span className="text-sm font-mono text-zinc-500 dark:text-zinc-400">
+												{event.date}
+											</span>
+											{event.organizer && (
+												<span className="text-xs font-bold px-3 py-1 bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 rounded-full">
+													{event.organizer}
+												</span>
+											)}
+										</div>
+										<h4 className="text-lg font-semibold text-zinc-900 dark:text-white leading-tight">
+											{event.title}
+										</h4>
+									</div>
+									{event.link && (
+										<Link
+											href={event.link}
+											target="_blank"
+											className="mt-6 inline-block"
+										>
+											<Button outline className="w-full">
+												View Details
+											</Button>
+										</Link>
+									)}
+								</div>
+							))}
+						</div>
+					)}
 				</div>
 			)}
 		</div>

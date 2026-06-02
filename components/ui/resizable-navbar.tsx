@@ -1,13 +1,13 @@
 "use client";
-import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { IconMenu2, IconX } from "@tabler/icons-react";
 import {
-	motion,
 	AnimatePresence,
-	useScroll,
+	motion,
 	useMotionValueEvent,
+	useScroll,
 } from "motion/react";
+import Link from "next/link";
 
 import React, { useRef, useState } from "react";
 

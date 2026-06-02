@@ -1,10 +1,11 @@
-import { Hero } from "@/components/section/hero";
-import { FeaturedEvents } from "@/components/section/featured-events";
 import { ImageCarousel } from "@/components/custom/image-carousel";
+import { CurrentExecom } from "@/components/section/current-execom";
+import { FeaturedEvents } from "@/components/section/featured-events";
+import { Hero } from "@/components/section/hero";
+import { MarqueeBanner } from "@/components/section/marquee-banner";
 import { PainPoint } from "@/components/section/pain-point";
 import { Stats } from "@/components/section/stats";
 import { Supporters } from "@/components/section/supporters";
-import { MarqueeBanner } from "@/components/section/marquee-banner";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -31,7 +32,12 @@ export default function Home() {
 				<PainPoint />
 				<ImageCarousel />
 			</div>
-			<FeaturedEvents />
+			<div className="-mx-6 sm:mx-0 lg:-mx-10">
+				<FeaturedEvents />
+			</div>
+			<div className="-mx-6 sm:mx-0 lg:-mx-10">
+				<CurrentExecom />
+			</div>
 		</>
 	);
 }

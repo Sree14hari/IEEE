@@ -1,6 +1,3 @@
-import type { Metadata } from "next";
-import { Fira_Mono } from "next/font/google";
-import localFont from "next/font/local";
 import { SiteShell } from "@/components/custom/site-shell";
 import {
 	DEFAULT_OG_IMAGE,
@@ -9,6 +6,9 @@ import {
 	SITE_NAME,
 	SITE_URL,
 } from "@/lib/seo";
+import type { Metadata } from "next";
+import { Fira_Mono } from "next/font/google";
+import localFont from "next/font/local";
 
 import "./globals.css";
 

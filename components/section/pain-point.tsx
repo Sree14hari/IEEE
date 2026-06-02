@@ -1,12 +1,12 @@
+import { PWA_LINK } from "@/lib/constants";
 import {
+	IconArrowRight,
 	IconAward,
 	IconBooks,
 	IconCoins,
 	IconUsers,
-	IconArrowRight,
 } from "@tabler/icons-react";
 import Link from "next/link";
-import { PWA_LINK } from "@/lib/constants";
 
 const features = [
 	{
@@ -42,7 +42,8 @@ export function PainPoint() {
 			<div
 				className="absolute inset-0 opacity-40"
 				style={{
-					backgroundImage: "radial-gradient(circle, #e4e4e7 1px, transparent 1px)",
+					backgroundImage:
+						"radial-gradient(circle, #e4e4e7 1px, transparent 1px)",
 					backgroundSize: "28px 28px",
 				}}
 			/>
@@ -80,22 +81,25 @@ export function PainPoint() {
 
 							{/* Icon */}
 							<div className="relative z-10 mb-5 self-start flex items-center justify-center w-12 h-12 rounded-2xl bg-zinc-100 border border-zinc-200 transition-all duration-300 group-hover:bg-zinc-900 group-hover:border-zinc-900">
-								<feature.icon className="w-6 h-6 text-zinc-700 group-hover:text-white transition-colors duration-300" aria-hidden="true" />
+								<feature.icon
+									className="w-6 h-6 text-zinc-700 group-hover:text-white transition-colors duration-300"
+									aria-hidden="true"
+								/>
 							</div>
 
 							{/* Text */}
 							<div className="relative z-10 flex-1">
-								<h3 className="text-lg font-bold text-zinc-900 mb-2">{feature.name}</h3>
+								<h3 className="text-lg font-bold text-zinc-900 mb-2">
+									{feature.name}
+								</h3>
 								<p className="text-sm sm:text-base leading-relaxed text-zinc-500 group-hover:text-zinc-600 transition-colors duration-300">
 									{feature.description}
 								</p>
 							</div>
-
 						</div>
 					))}
 				</div>
-
-				</div>
+			</div>
 
 			<style>{`
 				@keyframes fadeInUp {

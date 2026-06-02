@@ -1,9 +1,9 @@
 import { Card, CardContent } from "@/components/ui/card";
+import data from "@/public/Excom/2025/2025.json";
+import { Linkedin } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Linkedin } from "lucide-react";
-import data from "@/public/Excom/2025/2025.json";
-import type { Metadata } from "next";
 
 export const metadata: Metadata = {
 	title: "IAS Excom 2025",
@@ -53,9 +53,10 @@ export default async function Page() {
 		members = data.filter(
 			(m: ExecomMember) => m.category === "IAS Execom" && m.year === "2025",
 		);
-		
+
 		members.sort(
-			(a: ExecomMember, b: ExecomMember) => rankDesignation(a.designation) - rankDesignation(b.designation)
+			(a: ExecomMember, b: ExecomMember) =>
+				rankDesignation(a.designation) - rankDesignation(b.designation),
 		);
 	} catch (error) {
 		console.error("Failed to load execom data:", error);
@@ -65,27 +66,31 @@ export default async function Page() {
 		<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-24">
 			<div className="text-center mb-16">
 				<h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl text-zinc-900 dark:text-zinc-50 tracking-tight font-display">
-					IAS Execom <span className="text-blue-600 dark:text-blue-500">2025</span>
+					IAS Execom{" "}
+					<span className="text-blue-600 dark:text-blue-500">2025</span>
 				</h2>
 				<p className="mt-4 text-xl leading-8 text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">
-					Meet the Industry Applications Society Executive Committee driving innovation and leadership.
+					Meet the Industry Applications Society Executive Committee driving
+					innovation and leadership.
 				</p>
 			</div>
 
 			{members.length === 0 ? (
 				<div className="text-center py-20">
-					<p className="text-xl text-zinc-500 dark:text-zinc-400">Member details coming soon.</p>
+					<p className="text-xl text-zinc-500 dark:text-zinc-400">
+						Member details coming soon.
+					</p>
 				</div>
 			) : (
 				<div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
 					{members.map((member: ExecomMember, index: number) => (
 						<div
 							key={member.id}
-							className="group relative overflow-hidden rounded-3xl bg-zinc-100 dark:bg-zinc-900 transition-all duration-500 hover:shadow-2xl dark:hover:shadow-blue-900/20"
-							style={{ 
+							className="group relative overflow-hidden rounded-3xl bg-zinc-100 dark:bg-zinc-900 transition-shadow duration-300 hover:shadow-2xl dark:hover:shadow-blue-900/20"
+							style={{
 								animation: `fadeInUp 0.6s ease-out forwards ${index * 0.1}s`,
 								opacity: 0,
-								transform: 'translateY(20px)'
+								transform: "translateY(20px)",
 							}}
 						>
 							<div className="aspect-[3/4] w-full relative overflow-hidden">
@@ -93,12 +98,16 @@ export default async function Page() {
 									src={member.image_url || "/placeholder.svg"}
 									alt={member.name}
 									fill
-									className="object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"
+									className="object-cover transition-transform duration-300 ease-out group-hover:scale-105 transform-gpu"
 								/>
 								<div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 transition-opacity duration-300 group-hover:opacity-90" />
-								<div className="absolute inset-x-0 bottom-0 p-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-300 ease-in-out">
-									<h3 className="text-2xl font-bold text-white mb-1">{member.name}</h3>
-									<p className="text-blue-400 font-medium text-sm mb-4 uppercase tracking-wider">{member.designation}</p>
+								<div className="absolute inset-x-0 bottom-0 p-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-300 ease-out transform-gpu">
+									<h3 className="text-2xl font-bold text-white mb-1">
+										{member.name}
+									</h3>
+									<p className="text-blue-400 font-medium text-sm mb-4 uppercase tracking-wider">
+										{member.designation}
+									</p>
 									<div className="flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
 										{member.linkedin && (
 											<Link
